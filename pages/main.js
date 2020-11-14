@@ -1,21 +1,13 @@
-import React from "react";
+import React, {useEffect} from "react";
 import Header from "components/header.js";
 import {Card} from "react-bootstrap"
 import SearchIcon from '@material-ui/icons/Search';
 
+import * as courseAPI from 'pages/api/course'
+
 const MainPage = () => {
   let posts = [{code:"CS350", name:"intro", prof:"hi"}]
 
-  const BoardModule = ({ className, boardName, posts, bulletinId }) => {
-    if (!posts) posts = [];
-    while (posts.length < 5)
-      posts = posts.concat({
-        code: "",
-        name: "",
-        prof: ""
-    })
-  };
-  
   const CourseElem = props => {
     return (
       <Card className='w-100 mb-2'>
@@ -44,7 +36,13 @@ const MainPage = () => {
     </>
   ));
 
-  posts = []
+  const getCourseList = async (userid) => {
+    return course = await courseAPI.get(userid)
+  }
+
+  useEffect(() => {
+    posts = getCourseList('5')
+  }, [])
 
   return (
     <div

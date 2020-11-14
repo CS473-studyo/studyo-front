@@ -1,26 +1,12 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Container, Navbar, Nav } from "react-bootstrap";
-import "components/header.module.css";
+import styles from "components/header.module.css";
 import { withRouter } from "react-router-dom";
 import Logo from "public/Logo.svg"
 
 const Header = ({ history, ...props }) => {
-  const [hover1, setHover1] = useState(<div />);
-  const [hover2, setHover2] = useState(<div />);
-  const [hover3, setHover3] = useState(<div />);
-  const [hover4, setHover4] = useState(<div />);
   const [adminAuth, setAdminAuth] = useState(false);
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
-
-  const active = (
-    <div
-      style={{
-        height: "2px",
-        backgroundColor: "#444",
-        marginTop: "-2px"
-      }}
-    />
-  );
 
   const checkAdminAuth = async () => {
     const access = await adminsAPI.checkAdmin(
@@ -33,9 +19,6 @@ const Header = ({ history, ...props }) => {
   useEffect(() => {
     // checkAdminAuth();
   }, []);
-
-  const enter = <div className="tab-hover-enter" />;
-  const leave = <div className="tab-hover-leave" />;
 
   const tryLogout = useCallback(() => {
     setAdminAuth(false);
@@ -59,12 +42,12 @@ const Header = ({ history, ...props }) => {
         <div className="d-flex ml-auto">
           <Nav>
             <Nav.Link className="header-login" href="/web/api/auth/login">
-              로그인
+              Login
             </Nav.Link>
           </Nav>
           <Nav>
             <Nav.Link className="header-login" href="/web/auth/agreement">
-              회원가입
+              Register
             </Nav.Link>
           </Nav>
         </div>
@@ -74,7 +57,7 @@ const Header = ({ history, ...props }) => {
   return (
     <div style={{ backgroundColor: "#fff" }}>
       <Navbar as={Container} collapseOnSelect expand="lg">
-        <Navbar.Brand href="/web/main">
+        <Navbar.Brand href="/main">
           <Logo/>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
