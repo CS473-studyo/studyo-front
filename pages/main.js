@@ -19,7 +19,7 @@ const MainPage = () => {
         <div className='mt-2 body-text'>
           Prof. {props.prof}
         </div>
-        <button type="button" className="mt-4 custom-btn">Enter</button>
+        <a href={`/course/${props.code}`} type="button" className="mt-4 custom-btn">Enter</a>
       </Card.Body>
       </Card>
     );

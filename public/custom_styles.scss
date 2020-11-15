@@ -66,8 +66,27 @@ body {
     border: none;
 }
 
+.custom-btn:hover {
+    color: #c3d1ef !important;
+    text-decoration: none;
+}
+
 .form-control:focus {
     box-shadow: none;
+}
+
+.hashtag {
+    background-color: lightgray;
+    color: black;
+    margin-right: 0.5rem;
+    padding-right: 0.25rem;
+    padding-left: 0.25rem;
+    padding-top: 0.1rem;
+    padding-bottom: 0.1rem;
+}
+
+.lecture {
+    border: none;
 }
 
 @import '~bootstrap/scss/bootstrap';
