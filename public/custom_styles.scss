@@ -89,4 +89,30 @@ body {
     border: none;
 }
 
+.scrolling-wrapper {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    white-space: nowrap;
+  
+    .card {
+        display: inline-block;
+    }
+}
+
+.react-pdf__Document {
+    border-radius: 8px;
+    max-width: 50%;
+    position: relative;
+}
+
+.react-pdf__Page {
+    max-width: 400px;
+    width: 90vw;
+    height: 10rem !important;
+}
+
+.thumbnail-pdf {
+    height: 10rem !important;
+}
+
 @import '~bootstrap/scss/bootstrap';
