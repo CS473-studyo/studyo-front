@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useCallback } from "react";
-import { Container, Navbar, Nav } from "react-bootstrap";
-import styles from "components/header.module.css";
-import { withRouter } from "react-router-dom";
-import Logo from "public/Logo.svg"
+import React, { useState, useEffect, useCallback } from 'react';
+import { Container, Navbar, Nav } from 'react-bootstrap';
+import styles from 'components/header.module.css';
+import { withRouter } from 'react-router-dom';
+import Logo from 'public/Logo.svg';
 
 const Header = ({ history, ...props }) => {
   const [adminAuth, setAdminAuth] = useState(false);
@@ -22,8 +22,8 @@ const Header = ({ history, ...props }) => {
 
   const tryLogout = useCallback(() => {
     setAdminAuth(false);
-    delete window.sessionStorage["accessToken"];
-    delete window.sessionStorage["email"];
+    delete window.sessionStorage['accessToken'];
+    delete window.sessionStorage['email'];
   }, []);
 
   useEffect(() => {
@@ -55,17 +55,17 @@ const Header = ({ history, ...props }) => {
   }, [adminAuth, tryLogout]);
 
   return (
-    <div style={{ backgroundColor: "#fff" }}>
+    <div style={{ backgroundColor: '#fff' }}>
       <Navbar as={Container} collapseOnSelect expand="lg">
         <Navbar.Brand href="/main">
-          <Logo/>
+          <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav">
           {authButtonBar}
         </Navbar.Collapse>
       </Navbar>
-      <div style={{ height: "1px", backgroundColor: "#ddd" }} />
+      <div style={{ height: '1px', backgroundColor: '#ddd' }} />
     </div>
   );
 };
