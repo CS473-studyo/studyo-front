@@ -46,8 +46,12 @@ const NoteList = () => {
                 </button>
               </h5>
             </div>
-            <div>
-              <div className="card-body">{props.content}</div>
+            <div className="card-body">
+              <div>{props.content}</div>
+              <img
+                className="w-100"
+                src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F1930A949512D50450C"
+              />
             </div>
           </div>
         </div>
