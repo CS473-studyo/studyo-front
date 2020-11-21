@@ -15,6 +15,22 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 function LectureNote() {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
+  const [notes, setNotes] = useState([
+    {
+      num: '1',
+      name: 'Daeun Choi',
+      clap: '2',
+    },
+    {
+      num: '2',
+      name: 'Dan Choi',
+      clap: '5',
+    },
+  ]); // Todo: get notes list(현재 course,lecture의 모든 note 가져오기)
+  // To backend: 연결할 때 num이라는 property가 있는데,
+  // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
+  // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
+  // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.)
   const width = window.innerWidth * 0.4;
 
   function onDocumentLoadSuccess({ numPages }) {
@@ -98,7 +114,7 @@ function LectureNote() {
           </div>
           <div className="col">
             <h1 className="title-text">Notes from course students</h1>
-            <NoteList />
+            <NoteList notes={notes} />
           </div>
         </div>
       </div>

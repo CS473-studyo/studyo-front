@@ -38,31 +38,39 @@ const QuizPage = () => {
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
-  ]; 
-  let totalQuizCount = 2; 
-  if ( lectureid ) {
-      questionAPI.quizList(parseInt(lectureid)).then((res) => {  
-      quizes = res.data
-      totalQuizCount = Object.keys( quizes ).length
+  ];
+  let totalQuizCount = 2;
+  if (lectureid) {
+    questionAPI.quizList(parseInt(lectureid)).then((res) => {
+      quizes = res.data;
+      totalQuizCount = Object.keys(quizes).length;
     });
   }
-  
+
   let answers = [
     {
-      title: 'Introductory Question',
+      num: '1',
       content:
-        'What is you name? Also, what is the next alphabet for ‘a’?',
+        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
+      name: 'JunSeoung Choi',
+      clap: '10',
     },
     {
-      title: 'Introductory Question',
+      num: '2',
       content:
-        'What is you name? Also, what is the next alphabet for ‘a’?',
+        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
+      name: 'Dan Choi',
+      clap: '1',
     },
-  ]; // Todo: get answers that matches course & lecture & current displayed quiz
+  ]; // Todo: get notes list(현재 course,lecture, answer의 모든 note 가져오기)
+  // To backend: 연결할 때 num이라는 property가 있는데,
+  // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
+  // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
+  // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.
 
-  if ( quizes[displayQuiz].id ) {
-      answerAPI.others(quizes[displayQuiz].id).then((res) => {
-      answers = res.data
+  if (quizes[displayQuiz].id) {
+    answerAPI.others(quizes[displayQuiz].id).then((res) => {
+      answers = res.data;
     });
   }
 
@@ -195,7 +203,7 @@ const QuizPage = () => {
           </div>
           <div class="col">
             <div class="subtitle-text">Answers from course students</div>
-            <AnswerList />
+            <AnswerList answers={answers} />
           </div>
         </div>
       </div>

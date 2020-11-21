@@ -12,18 +12,34 @@ const QuestionDetail = () => {
 
   const [question, setQuestion] = useState({
     num: '1',
-    title: 'hello',
+    title: 'Introductory Question',
+    content: 'What is you name? Also, what is the next alphabet for ‘a’?',
     date: 'Aug. 8',
     lecture: '4',
     id: '123',
   }); //Todo: questionid 이용해서 question 가져오기
+
+  const [answers, setAnswers] = useState([
+    {
+      name: 'Daeun Choi',
+      title: 'Introductory Question',
+      content:
+        'What is you name? Also, what is the next alphabet for ‘a’?',
+    },
+    {
+      name: 'Dan Choi',
+      title: 'Introductory Question',
+      content:
+        'What is you name? Also, what is the next alphabet for ‘a’?',
+    },
+  ]); //Todo: questionid 이용해서 answers 가져오기
 
   return (
     <>
       <Header />
       <CourseHeader courseid={courseid} />
       <div className="container">
-        <div className="title-text mt-5" style={{ color: '#234382' }}>
+        <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
           <Link href={`/course/${courseid}/questionlist`}>
             <a style={{ textDecoration: 'none', color: '#234382' }}>
               <ArrowBackIcon
@@ -34,13 +50,16 @@ const QuestionDetail = () => {
             </a>
           </Link>
         </div>
-        <div className="row mt-4 subtitle-text ml-2 mr-2">
-          <div className="col-1">#</div>
-          <div className="col-8 row align-items-center">Title</div>
-          <div className="col-3">Date</div>
+        <div class="w-100 ml-2">
+          <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
+            {question.title}
+          </div>
+          <div class="body-text mb-2">{question.content}</div>
+          <hr />
+          <div class="subtitle-text" style={{ color: '#234382' }}>
+            Answers from course students
+          </div>
         </div>
-        <hr />
-        {/* <div className="mt-2">{rows}</div> */}
       </div>
     </>
   );
