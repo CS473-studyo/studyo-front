@@ -41,12 +41,12 @@ const Header = ({ history, ...props }) => {
       setAuthButtonBar(
         <div className="d-flex ml-auto">
           <Nav>
-            <Nav.Link className="header-login" href="/web/api/auth/login">
+            <Nav.Link className="header-login" href="/login">
               Login
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link className="header-login" href="/web/auth/agreement">
+            <Nav.Link className="header-login" href="/register">
               Register
             </Nav.Link>
           </Nav>

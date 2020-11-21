@@ -2,22 +2,26 @@ import React, { useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
 
-const NoteList = () => {
+const AnswerList = () => {
   const [expand, setExpand] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
 
   let notes = [
     {
       num: '1',
-      name: 'Daeun Choi',
-      clap: '2',
+      content:
+        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
+      name: 'JunSeoung Choi',
+      clap: '10',
     },
     {
       num: '2',
+      content:
+        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
       name: 'Dan Choi',
-      clap: '5',
+      clap: '1',
     },
-  ]; // Todo: get notes list(현재 course,lecture의 모든 note 가져오기)
+  ]; // Todo: get notes list(현재 course,lecture, answer의 모든 note 가져오기)
   // To backend: 연결할 때 num이라는 property가 있는데,
   // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
   // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
@@ -28,7 +32,7 @@ const NoteList = () => {
     else setExpand(0);
   };
 
-  const NoteElem = (props) => {
+  const AnswerElem = (props) => {
     if (props.num === expand)
       return (
         <div className="row">
@@ -51,10 +55,7 @@ const NoteList = () => {
               </h5>
             </div>
             <div className="card-body">
-              <img
-                className="w-100 mb-2"
-                src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F1930A949512D50450C"
-              />
+              <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
                 <div className="col body-text align-center">
                   {totalCount} claps for this note!{' '}
@@ -105,7 +106,7 @@ const NoteList = () => {
 
   const rows = notes.slice(0, notes.length).map((note) => (
     <>
-      <NoteElem
+      <AnswerElem
         num={note.num}
         name={note.name}
         content={note.content}
@@ -115,7 +116,7 @@ const NoteList = () => {
     </>
   ));
 
-  return <div>{rows}</div>;
+  return <div className="w-100">{rows}</div>;
 };
 
-export default NoteList;
+export default AnswerList;

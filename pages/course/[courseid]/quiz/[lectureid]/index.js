@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
 import LectureHeader from 'components/lectureheader.js';
-import { Card } from 'react-bootstrap';
-import SearchIcon from '@material-ui/icons/Search';
-import * as questionAPI from 'api/question';
 
+import AnswerList from 'components/answerList.js';
+import * as questionAPI from 'api/question';
 
 const QuizPage = () => {
   const router = useRouter();
@@ -45,6 +44,19 @@ const QuizPage = () => {
     });
   }
   
+
+  let answers = [
+    {
+      title: 'Introductory Question',
+      content:
+        'What is you name? Also, what is the next alphabet for ‘a’?',
+    },
+    {
+      title: 'Introductory Question',
+      content:
+        'What is you name? Also, what is the next alphabet for ‘a’?',
+    },
+  ]; // Todo: get answers that matches course & lecture & current displayed quiz
 
   const ButtonsGroup = () => {
     if (displayQuiz === 0) {
@@ -175,6 +187,7 @@ const QuizPage = () => {
           </div>
           <div class="col">
             <div class="subtitle-text">Answers from course students</div>
+            <AnswerList />
           </div>
         </div>
       </div>

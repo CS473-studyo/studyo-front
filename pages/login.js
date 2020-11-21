@@ -50,7 +50,11 @@ const AdminLoginPage = () => {
                 onChange={(value) => setPassword(value.target.value)}
               />
             </Form.Group>
-            <Button type="submit" className="login-button" variant="dark">
+            <Button
+              type="submit"
+              className="login-button"
+              variant="primary"
+            >
               Login
             </Button>
           </Form>
