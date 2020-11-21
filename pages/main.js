@@ -19,7 +19,7 @@ const MainPage = () => {
             <div className="title-text mr-2">{props.code}</div>
             <div className="title-text-light">{props.name}</div>
           </div>
-          <div className="mt-2 body-text">Prof. {props.prof}</div>
+          <div className="mt-2 body-text">Prof. {props.professor}</div>
           <a
             href={`/course/${props.code}`}
             type="button"
@@ -34,13 +34,17 @@ const MainPage = () => {
 
   const rows = courses.map((post) => (
     <>
-      <CourseElem code={post.code} name={post.name} prof={post.prof} />
+      <CourseElem
+        code={post.code}
+        name={post.name}
+        professor={post.professor}
+      />
       <div className="divider" />
     </>
   ));
 
   const getCourseList = async () => {
-    result = await courseAPI.list();
+    result = await courseAPI.userCourses();
     setCourses(result.data);
   };
 

@@ -5,6 +5,6 @@ const auth = axios.create({
   withCredentials: true,
 });
 
-export const show = (course) => auth.post(`/show/${course}`);
+export const courseLectures = (course) => auth.get(`/${course}`);
 // export const check = () => auth.get(`/check`);
 // export const logout = () => auth.get(`/logout`);

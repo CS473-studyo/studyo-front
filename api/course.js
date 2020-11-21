@@ -5,4 +5,6 @@ const course = axios.create({
   withCredentials: true,
 });
 
-export const list = (id) => course.post(`/list`);
+export const userCourses = () => course.get(`/`);
+export const courseInfo = (courseId) => course.get(`/${courseId}`);
+export const join = (courseId) => course.post(`/join/${courseId}`);

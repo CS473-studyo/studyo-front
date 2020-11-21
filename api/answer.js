@@ -1,18 +1,16 @@
 import axios from 'axios';
 
-const auth_Answer = axios.create({
+const answer = axios.create({
   baseURL: `${process.env.BASE_URL}/answer`,
   withCredentials: true,
 });
 
-export const answering = ({ question, user, content }) =>
-  auth_Answer.post(`/`, { question, user, content });
+export const submit = (questionId, content) =>
+  answer.post(`/${questionId}`, { content });
 
-export const others = (id) => auth_Answer.post(`/others`, { id });
+export const answers = (questionId) => answer.get(`/${questionId}`);
 
-export const myanswer = ({ id, userId }) =>
-  auth_Answer.post(`/myanswer`, { id, userId });
+export const userAnswer = (questionId) =>
+  answer.get(`/user/${questionId}`);
 
-export const like = (answerId) => auth_Answer.post(`/join/${answerId}`);
-
-export const clap = (id, user) => auth_Answer.post('/clap', { id, user });
+export const clap = (answerId) => answer.post(`/${answerId}`);

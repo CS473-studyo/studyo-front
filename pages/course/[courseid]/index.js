@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
@@ -5,7 +6,6 @@ import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
 import { Divider } from '@material-ui/core';
 import * as lectureAPI from 'api/lecture';
-import { useState } from 'react';
 
 const Course = () => {
   // let lectures = [{num:"1", date:"Aug. 8", keyword:new Array('zero', 'one', 'tow')}, {num:"2", date:"Aug. 10", keyword:new Array('zero', 'one', 'tow')}]
@@ -27,13 +27,15 @@ const Course = () => {
   const { courseid } = router.query;
 
   // console.log(router.query)
-  if (courseid) {
-    lectureAPI.show(courseid).then((res) => {
-      console.log(res.data);
-      setLectures(res.data);
-      //  console.log(res)
-    });
-  }
+  useEffect(() => {
+    if (courseid) {
+      lectureAPI.courseLectures(courseid).then((res) => {
+        console.log(res.data);
+        setLectures(res.data);
+        //  console.log(res)
+      });
+    }
+  }, []);
 
   const Hashtag = (props) => {
     return <div className="hashtag body-text">#{props.keyword}</div>;

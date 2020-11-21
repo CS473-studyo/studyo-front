@@ -10,9 +10,8 @@ const Header = ({ history, ...props }) => {
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
 
   const checkAdminAuth = async () => {
-    const access = await userAPI.check(window.sessionStorage.accessToken);
-    console.log(access);
-    setAdminAuth(access.data.access);
+    const access = await userAPI.check();
+    setAdminAuth(access.data ? true : false);
   };
 
   useEffect(() => {
@@ -28,7 +27,7 @@ const Header = ({ history, ...props }) => {
   useEffect(() => {
     if (adminAuth)
       setAuthButtonBar(
-        <div className="d-flex">
+        <div className="d-flex ml-auto">
           <Nav>
             <div className="header-logout" onClick={tryLogout}>
               Logout
