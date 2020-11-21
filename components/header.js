@@ -3,21 +3,20 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import styles from 'components/header.module.css';
 import { withRouter } from 'react-router-dom';
 import Logo from 'public/Logo.svg';
+import * as userAPI from 'api/user.js';
 
 const Header = ({ history, ...props }) => {
   const [adminAuth, setAdminAuth] = useState(false);
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
 
   const checkAdminAuth = async () => {
-    const access = await adminsAPI.checkAdmin(
-      window.sessionStorage.accessToken
-    );
+    const access = await userAPI.check(window.sessionStorage.accessToken);
     console.log(access);
     setAdminAuth(access.data.access);
   };
 
   useEffect(() => {
-    // checkAdminAuth();
+    checkAdminAuth();
   }, []);
 
   const tryLogout = useCallback(() => {
@@ -32,7 +31,7 @@ const Header = ({ history, ...props }) => {
         <div className="d-flex">
           <Nav>
             <div className="header-logout" onClick={tryLogout}>
-              어드민 로그아웃
+              Logout
             </div>
           </Nav>
         </div>

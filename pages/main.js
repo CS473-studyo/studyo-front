@@ -1,12 +1,15 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import Header from 'components/header.js';
 import { Card } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 
-import * as courseAPI from 'pages/api/course';
+import * as courseAPI from 'api/course';
 
 const MainPage = () => {
-  let posts = [{ code: 'CS350', name: 'intro', prof: 'hi' }];
+  // let courses = [{ code: 'CS350', name: 'intro', prof: 'hi' }];
+  // let courses = [];
+  const [courses, setCourses] = useState([]);
+  let result;
 
   const CourseElem = (props) => {
     return (
@@ -29,18 +32,20 @@ const MainPage = () => {
     );
   };
 
-  const rows = posts.slice(0, 5).map((post) => (
+  const rows = courses.map((post) => (
     <>
       <CourseElem code={post.code} name={post.name} prof={post.prof} />
       <div className="divider" />
     </>
   ));
 
-  const getCourseList = async (userid) =>
-    (course = await courseAPI.get(userid));
+  const getCourseList = async () => {
+    result = await courseAPI.list();
+    setCourses(result.data);
+  };
 
   useEffect(() => {
-    posts = getCourseList('5');
+    getCourseList();
   }, []);
 
   return (
