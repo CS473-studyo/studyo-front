@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const auth = axios.create({
-  baseURL: `http://localhost:8080/user`,
+  baseURL: `${process.env.BASE_URL}/user`,
   withCredentials: true,
 });
 
@@ -20,6 +20,5 @@ export const save = ({ user, course, lecture, content }) =>
 
 export const getList = ({ course, lecture }) =>
   auth_Keyword.post(`/list`, { course, lecture });
-  
-export const vote = ( keywordId ) =>
-auth_Keyword.post(`/join/${keywordId}`);
+
+export const vote = (keywordId) => auth_Keyword.post(`/join/${keywordId}`);
