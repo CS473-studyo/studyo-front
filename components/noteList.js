@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
-import { Card } from 'react-bootstrap';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
+import ClapButton from 'react-clap-button';
 
 const NoteList = () => {
   const [expand, setExpand] = useState(0);
+  const [totalCount, setTotalCount] = useState(0);
 
   let notes = [
     {
       num: '1',
       name: 'Daeun Choi',
-      content: 'Collapsible Group Item #1',
       clap: '2',
     },
     {
       num: '2',
       name: 'Dan Choi',
-      content: 'Collapsible Group Item #2',
-      clap: '2',
+      clap: '5',
     },
-  ];
+  ]; // Todo: get notes list(현재 course,lecture의 모든 note 가져오기)
 
   const expandToggle = (num) => {
     if (expand !== num) setExpand(num);
@@ -40,18 +39,36 @@ const NoteList = () => {
                   type="button"
                   onClick={() => expandToggle(props.num)}
                 >
-                  <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                  {props.name}
-                  {props.clap}
+                  <div className="row ml-1">
+                    <AccountCircleIcon className="mr-3"></AccountCircleIcon>
+                    {props.name}
+                  </div>
                 </button>
               </h5>
             </div>
             <div className="card-body">
-              <div>{props.content}</div>
               <img
-                className="w-100"
+                className="w-100 mb-2"
                 src="https://img1.daumcdn.net/thumb/R800x0/?scode=mtistory2&fname=https%3A%2F%2Ft1.daumcdn.net%2Fcfile%2Ftistory%2F1930A949512D50450C"
               />
+              <div className="w-100 row align-items-center">
+                <div className="col body-text align-center">
+                  {totalCount} claps for this note!{' '}
+                </div>
+                <ClapButton
+                  className="col"
+                  count={0}
+                  countTotal={totalCount}
+                  isClicked={false}
+                  maxCount={3}
+                  onCountChange={function onCountChange() {
+                    setTotalCount((totalCount) => totalCount + 1);
+                  }}
+                  theme={{
+                    secondaryColor: '#234382',
+                  }}
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -70,9 +87,10 @@ const NoteList = () => {
                   type="button"
                   onClick={() => expandToggle(props.num)}
                 >
-                  <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                  {props.name}
-                  {props.clap}
+                  <div className="row ml-1">
+                    <AccountCircleIcon className="mr-3"></AccountCircleIcon>
+                    {props.name}
+                  </div>
                 </button>
               </h5>
             </div>
