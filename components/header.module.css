@@ -1,56 +1,55 @@
 .header-item {
-    font-family: "NanumSquare Bold";
-    color: black !important;
-    margin-left: 10px;
-  }
-  
-  .header-login {
-    margin-left: 10px;
-    transition: 0.3s;
-  }
-  
-  .header-logout {
-    margin-left: 10px;
-    color: #ff0000;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-  
-  .tab-hover-enter {
-    height: 2px;
-    margin-top: -2px;
+  font-family: 'NanumSquare Bold';
+  color: black !important;
+  margin-left: 10px;
+}
+
+.header-login {
+  margin-left: 10px;
+  transition: 0.3s;
+}
+
+.header-logout {
+  margin-left: 10px;
+  color: #ff0000;
+  transition: 0.3s;
+  cursor: pointer;
+}
+
+.tab-hover-enter {
+  height: 2px;
+  margin-top: -2px;
+  width: 0%;
+  background-color: #444;
+  animation-duration: 0.3s;
+  animation-name: tab-hover-enter;
+  animation-fill-mode: forwards;
+}
+
+@keyframes tab-hover-enter {
+  from {
     width: 0%;
-    background-color: #444;
-    animation-duration: 0.3s;
-    animation-name: tab-hover-enter;
-    animation-fill-mode: forwards;
   }
-  
-  @keyframes tab-hover-enter {
-    from {
-      width: 0%;
-    }
-    to {
-      width: 100%;
-    }
-  }
-  
-  .tab-hover-leave {
-    height: 2px;
-    margin-top: -2px;
+  to {
     width: 100%;
-    background-color: #444;
-    animation-duration: 0.3s;
-    animation-name: tab-hover-leave;
-    animation-fill-mode: forwards;
   }
-  
-  @keyframes tab-hover-leave {
-    from {
-      width: 100%;
-    }
-    to {
-      width: 0%;
-    }
+}
+
+.tab-hover-leave {
+  height: 2px;
+  margin-top: -2px;
+  width: 100%;
+  background-color: #444;
+  animation-duration: 0.3s;
+  animation-name: tab-hover-leave;
+  animation-fill-mode: forwards;
+}
+
+@keyframes tab-hover-leave {
+  from {
+    width: 100%;
   }
-  
+  to {
+    width: 0%;
+  }
+}

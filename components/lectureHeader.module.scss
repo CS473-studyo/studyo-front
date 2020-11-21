@@ -1,12 +1,7 @@
-$headerHeight: 150px;
+$headerHeight: 100px;
 
-.header-overlay {
-  background: rgba(0, 0, 0, 0.5);
-}
-
-.header-fill-img {
-  background-image: url('../public/CourseHeaderBackground.png');
-  background-color: white;
+.header-fill {
+  background-color: #234382;
   height: $headerHeight;
 }
 
