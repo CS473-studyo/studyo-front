@@ -5,11 +5,14 @@ import LectureHeader from 'components/lectureheader.js';
 
 import AnswerList from 'components/answerList.js';
 import * as questionAPI from 'api/question';
+import * as answerAPI from 'api/answer';
 
 const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
-  console.log(courseid, lectureid)
+  // const courseid = "CS350"
+  // const lectureid = "1"
+  // console.log(courseid, lectureid)
   const [displayQuiz, setDisplayQuiz] = useState(1);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
@@ -24,27 +27,26 @@ const QuizPage = () => {
   }
   let quizes = [
     {
+      id: 'a',
       title: 'Introductory Question',
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
     {
+      id: 'b',
       title: 'Introductory Question',
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
   ]; 
-  let totalQuizCount = 2; //Todo: get total quiz count
-  // Todo: get quizes that matches course & lecture (exclude my questions)
+  let totalQuizCount = 2; 
   if ( lectureid ) {
-    questionAPI.quizList(lectureid).then((res) => {
-      console.log(res)
-      quizes = res.data //Is it Right? (Sun)
-      totalQuizCount = Object.keys( data ).length
+      questionAPI.quizList(parseInt(lectureid)).then((res) => {  
+      quizes = res.data
+      totalQuizCount = Object.keys( quizes ).length
     });
   }
   
-
   let answers = [
     {
       title: 'Introductory Question',
@@ -57,6 +59,12 @@ const QuizPage = () => {
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
   ]; // Todo: get answers that matches course & lecture & current displayed quiz
+
+  if ( quizes[displayQuiz].id ) {
+      answerAPI.others(quizes[displayQuiz].id).then((res) => {
+      answers = res.data
+    });
+  }
 
   const ButtonsGroup = () => {
     if (displayQuiz === 0) {
