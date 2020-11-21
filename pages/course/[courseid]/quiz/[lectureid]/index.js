@@ -10,6 +10,17 @@ const QuizPage = () => {
   const { courseid, lectureid } = router.query;
 
   const [displayQuiz, setDisplayQuiz] = useState(1);
+  function changeQuiz(offset) {
+    setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
+  }
+
+  function previousQuiz() {
+    changeQuiz(-1);
+  }
+
+  function nextQuiz() {
+    changeQuiz(1);
+  }
 
   let quizes = [
     {
@@ -17,26 +28,63 @@ const QuizPage = () => {
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
+    {
+      title: 'Introductory Question',
+      content:
+        'What is you name? Also, what is the next alphabet for ‘a’?',
+    },
   ]; // Todo: get quizes that matches course & lecture (exclude my questions)
-  let totalQuizCount = 3; //Todo: get total quiz count
+  let totalQuizCount = 2; //Todo: get total quiz count
 
-  const QuizElem = (props) => {
-    return (
-      <Card className="w-100 mb-2">
-        <Card.Body>
-          <div className="container row">
-            <div className="title-text mr-2">{props.title}</div>
+  const ButtonsGroup = () => {
+    if (displayQuiz === 0) {
+      return (
+        <div>
+          <div id="buttongroup" class="float-right">
+            <button
+              type="submit"
+              class="btn btn-primary mr-2"
+              onClick={() => nextQuiz()}
+            >
+              Submit
+            </button>
+            <button
+              type="pass"
+              class="btn btn-secondary"
+              onClick={() => nextQuiz()}
+            >
+              Pass
+            </button>
           </div>
-          <div className="mt-2 body-text">{props.content}</div>
-          <a
-            href={`/course/${props.code}`}
-            type="button"
-            className="mt-4 custom-btn"
+        </div>
+      );
+    }
+    return (
+      <div>
+        <button
+          type="prev"
+          class="btn btn-primary mr-2"
+          onClick={() => previousQuiz()}
+        >
+          Prev
+        </button>
+        <div id="buttongroup" class="float-right">
+          <button
+            type="submit"
+            class="btn btn-primary mr-2"
+            onClick={() => nextQuiz()}
           >
             Submit
-          </a>
-        </Card.Body>
-      </Card>
+          </button>
+          <button
+            type="pass"
+            class="btn btn-secondary"
+            onClick={() => nextQuiz()}
+          >
+            Pass
+          </button>
+        </div>
+      </div>
     );
   };
 
@@ -61,6 +109,7 @@ const QuizPage = () => {
     );
   }
 
+  console.log(quizes[0].title);
   return (
     <div
       style={{
@@ -72,16 +121,50 @@ const QuizPage = () => {
       <Header />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div class="container">
-        <div class="progress">
+        <div class="progress mt-4 mb-4">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
-            aria-valuenow={(displayQuiz * 100) / totalQuizCount}
+            aria-valuenow={((displayQuiz + 1) * 100) / totalQuizCount}
             aria-valuemin="0"
             aria-valuemax="100"
-            style={{ width: (displayQuiz * 100) / totalQuizCount + '%' }}
+            style={{
+              width: ((displayQuiz + 1) * 100) / totalQuizCount + '%',
+            }}
           >
-            {displayQuiz} / {totalQuizCount} completed
+            {displayQuiz + 1} / {totalQuizCount} quiz in progress
+          </div>
+        </div>
+        <div class="title-text mb-2">Quiz {displayQuiz + 1}.</div>
+        <div class="row w-100">
+          <div class="col">
+            <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
+              {quizes[displayQuiz].title}
+            </div>
+            <div class="subtitle-text mb-5">
+              {quizes[displayQuiz].content}
+            </div>
+            <form>
+              <div class="form-group">
+                <label class="body-text" for="exampleInputEmail1">
+                  Enter your answer
+                </label>
+                <textarea
+                  type="text"
+                  class="form-control"
+                  id="exampleInputEmail1"
+                  aria-describedby="emailHelp"
+                  placeholder="Your Answer"
+                />
+                <small id="emailHelp" class="form-text text-muted">
+                  Your answer will be shared to your classmates.
+                </small>
+              </div>
+              <ButtonsGroup />
+            </form>
+          </div>
+          <div class="col">
+            <div class="subtitle-text">Answers from course students</div>
           </div>
         </div>
       </div>
