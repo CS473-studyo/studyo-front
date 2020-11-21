@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
 import LectureHeader from 'components/lectureheader.js';
+
 import AnswerList from 'components/answerList.js';
+import * as questionAPI from 'api/question';
 
 const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
-
+  console.log(courseid, lectureid)
   const [displayQuiz, setDisplayQuiz] = useState(1);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
@@ -20,7 +22,6 @@ const QuizPage = () => {
   function nextQuiz() {
     changeQuiz(1);
   }
-
   let quizes = [
     {
       title: 'Introductory Question',
@@ -32,8 +33,17 @@ const QuizPage = () => {
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
-  ]; // Todo: get quizes that matches course & lecture (exclude my questions)
+  ]; 
   let totalQuizCount = 2; //Todo: get total quiz count
+  // Todo: get quizes that matches course & lecture (exclude my questions)
+  if ( lectureid ) {
+    questionAPI.quizList(lectureid).then((res) => {
+      console.log(res)
+      quizes = res.data //Is it Right? (Sun)
+      totalQuizCount = Object.keys( data ).length
+    });
+  }
+  
 
   let answers = [
     {
