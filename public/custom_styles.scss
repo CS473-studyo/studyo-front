@@ -40,7 +40,7 @@ body {
 .subtitle-text {
   font-family: Nanum Gothic;
   font-style: normal;
-  font-weight: bold;
+  font-weight: 800;
   font-size: 18px;
   line-height: 140%;
 }
@@ -85,8 +85,8 @@ body {
   padding-bottom: 0.1rem;
 }
 
-.lecture {
-  border: none;
+.lecture_note {
+  width: 40% !important;
 }
 
 .scrolling-wrapper {
@@ -99,56 +99,28 @@ body {
   }
 }
 
-.react-pdf__Document {
-  border-radius: 8px;
-  max-width: 50%;
-  position: relative;
+.pdf-viewer {
+  border: 1px;
+  border-color: $body-color;
 }
 
-.react-pdf__Page {
-  max-width: 400px;
-  width: 90vw;
-  height: 10rem !important;
+.lecture_btn {
+  background-color: none;
+  border: none;
 }
 
-.thumbnail-pdf {
-  height: 10rem !important;
+.list-selected {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  background-color: #ebebeb;
+}
+
+.list-unselected {
+  padding-top: 0.25rem;
+  padding-bottom: 0.25rem;
+  padding-left: 0.25rem;
+  background-color: white;
 }
 
 @import '~bootstrap/scss/bootstrap';
-
-@media (min-width: 768px) {
-  .login-content {
-    margin: auto;
-    border: 1px solid #dddddd;
-    border-radius: 5px;
-    width: 450px;
-  }
-}
-@media (max-width: 767px) {
-  .login-content {
-    width: 100vw;
-    padding: 30px 50px;
-  }
-}
-.login-module {
-  background-color: white;
-  height: 100vh;
-  padding: 15px;
-}
-
-@media (min-width: 768px) {
-  .login-module {
-    height: 100%;
-    margin: 45px 15px;
-  }
-}
-
-.login-logo {
-  padding-bottom: 50px;
-}
-
-.login-button {
-  margin-top: 15px !important;
-  float: right;
-}

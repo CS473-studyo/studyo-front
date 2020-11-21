@@ -53,14 +53,14 @@ const Course = () => {
           </div>
           <div className="row">
             <a
-              href={`/course/${courseid}/${props.num}/note`}
+              href={`/course/${courseid}/note/${props.num}`}
               type="button"
               className="mt-4 custom-btn mr-3"
             >
               Lecture Note
             </a>
             <a
-              onclick={`/course/${courseid}/${props.num}/review`}
+              onclick={`/course/${courseid}/quiz/${props.num}`}
               type="button"
               className="mt-4 custom-btn"
             >
