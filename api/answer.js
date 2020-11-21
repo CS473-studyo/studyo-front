@@ -8,7 +8,7 @@ const auth_Answer = axios.create({
   export const answering = ({ question, user, content }) =>
     auth_Answer.post(`/`, { question, user, content });
   
-  export const others = ({ id }) =>
+  export const others = ( id ) =>
     auth_Answer.post(`/others`, { id });
   
   export const myanswer = ({ id, userId }) =>
