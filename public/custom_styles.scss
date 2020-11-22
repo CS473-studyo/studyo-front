@@ -71,6 +71,32 @@ body {
   text-decoration: none;
 }
 
+.custom-btn-secondary {
+  /* Main Color */
+  background: linear-gradient(99.42deg, #b5b6b7 0%, #9a9ca2 100%);
+  color: #ffffff;
+  box-shadow: 0px 4px 10px rgba(36, 50, 124, 0.4);
+  border-radius: 50px;
+
+  font-family: Nanum Gothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+
+  border: none;
+}
+
+.custom-btn:hover {
+  color: #c3d1ef !important;
+  text-decoration: none;
+}
+
 .form-control:focus {
   box-shadow: none;
 }

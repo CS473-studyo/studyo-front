@@ -1,66 +1,28 @@
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
-import { useState } from 'react';
+import * as courseAPI from 'api/course';
 
 const Course = () => {
-  const [questions, setQuestions] = useState([
-    {
-      num: '1',
-      title: 'hello',
-      date: 'Aug. 8',
-      lecture: '4',
-      id: '123',
-    },
-    {
-      num: '2',
-      title: 'bye',
-      date: 'Aug. 10',
-      lecture: '5',
-      id: '234',
-    },
-  ]);
-
   const router = useRouter();
   const { courseid } = router.query;
 
-  const Hashtag = (props) => {
-    return (
-      <div className="hashtag body-text">Lecture {props.lecture}</div>
-    );
-  };
+  const [lectures, setLectures] = useState([]);
 
-  const QuestionElem = (props) => {
-    return (
-      <div>
-        <Link href={`/course/${courseid}/question/${props.id}`}>
-          <a style={{ textDecoration: 'none', color: 'black' }}>
-            <div className="row mt-3 body-text ml-2 mr-2">
-              <div className="col-1">{props.num}</div>
-              <div className="col-8 row align-items-center">
-                <Hashtag lecture={props.lecture} />
-                {props.title}
-              </div>
-              <div className="col-3">{props.date}</div>
-            </div>
-          </a>
-        </Link>
-      </div>
-    );
-  };
+  useEffect(() => {
+    if (courseid) {
+      courseAPI.courseLectures(courseid).then((res) => {
+        setLectures(res.data);
+        console.log(res.data);
+      });
+    }
+  }, [courseid]);
 
-  const rows = questions.map((question) => (
-    <div>
-      <QuestionElem
-        num={question.num}
-        title={question.title}
-        date={question.date}
-        lecture={question.lecture}
-        id={question.id}
-      />
-      <hr />
-    </div>
+  const lectureOptions = lectures.map((lecture) => (
+    <>
+      <option>Lecture {lecture.number}</option>
+    </>
   ));
 
   return (
@@ -68,23 +30,56 @@ const Course = () => {
       <Header />
       <CourseHeader courseid={courseid} />
       <div className="container">
-        <div className="title-text mt-5" style={{ color: '#234382' }}>
-          My Questions
+        <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
+          New Questions
         </div>
-        <div className="row mt-4 subtitle-text ml-2 mr-2">
-          <div className="col-1">#</div>
-          <div className="col-8 row align-items-center">Title</div>
-          <div className="col-3">Date</div>
-        </div>
+        <form>
+          <div class="form-group">
+            <label class="subtitle-text" for="exampleInputEmail1">
+              Title
+            </label>
+            <input
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Title"
+            />
+            <label class="subtitle-text mt-2" for="exampleInputEmail1">
+              Content
+            </label>
+            <textarea
+              type="text"
+              class="form-control"
+              id="exampleInputEmail1"
+              aria-describedby="emailHelp"
+              placeholder="Write your question here!"
+            />
+            <label class="subtitle-text mt-2" for="exampleInputEmail1">
+              Lecture
+            </label>
+            <select class="form-control">{lectureOptions}</select>
+            <small id="emailHelp" class="form-text text-muted">
+              Your question will be shared to your classmates in the review
+              quiz.
+            </small>
+          </div>
+        </form>
         <hr />
-        <div className="mt-2">{rows}</div>
-        <a
-          href={`/course/${courseid}/newQuestion`}
+        <button
+          href={`/course/${courseid}/questionlist`}
           type="button"
-          className="mt-4 custom-btn float-right"
+          className="mt-4 ml-3 custom-btn float-right"
         >
-          New Question
-        </a>
+          Submit
+        </button>
+        <button
+          href={`/course/${courseid}/questionlist`}
+          type="button"
+          className="mt-4 custom-btn-secondary float-right"
+        >
+          Cancel
+        </button>
       </div>
     </>
   );
