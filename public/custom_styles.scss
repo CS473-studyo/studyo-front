@@ -122,6 +122,7 @@ body {
 
   .card {
     display: inline-block;
+    cursor: pointer;
   }
 }
 
@@ -133,6 +134,8 @@ body {
 .lecture_btn {
   background-color: none;
   border: none;
+  width: 40px;
+  height: 40px;
 }
 
 .list-selected {

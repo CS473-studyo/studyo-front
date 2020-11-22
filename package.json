@@ -14,8 +14,11 @@
     "applause-button": "^3.3.2",
     "axios": "^0.21.0",
     "bootstrap": "^4.5.3",
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
     "next": "^10.0.0",
     "node-sass": "^4.14.1",
+    "pdf2pic": "^2.1.2",
     "pdfjs-dist": "^2.5.207",
     "react": "16.13.1",
     "react-bootstrap": "^1.4.0",
@@ -23,7 +26,8 @@
     "react-dom": "16.13.1",
     "react-file-reader": "^1.1.4",
     "react-pdf": "^5.0.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "react-sizeme": "^2.6.12"
   },
   "devDependencies": {
     "babel-eslint": "^10.1.0",

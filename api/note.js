@@ -6,4 +6,4 @@ const note = axios.create({
 });
 
 export const upload = (lectureId, file) =>
-  note.post(`/${lectureId}`, { file });
+  note.post(`/${lectureId}`, file);

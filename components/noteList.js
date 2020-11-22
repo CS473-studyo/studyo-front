@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
 
+if (typeof window === 'undefined') {
+  global.window = {};
+}
 const NoteList = ({ notes }) => {
   const [expand, setExpand] = useState(0);
   const [totalCount, setTotalCount] = useState(0);
