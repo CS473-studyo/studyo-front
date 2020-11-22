@@ -69,7 +69,7 @@ const QuizPage = () => {
   // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.
 
   if (quizes[displayQuiz].id) {
-    answerAPI.otherAnswers(quizes[displayQuiz].id).then((res) => {
+    answerAPI.answers(quizes[displayQuiz].id).then((res) => {
       answers = res.data;
     });
   }

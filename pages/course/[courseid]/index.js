@@ -8,6 +8,7 @@ import * as courseAPI from 'api/course';
 
 const Course = () => {
   const [lectures, setLectures] = useState([]);
+  const [course, setCourse] = useState({});
 
   const router = useRouter();
   const { courseid } = router.query;
@@ -17,7 +18,16 @@ const Course = () => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
-        //  console.log(res)
+        // console.log(res);
+      });
+    }
+  }, [courseid]);
+
+  useEffect(() => {
+    if (courseid) {
+      courseAPI.courseInfo(courseid).then((res) => {
+        setCourse(res.data);
+        console.log(res.data);
       });
     }
   }, [courseid]);
@@ -76,7 +86,11 @@ const Course = () => {
   return (
     <>
       <Header />
-      <CourseHeader courseid={courseid} />
+      <CourseHeader
+        courseid={courseid}
+        courseName={course.name}
+        profName={course.professor}
+      />
       <div className="container mt-2">{rows}</div>
     </>
   );

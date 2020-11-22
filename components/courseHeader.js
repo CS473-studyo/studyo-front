@@ -2,10 +2,8 @@ import React from 'react';
 import styles from './courseHeader.module.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const CourseHeader = ({ courseid }) => {
-  let courseName = 'Introduction to Software Engineering'; // Todo: load course naem
-  let studentNum = 21; //Todo: load student number
-  let profName = 'Doo-Hwan Bae'; //Todo: load prof name
+const CourseHeader = ({ courseid, courseName, profName }) => {
+  let studentNum = 20;
 
   return (
     <div className={styles['header-fill-img']}>
@@ -30,7 +28,7 @@ const CourseHeader = ({ courseid }) => {
               <div
                 className={`body-text text-right ${styles['course-detail']}`}
               >
-                Prof.{profName} <br /> {studentNum} students joined
+                Prof. {profName} <br /> {studentNum} students joined
               </div>
             </div>
           </div>
