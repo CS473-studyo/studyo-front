@@ -17,6 +17,7 @@ const Course = () => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
+        console.log(res.data);
       });
     }
   }, [courseid]);
@@ -66,7 +67,7 @@ const Course = () => {
         number={lecture.number}
         keywords={lecture.Keywords || []}
         date={lecture.date}
-        id={lecture.LectureId}
+        id={lecture.id}
       />
       <div className="divider" />
       <hr />
