@@ -2,9 +2,7 @@ import React from 'react';
 import styles from './courseHeader.module.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const CourseHeader = ({ courseid, courseName, profName }) => {
-  let studentNum = 20;
-
+const CourseHeader = ({ courseid, courseName, profName, userNumber }) => {
   return (
     <div className={styles['header-fill-img']}>
       <div className={`h-100 w-100 ${styles['header-overlay']}`}>
@@ -28,7 +26,7 @@ const CourseHeader = ({ courseid, courseName, profName }) => {
               <div
                 className={`body-text text-right ${styles['course-detail']}`}
               >
-                Prof. {profName} <br /> {studentNum} students joined
+                Prof. {profName} <br /> {userNumber} students joined
               </div>
             </div>
           </div>

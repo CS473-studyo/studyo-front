@@ -18,7 +18,6 @@ const Course = () => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
-        // console.log(res);
       });
     }
   }, [courseid]);
@@ -27,7 +26,6 @@ const Course = () => {
     if (courseid) {
       courseAPI.courseInfo(courseid).then((res) => {
         setCourse(res.data);
-        console.log(res.data);
       });
     }
   }, [courseid]);
@@ -52,14 +50,14 @@ const Course = () => {
           </div>
           <div className="row">
             <a
-              href={`/course/${courseid}/note/${props.number}`}
+              href={`/course/${courseid}/note/${props.id}`}
               type="button"
               className="mt-4 custom-btn mr-3"
             >
               Lecture Note
             </a>
             <a
-              onclick={`/course/${courseid}/quiz/${props.number}`}
+              href={`/course/${courseid}/quiz/${props.id}`}
               type="button"
               className="mt-4 custom-btn"
             >
@@ -77,6 +75,7 @@ const Course = () => {
         number={lecture.number}
         keywords={lecture.Keywords || []}
         date={lecture.date}
+        id={lecture.LectureId}
       />
       <div className="divider" />
       <hr />
@@ -90,6 +89,7 @@ const Course = () => {
         courseid={courseid}
         courseName={course.name}
         profName={course.professor}
+        userNumber={course.userNumber}
       />
       <div className="container mt-2">{rows}</div>
     </>
