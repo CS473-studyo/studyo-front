@@ -31,7 +31,7 @@ const AdminLoginPage = () => {
     >
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
-          <a href="/web" className="align-self-center login-logo">
+          <a href="/main" className="align-self-center login-logo">
             <Logo />
           </a>
           <Form className="login-form" onSubmit={tryLogin}>
