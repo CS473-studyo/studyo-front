@@ -39,6 +39,13 @@ const Course = () => {
             {props.keywords.map((keyword) => (
               <Hashtag keyword={keyword.word} />
             ))}
+            <a
+              href={`/course/${courseid}/keyword/${props.id}`}
+              // type="button"
+              className="ml-2"
+            >
+              Vote keywords
+            </a>
           </div>
           <div className="row">
             <a
