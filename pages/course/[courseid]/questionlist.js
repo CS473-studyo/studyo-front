@@ -2,9 +2,11 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
-import { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import * as questionAPI from 'api/question';
 
 const Course = () => {
+  let result;
   const [questions, setQuestions] = useState([
     {
       num: '1',
@@ -24,6 +26,15 @@ const Course = () => {
 
   const router = useRouter();
   const { courseid } = router.query;
+
+  const getQuestionList = async () => {
+    result = await questionAPI.list();
+    setQuestions(result.data);
+  };
+
+  useEffect(() => {
+    getQuestionList();
+  }, []);
 
   const Hashtag = (props) => {
     return (
@@ -78,6 +89,13 @@ const Course = () => {
         </div>
         <hr />
         <div className="mt-2">{rows}</div>
+        <a
+          href={`/course/${courseid}/newQuestion`}
+          type="button"
+          className="mt-4 custom-btn float-right"
+        >
+          New Question
+        </a>
       </div>
     </>
   );

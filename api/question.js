@@ -4,14 +4,13 @@ const auth_Question = axios.create({
   baseURL: `${process.env.BASE_URL}/question`,
   withCredentials: true,
 });
+// export const courseLectures = (course) => lecture.get(`/${course}`);
+export const post = (lectureId, title, content) =>
+  auth_Question.post(`/${lectureId}`, { title, content });
 
-export const post = (title, detail, userid, lecture) =>
-  auth_Question.post(`/post`, { title, detail, userid, lecture });
+export const list = () => auth_Question.get(`/user`);
 
-export const list = (
-  userid //my Question
-) => auth_Question.post(`/list`, { userid });
+export const quizList = (lectureId) => auth_Question.get(`/${lectureId}`);
 
-export const quizList = (
-  lecture //Lecture Quiz
-) => auth_Question.post(`/quizList`, { lecture });
+export const question = (questionId) =>
+  auth_Question.get(`/id/${questionId}`);
