@@ -16,11 +16,13 @@
     "bootstrap": "^4.5.3",
     "next": "^10.0.0",
     "node-sass": "^4.14.1",
+    "pdfjs-dist": "^2.5.207",
     "react": "16.13.1",
     "react-bootstrap": "^1.4.0",
     "react-clap-button": "^1.2.12",
     "react-dom": "16.13.1",
     "react-multiple-choice": "^2.0.2",
+    "react-file-reader": "^1.1.4",
     "react-pdf": "^5.0.0",
     "react-router-dom": "^5.2.0"
   },

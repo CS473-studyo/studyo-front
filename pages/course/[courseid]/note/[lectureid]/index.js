@@ -9,6 +9,11 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
+import ReactFileReader from 'react-file-reader';
+import { NotListedLocationSharp } from '@material-ui/icons';
+
+import * as noteAPI from 'api/note';
+
 if (typeof window === 'undefined') {
   global.window = {};
 }
@@ -59,6 +64,12 @@ function LectureNote() {
   function nextPage() {
     changePage(1);
   }
+
+  const handleFiles = (files) => {
+    const pdf = files[0];
+
+    noteAPI.upload(lectureid, pdf).then((res) => router.reload());
+  };
 
   return (
     <div
@@ -114,7 +125,7 @@ function LectureNote() {
                   disabled={pageNumber <= 1}
                   onClick={previousPage}
                 >
-                  <NavigateBeforeIcon></NavigateBeforeIcon>
+                  <NavigateBeforeIcon />
                 </button>
                 <p className="body-text align-self-center p-2">
                   Page {pageNumber || (numPages ? 1 : '--')} of{' '}
@@ -125,17 +136,17 @@ function LectureNote() {
                   disabled={pageNumber >= numPages}
                   onClick={nextPage}
                 >
-                  <NavigateNextIcon></NavigateNextIcon>
+                  <NavigateNextIcon />
                 </button>
               </div>
             </Document>
-            <a
-              // href={`/course/${courseid}/`}
-              type="button"
-              className="mt-4 custom-btn float-right"
+
+            <ReactFileReader
+              handleFiles={(e) => handleFiles(e)}
+              fileTypes={'.pdf'}
             >
-              Upload My Note
-            </a>
+              <button className="btn">Upload My Note</button>
+            </ReactFileReader>
           </div>
           <div className="col">
             <h1 className="title-text">Notes from course students</h1>
