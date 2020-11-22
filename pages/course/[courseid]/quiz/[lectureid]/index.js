@@ -118,6 +118,49 @@ const QuizPage = () => {
     );
   }
 
+  if (quizzes.length <= displayQuiz) {
+    return (
+      <div
+        style={{
+          minHeight: '100vh',
+          fontFamily: 'NanumSquare',
+        }}
+        className="d-flex flex-column"
+      >
+        <Header />
+        <LectureHeader courseid={courseid} lectureid={lectureid} />
+        <div className="container">
+          <div class="progress mt-4 mb-4">
+            <div
+              class="progress-bar"
+              role="progressbar"
+              aria-valuenow="100"
+              aria-valuemin="0"
+              aria-valuemax="100"
+              style={{ width: '100%' }}
+            >
+              All quiz completed
+            </div>
+          </div>
+          <div class="h-100 mt-5 align-items-center">
+            <div class="title-text text-center">
+              You completed all review quiz!
+            </div>
+            <div class="d-flex justify-content-center mt-5">
+              <a
+                type="submit"
+                className="custom-btn mr-2 align-middle"
+                href={`/course/${courseid}`}
+              >
+                Back to home
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
   const QuizContent = () => {
     if (quizzes)
       return (
