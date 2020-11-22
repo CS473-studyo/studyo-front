@@ -4,23 +4,9 @@ import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
-import { Divider } from '@material-ui/core';
-import * as lectureAPI from 'api/lecture';
+import * as courseAPI from 'api/course';
 
 const Course = () => {
-  // let lectures = [{num:"1", date:"Aug. 8", keyword:new Array('zero', 'one', 'tow')}, {num:"2", date:"Aug. 10", keyword:new Array('zero', 'one', 'tow')}]
-  // const [lectures, setLectures] = useState([
-  //   {
-  //     num: '1',
-  //     date: 'Aug. 8',
-  //     keyword: new Array('zero', 'one', 'tow'),
-  //   },
-  //   {
-  //     num: '2',
-  //     date: 'Aug. 10',
-  //     keyword: new Array('zero', 'one', 'tow'),
-  //   },
-  // ]);
   const [lectures, setLectures] = useState([]);
 
   const router = useRouter();
@@ -29,41 +15,41 @@ const Course = () => {
   // console.log(router.query)
   useEffect(() => {
     if (courseid) {
-      lectureAPI.courseLectures(courseid).then((res) => {
-        console.log(res.data);
+      courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
         //  console.log(res)
       });
     }
-  }, []);
+  }, [courseid]);
 
   const Hashtag = (props) => {
     return <div className="hashtag body-text">#{props.keyword}</div>;
   };
 
   const LectureElem = (props) => {
+    const date = new Date(props.date).toLocaleDateString('en-US');
     return (
       <Card className="w-100 mb-2 border-0">
         <Card.Body>
           <div className="row">
-            <div className="title-text mr-2">Lecture{props.num}</div>
-            <div className="body-text-light mt-2">{props.date}</div>
+            <div className="title-text mr-2">Lecture {props.number}</div>
+            <div className="body-text-light mt-2">{date}</div>
           </div>
           <div className="mt-2 body-text row">
-            <Hashtag keyword={props.keyword.split(',')[0]} />
-            <Hashtag keyword={props.keyword.split(',')[1]} />
-            <Hashtag keyword={props.keyword.split(',')[2]} />
+            {props.keywords.map((keyword) => (
+              <Hashtag keyword={keyword} />
+            ))}
           </div>
           <div className="row">
             <a
-              href={`/course/${courseid}/note/${props.num}`}
+              href={`/course/${courseid}/note/${props.number}`}
               type="button"
               className="mt-4 custom-btn mr-3"
             >
               Lecture Note
             </a>
             <a
-              onclick={`/course/${courseid}/quiz/${props.num}`}
+              onclick={`/course/${courseid}/quiz/${props.number}`}
               type="button"
               className="mt-4 custom-btn"
             >
@@ -78,8 +64,8 @@ const Course = () => {
   const rows = lectures.map((lecture) => (
     <>
       <LectureElem
-        num={lecture.num}
-        keyword={lecture.keyword}
+        number={lecture.number}
+        keywords={lecture.keywords || []}
         date={lecture.date}
       />
       <div className="divider" />

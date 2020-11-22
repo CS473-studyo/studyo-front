@@ -7,4 +7,5 @@ const course = axios.create({
 
 export const userCourses = () => course.get(`/`);
 export const courseInfo = (courseId) => course.get(`/${courseId}`);
+export const courseLectures = (code) => course.get(`/lectures/${code}`);
 export const join = (courseId) => course.post(`/join/${courseId}`);
