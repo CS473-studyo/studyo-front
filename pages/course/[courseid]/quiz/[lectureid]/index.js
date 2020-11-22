@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
 import LectureHeader from 'components/lectureheader.js';
@@ -10,8 +10,7 @@ import * as answerAPI from 'api/answer';
 const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
-  // const courseid = "CS350"
-  // const lectureid = "1"
+
   const [displayQuiz, setDisplayQuiz] = useState(0);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
@@ -24,57 +23,25 @@ const QuizPage = () => {
   function nextQuiz() {
     changeQuiz(1);
   }
-  const [quizes, setQuizes] = useState([
-    {
-      id: 'a',
-      title: 'Introductory Question',
-      content:
-        'What is you name? Also, what is the next alphabet for ‘a’?',
-    },
-    {
-      id: 'b',
-      title: 'Introductory Question',
-      content:
-        'What is you name? Also, what is the next alphabet for ‘a’?',
-    },
-  ])
-  let totalQuizCount = 2;
+  const [quizzes, setQuizzes] = useState([]);
+
   useEffect(() => {
-  if (lectureid) {
-    questionAPI.quizList(parseInt(lectureid)).then((res) => {
-      setQuizes(res.data);
-      totalQuizCount = Object.keys(quizes).length;
+    if (lectureid) {
+      questionAPI.quizList(lectureid).then((res) => {
+        setQuizzes(res.data);
       });
     }
   }, [lectureid]);
 
-  const [answers, setAnswers] = useState([
-    {
-      num: '1',
-      content:
-        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
-      name: 'JunSeoung Choi',
-      clap: '10',
-    },
-    {
-      num: '2',
-      content:
-        'My name is JunSeoung Choi. The next alphabet for ‘a’ is ‘b’.',
-      name: 'Dan Choi',
-      clap: '1',
-    },
-  ]); // Todo: get notes list(현재 course,lecture, answer의 모든 note 가져오기)
-  // To backend: 연결할 때 num이라는 property가 있는데,
-  // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
-  // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
-  // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.
+  const [answers, setAnswers] = useState([]);
+
   useEffect(() => {
-  if (quizes[displayQuiz].id) {
-    answerAPI.answers(quizes[displayQuiz].id).then((res) => {
-      setAnswers(res.data);
+    if (quizzes[displayQuiz] && quizzes[displayQuiz].id) {
+      answerAPI.answers(quizzes[displayQuiz].id).then((res) => {
+        setAnswers(res.data);
       });
     }
-  }, [quizes[displayQuiz].id]);
+  }, [displayQuiz]);
 
   const ButtonsGroup = () => {
     if (displayQuiz === 0) {
@@ -128,7 +95,9 @@ const QuizPage = () => {
     );
   };
 
-  if (totalQuizCount === 0) {
+  console.log(quizzes.length);
+
+  if (quizzes.length === 0) {
     return (
       <div
         style={{
@@ -139,9 +108,9 @@ const QuizPage = () => {
       >
         <Header />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
-        <div class="h-100">
-          <div class="title-text text-center">No Quizes Exist Yet!</div>
-          <div class="body-text text-center">
+        <div class="h-100 mt-5">
+          <div class="title-text text-center">No Quizzes Exist Yet!</div>
+          <div class="body-text text-center mt-1">
             Please wait until your friends ask some quiestions.
           </div>
         </div>
@@ -149,7 +118,20 @@ const QuizPage = () => {
     );
   }
 
-  console.log(quizes[0].title);
+  const QuizContent = () => {
+    if (quizzes)
+      return (
+        <div>
+          <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
+            {quizzes[displayQuiz].title}
+          </div>
+          <div class="subtitle-text mb-5">
+            {quizzes[displayQuiz].content}
+          </div>
+        </div>
+      );
+  };
+
   return (
     <div
       style={{
@@ -165,25 +147,20 @@ const QuizPage = () => {
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
             role="progressbar"
-            aria-valuenow={((displayQuiz + 1) * 100) / totalQuizCount}
+            aria-valuenow={((displayQuiz + 1) * 100) / quizzes.length}
             aria-valuemin="0"
             aria-valuemax="100"
             style={{
-              width: ((displayQuiz + 1) * 100) / totalQuizCount + '%',
+              width: ((displayQuiz + 1) * 100) / quizzes.length + '%',
             }}
           >
-            {displayQuiz + 1} / {totalQuizCount} quiz in progress
+            {displayQuiz + 1} / {quizzes.length} quiz in progress
           </div>
         </div>
         <div class="title-text mb-2">Quiz {displayQuiz + 1}.</div>
         <div class="row w-100">
           <div class="col">
-            <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
-              {quizes[displayQuiz].title}
-            </div>
-            <div class="subtitle-text mb-5">
-              {quizes[displayQuiz].content}
-            </div>
+            <QuizContent />
             <form>
               <div class="form-group">
                 <label class="body-text" for="exampleInputEmail1">
