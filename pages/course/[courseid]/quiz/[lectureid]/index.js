@@ -12,8 +12,7 @@ const QuizPage = () => {
   const { courseid, lectureid } = router.query;
   // const courseid = "CS350"
   // const lectureid = "1"
-  // console.log(courseid, lectureid)
-  const [displayQuiz, setDisplayQuiz] = useState(1);
+  const [displayQuiz, setDisplayQuiz] = useState(0);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
   }
@@ -25,7 +24,7 @@ const QuizPage = () => {
   function nextQuiz() {
     changeQuiz(1);
   }
-  let quizes = [
+  const [quizes, setQuizes] = useState([
     {
       id: 'a',
       title: 'Introductory Question',
@@ -38,16 +37,18 @@ const QuizPage = () => {
       content:
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
-  ];
+  ])
   let totalQuizCount = 2;
+  useEffect(() => {
   if (lectureid) {
     questionAPI.quizList(parseInt(lectureid)).then((res) => {
-      quizes = res.data;
+      setQuizes(res.data);
       totalQuizCount = Object.keys(quizes).length;
-    });
-  }
+      });
+    }
+  }, [lectureid]);
 
-  let answers = [
+  const [answers, setAnswers] = useState([
     {
       num: '1',
       content:
@@ -62,17 +63,18 @@ const QuizPage = () => {
       name: 'Dan Choi',
       clap: '1',
     },
-  ]; // Todo: get notes list(현재 course,lecture, answer의 모든 note 가져오기)
+  ]); // Todo: get notes list(현재 course,lecture, answer의 모든 note 가져오기)
   // To backend: 연결할 때 num이라는 property가 있는데,
   // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
   // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
   // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.
-
+  useEffect(() => {
   if (quizes[displayQuiz].id) {
     answerAPI.answers(quizes[displayQuiz].id).then((res) => {
-      answers = res.data;
-    });
-  }
+      setAnswers(res.data);
+      });
+    }
+  }, [quizes[displayQuiz].id]);
 
   const ButtonsGroup = () => {
     if (displayQuiz === 0) {
