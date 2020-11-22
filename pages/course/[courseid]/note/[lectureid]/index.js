@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { useRouter } from 'next/router';
+import Link from 'next/link';
 import { Document, Page, Outline } from 'react-pdf';
 import { pdfjs } from 'react-pdf';
 import Header from 'components/header.js';
 import NoteList from 'components/noteList.js';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 if (typeof window === 'undefined') {
   global.window = {};
@@ -13,6 +16,9 @@ if (typeof window === 'undefined') {
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 function LectureNote() {
+  const router = useRouter();
+  const { courseid, lectureid } = router.query;
+
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [notes, setNotes] = useState([
@@ -63,7 +69,19 @@ function LectureNote() {
       className="d-flex flex-column"
     >
       <Header></Header>
-      <div className="mt-5 row ml-5 mr-5">
+      <div className="mt-3 row ml-5 mr-5">
+        <Link href={`/course/${courseid}`}>
+          <a
+            className="subtitle-text mb-2"
+            style={{ textDecoration: 'none', color: '#234382' }}
+          >
+            <ArrowBackIcon
+              fontSize="large"
+              classNmae="mr-1"
+            ></ArrowBackIcon>
+            {courseid}
+          </a>
+        </Link>
         <div className="row w-100">
           <div className="col lecture_note">
             <h1 className="title-text">Lecture Note</h1>
@@ -111,6 +129,13 @@ function LectureNote() {
                 </button>
               </div>
             </Document>
+            <a
+              // href={`/course/${courseid}/`}
+              type="button"
+              className="mt-4 custom-btn float-right"
+            >
+              Upload My Note
+            </a>
           </div>
           <div className="col">
             <h1 className="title-text">Notes from course students</h1>
