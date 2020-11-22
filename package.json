@@ -24,6 +24,7 @@
     "react-bootstrap": "^1.4.0",
     "react-clap-button": "^1.2.12",
     "react-dom": "16.13.1",
+    "react-multiple-choice": "^2.0.2",
     "react-file-reader": "^1.1.4",
     "react-pdf": "^5.0.0",
     "react-router-dom": "^5.2.0",

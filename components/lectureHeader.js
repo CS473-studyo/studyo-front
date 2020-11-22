@@ -1,8 +1,19 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './lectureHeader.module.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import * as lectureAPI from 'api/lecture';
 
 const LectureHeader = ({ lectureid, courseid }) => {
+  const [lecture, setLecture] = useState({});
+
+  useEffect(() => {
+    if (lectureid) {
+      lectureAPI.lectureInfo(lectureid).then((res) => {
+        setLecture(res.data);
+      });
+    }
+  }, [lectureid]);
+
   return (
     <div className={styles['header-fill']}>
       <div className={`h-100 w-100 ${styles['header-overlay']}`}>
@@ -20,7 +31,7 @@ const LectureHeader = ({ lectureid, courseid }) => {
             <h1
               className={`col-6 title-text text-center ${styles['course-title']}`}
             >
-              Lecture {lectureid}
+              Lecture {lecture.number}
             </h1>
             <div class="col"></div>
           </div>

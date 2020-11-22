@@ -36,9 +36,17 @@ const Course = () => {
             <div className="body-text-light mt-2">{date}</div>
           </div>
           <div className="mt-2 body-text row">
-            {props.keywords.map((keyword) => (
+            {props.keywords.slice(0, 3).map((keyword) => (
               <Hashtag keyword={keyword.word} />
             ))}
+            <a
+              href={`/course/${courseid}/keyword/${props.id}`}
+              // type="button"
+              className="ml-2 align-self-center"
+              style={{ fontWeight: '600' }}
+            >
+              Vote keywords here
+            </a>
           </div>
           <div className="row">
             <a
