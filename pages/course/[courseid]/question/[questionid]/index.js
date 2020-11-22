@@ -5,6 +5,8 @@ import Link from 'next/link';
 import Header from 'components/header';
 import CourseHeader from 'components/courseHeader';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
+import * as questionAPI from 'api/question';
+import * as answerAPI from 'api/answer';
 
 const QuestionDetail = () => {
   const router = useRouter();
@@ -33,6 +35,28 @@ const QuestionDetail = () => {
         'What is you name? Also, what is the next alphabet for ‘a’?',
     },
   ]); //Todo: questionid 이용해서 answers 가져오기
+
+  let Qresult;
+  let Aresult;
+
+  const getQuestionList = async () => {
+    Qresult = await questionAPI.question(questionid);
+    setQuestion(Qresult.data);
+  };
+
+  useEffect(() => {
+    getQuestionList();
+  }, []);
+
+  const getAnswerList = async () => {
+    Aresult = await answerAPI.answers(questionid);
+    setAnswers(Aresult.data);
+    console.log(Aresult.data);
+  };
+
+  useEffect(() => {
+    getAnswerList();
+  }, []);
 
   return (
     <>
