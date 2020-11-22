@@ -37,7 +37,7 @@ const Course = () => {
           </div>
           <div className="mt-2 body-text row">
             {props.keywords.map((keyword) => (
-              <Hashtag keyword={keyword} />
+              <Hashtag keyword={keyword.word} />
             ))}
           </div>
           <div className="row">
@@ -65,7 +65,7 @@ const Course = () => {
     <>
       <LectureElem
         number={lecture.number}
-        keywords={lecture.keywords || []}
+        keywords={lecture.Keywords || []}
         date={lecture.date}
       />
       <div className="divider" />
