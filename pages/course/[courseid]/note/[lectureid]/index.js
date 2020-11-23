@@ -15,6 +15,7 @@ import ReactFileReader from 'react-file-reader';
 import { SizeMe } from 'react-sizeme';
 
 import * as noteAPI from 'api/note';
+import * as lectureAPI from 'api/lecture';
 
 if (typeof window === 'undefined') {
   global.window = {};
@@ -37,6 +38,7 @@ function LectureNote() {
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
   const [notes, setNotes] = useState([]);
+  const [pdf, setPdf] = useState('');
 
   function onDocumentLoadSuccess(pdf) {
     setNumPages(pdf.numPages);
@@ -56,12 +58,20 @@ function LectureNote() {
   }
 
   useEffect(() => {
-    noteAPI.lectureNotes(lectureid).then((res) => {
-      setNotes(res.data);
-    });
-  }, [lectureid]);
+    if (lectureid) {
+      lectureAPI.lectureInfo(lectureid).then((res) => {
+        console.log(res.data);
+        setPdf(res.data.pdf);
+      });
+      noteAPI.lectureNotes(lectureid).then((res) => {
+        setNotes(res.data);
+      });
+    }
+  }, [lectureid, pdf]);
 
   const file = React.createRef();
+
+  console.log(pdf);
 
   const handleFiles = () => {
     const pdf = file.current.files[0];
@@ -107,7 +117,7 @@ function LectureNote() {
               render={({ size }) => (
                 <div>
                   <Document
-                    file="/sample.pdf"
+                    file={pdf}
                     onLoadSuccess={onDocumentLoadSuccess}
                   >
                     <div
