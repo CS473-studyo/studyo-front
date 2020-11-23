@@ -15,4 +15,4 @@ export const userAnswer = (questionId) =>
 
 export const clap = (answerId) => answer.post(`/clap/${answerId}`);
 
-export const getClap = (answerId) => answer.get(`/getclap/${answerId}`);
+export const getClap = (answerId) => answer.get(`/clap/${answerId}`);
