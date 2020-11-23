@@ -3,13 +3,20 @@ import { useRouter } from 'next/router';
 import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
 import * as courseAPI from 'api/course';
+import * as questionAPI from 'api/question';
 
 const Course = () => {
   const router = useRouter();
   const { courseid } = router.query;
 
+  const [newTitle, setNewTitle] = useState();
+  const onInputTitle = ({ target: { value } }) => setNewTitle(value);
+  const [newContent, setNewContent] = useState();
+  const onInputContent = ({ target: { value } }) => setNewContent(value);
+  const [newLecture, setNewLecture] = useState();
+  const onInputLecture = ({ target: { value } }) => setNewLecture(value);
+  
   const [lectures, setLectures] = useState([]);
-
   useEffect(() => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
@@ -19,9 +26,20 @@ const Course = () => {
     }
   }, [courseid]);
 
+  const addQuestion = () => {
+    if (newKeyword && !/^\s+$/.test(newKeyword)) //?
+      questionAPI
+        .post({
+          lectureId: newLecture.lectureId,
+          title: newTitle,
+          content: newContent
+        })
+        .then((res) => router.reload());//Todo: change to next
+  };
+
   const lectureOptions = lectures.map((lecture) => (
     <>
-      <option>Lecture {lecture.number}</option>
+      <option>{lecture.number}</option>
     </>
   ));
 
@@ -44,6 +62,7 @@ const Course = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Title"
+              onChange={onInputTitle}
             />
             <label class="subtitle-text mt-2" for="exampleInputEmail1">
               Content
@@ -54,11 +73,14 @@ const Course = () => {
               id="exampleInputEmail1"
               aria-describedby="emailHelp"
               placeholder="Write your question here!"
+              onChange={onInputContent}
             />
             <label class="subtitle-text mt-2" for="exampleInputEmail1">
               Lecture
             </label>
-            <select class="form-control">{lectureOptions}</select>
+            <select class="form-control"
+            onChange={onInputLecture}
+            >{lectureOptions}</select>
             <small id="emailHelp" class="form-text text-muted">
               Your question will be shared to your classmates in the review
               quiz.
@@ -70,6 +92,7 @@ const Course = () => {
           href={`/course/${courseid}/questionlist`}
           type="button"
           className="mt-4 ml-3 custom-btn float-right"
+          onClick={() => addQuestion()}
         >
           Submit
         </button>
