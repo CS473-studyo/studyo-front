@@ -4,12 +4,12 @@ import ClapButton from 'react-clap-button';
 import * as answerAPI from 'api/answer';
 
 const AnswerList = ({ answers }) => {
-  const [expand, setExpand] = useState(0);
+  const [expand, setExpand] = useState(-1);
   const [totalCount, setTotalCount] = useState(0);
 
   const expandToggle = (num) => {
     if (expand !== num) setExpand(num);
-    else setExpand(0);
+    else setExpand(-1);
   };
 
   const clapAnswer = (answerId) => {
@@ -27,16 +27,14 @@ const AnswerList = ({ answers }) => {
   // };
 
   useEffect(() => {
-    if (answers) {
-      console.log(answers[expand]);
-      answerAPI.getClap(answers[expand].id).then((res) => {
-        setTotalCount(res.data.clap);
-      });
+    if (answers && expand !== -1) {
+      console.log('yahoo');
+      setTotalCount(answers[expand].clap);
     }
   }, [expand]);
 
   const AnswerElem = (props) => {
-    if (props.num === expand)
+    if (props.index === expand)
       return (
         <div className="row">
           <div
@@ -48,7 +46,7 @@ const AnswerList = ({ answers }) => {
                 <button
                   className="btn subtitle-text"
                   type="button"
-                  onClick={() => expandToggle(props.num)}
+                  onClick={() => expandToggle(props.index)}
                 >
                   <div className="row ml-1">
                     <AccountCircleIcon className="mr-3"></AccountCircleIcon>
@@ -61,7 +59,7 @@ const AnswerList = ({ answers }) => {
               <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
                 <div className="col body-text align-center">
-                  {totalCount} claps for this note!{' '}
+                  {totalCount} claps for this note!
                 </div>
                 <ClapButton
                   className="col"
@@ -91,7 +89,7 @@ const AnswerList = ({ answers }) => {
                 <button
                   className="btn subtitle-text"
                   type="button"
-                  onClick={() => expandToggle(props.num)}
+                  onClick={() => expandToggle(props.index)}
                 >
                   <div className="row ml-1">
                     <AccountCircleIcon className="mr-3"></AccountCircleIcon>
@@ -105,14 +103,14 @@ const AnswerList = ({ answers }) => {
       );
   };
 
-  const rows = answers.map((note) => (
+  const rows = answers.map((answer, index) => (
     <>
       <AnswerElem
-        id={note.id}
-        num={note.num}
-        name={note.name}
-        content={note.content}
-        clap={note.clap}
+        id={answer.id}
+        index={index}
+        name={answer.name}
+        content={answer.content}
+        clap={answer.clap}
       />
       <div className="divider" />
     </>
