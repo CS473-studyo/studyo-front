@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const answer = axios.create({
-  baseURL: `${process.env.BASE_URL}/answer`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/answer`,
   withCredentials: true,
 });
 

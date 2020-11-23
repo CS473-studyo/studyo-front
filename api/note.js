@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const note = axios.create({
-  baseURL: `${process.env.BASE_URL}/note`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/note`,
   withCredentials: true,
 });
 

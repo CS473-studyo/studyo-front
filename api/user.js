@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const auth = axios.create({
-  baseURL: `${process.env.BASE_URL}/user`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/user`,
   withCredentials: true,
 });
 

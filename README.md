@@ -1,8 +1,12 @@
-This project is for the Milestone 4: High-Fi Prototype of **KAIST CS473 Introduction to Social Computing**.
+<p align="center">
+<img src="https://github.com/CS473-studyo/studyo-front/blob/develop/public/Logo.png" width="40%"/>
+<br/>
+<img src="https://img.shields.io/badge/node-12.16.1-brightgreen" />
+</p>
+<p>This project is for the Milestone 4: High-Fi Prototype of <b>KAIST CS473 Introduction to Social Computing</b>.<p/>
+
 
 ## Project Name & Pitch
-
-<img src="https://github.com/CS473-studyo/studyo-front/blob/develop/public/Logo.png" width="40%"></img>
 
 **Studyo**
 

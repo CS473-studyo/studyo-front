@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const course = axios.create({
-  baseURL: `${process.env.BASE_URL}/course`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/course`,
   withCredentials: true,
 });
 
