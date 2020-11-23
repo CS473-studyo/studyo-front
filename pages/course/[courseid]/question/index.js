@@ -4,6 +4,7 @@ import Header from 'components/header';
 import CourseHeader from 'components/courseHeader';
 import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const Course = () => {
   let result;
@@ -60,7 +61,15 @@ const Course = () => {
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
-          My Questions
+          <Link href={`/course/${courseid}`}>
+            <div style={{ cursor: 'pointer' }}>
+              <ArrowBackIcon
+                fontSize="large"
+                classNmae="mr-1"
+              ></ArrowBackIcon>
+              My Questions
+            </div>
+          </Link>
         </div>
         <div className="row mt-4 subtitle-text ml-2 mr-2">
           <div className="col-2">Lecture</div>
