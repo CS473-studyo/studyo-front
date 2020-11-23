@@ -2,6 +2,8 @@ This project is for the Milestone 4: High-Fi Prototype of **KAIST CS473 Introduc
 
 ## Project Name & Pitch
 
+<img src="https://github.com/CS473-studyo/studyo-front/blob/develop/public/Logo.png" width="90%"></img>
+
 **Studyo**
 
 Due to COVID-19, It becomes difficult to find a way of studying with others while staying apart, which was done easily by creating study groups back when everyone used to meet face-to-face. Therefore, we created a platform called "Studyo" that allows students to share their in-class lecture notes and ask each other questions. Unlike other learning platforms, "Studyo" focuses on learning by sharing ideas between classmates, not by the instructor.
