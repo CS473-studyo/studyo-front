@@ -16,8 +16,6 @@ const Header = ({ history, ...props }) => {
     const newName = user.data.name || 'NoName';
     const id = user.data.id ? true : false;
 
-    console.log('newName : ' + newName);
-
     setAuth(id);
     setName(newName);
   };

@@ -33,7 +33,16 @@ const KeywordPage = () => {
 
   useEffect(() => {
     if (lectureid) {
-      console.log(lectureid);
+      keywordAPI.getUserList(lectureid).then((res) => {
+        const newKeywordSelection = [];
+        res.data.map((selected) => newKeywordSelection.push(selected.id));
+        setKeywordSelection(newKeywordSelection);
+      });
+    }
+  }, [lectureid]);
+
+  useEffect(() => {
+    if (lectureid) {
       keywordAPI.getList(lectureid).then((res) => {
         setKeywords(res.data);
       });
@@ -43,7 +52,6 @@ const KeywordPage = () => {
   useEffect(() => {
     if (courseid) {
       courseAPI.courseInfo(courseid).then((res) => {
-        console.log(res.data.userNumber);
         setStudentNum(res.data.userNumber);
       });
     }
@@ -53,7 +61,6 @@ const KeywordPage = () => {
     const newKeywordSelection = keywordSelection.slice();
     newKeywordSelection.push(keyword.id);
     setKeywordSelection(newKeywordSelection);
-    console.log(keywordSelection);
   };
 
   const unselectKeyword = (keyword) => {
@@ -61,7 +68,6 @@ const KeywordPage = () => {
     const idx = newKeywordSelection.indexOf(keyword.id);
     if (idx > -1) newKeywordSelection.splice(idx, 1);
     setKeywordSelection(newKeywordSelection);
-    console.log(keywordSelection);
   };
 
   const submitKeywordVote = () => {
