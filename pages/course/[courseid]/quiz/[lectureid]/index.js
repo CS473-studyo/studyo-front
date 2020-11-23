@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
-import LectureHeader from 'components/lectureheader.js';
+import LectureHeader from 'components/lectureHeader';
 
 import AnswerList from 'components/answerList.js';
 import * as questionAPI from 'api/question';
