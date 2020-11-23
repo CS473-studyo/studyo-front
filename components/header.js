@@ -6,26 +6,24 @@ import Logo from 'public/Logo.svg';
 import * as userAPI from 'api/user.js';
 
 const Header = ({ history, ...props }) => {
-  const [adminAuth, setAdminAuth] = useState(false);
+  const [auth, setAuth] = useState(false);
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
 
-  const checkAdminAuth = async () => {
+  const checkAuth = async () => {
     const access = await userAPI.check();
-    setAdminAuth(access.data ? true : false);
+    setAuth(access.data ? true : false);
   };
 
   useEffect(() => {
-    checkAdminAuth();
+    checkAuth();
   }, []);
 
-  const tryLogout = useCallback(() => {
-    setAdminAuth(false);
-    delete window.sessionStorage['accessToken'];
-    delete window.sessionStorage['email'];
-  }, []);
+  const tryLogout = () => {
+    userAPI.logout().then((res) => setAuth(false));
+  };
 
   useEffect(() => {
-    if (adminAuth)
+    if (auth)
       setAuthButtonBar(
         <div className="d-flex ml-auto">
           <Nav>
@@ -50,7 +48,7 @@ const Header = ({ history, ...props }) => {
           </Nav>
         </div>
       );
-  }, [adminAuth, tryLogout]);
+  }, [auth]);
 
   return (
     <div style={{ backgroundColor: '#fff' }}>

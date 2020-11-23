@@ -188,4 +188,13 @@ body {
   float: right;
 }
 
+.header-logout {
+  cursor: pointer;
+  color: rgba(0, 0, 0, 0.5);
+
+  &:hover {
+    color: black;
+  }
+}
+
 @import '~bootstrap/scss/bootstrap';

@@ -8,17 +8,18 @@ const AdminLoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [name, setName] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modal, setModal] = useState('');
 
   const handleClose = () => setShowModal(false);
 
-  const tryLogin = (e) => {
+  const tryRegister = (e) => {
     e.preventDefault();
     loginAPI
-      .login({ email, password })
+      .register({ name, email, password })
       .then((res) => {
-        router.push('/main');
+        router.push('/login');
       })
       .catch((err) => {
         setShowModal(true);
@@ -30,6 +31,7 @@ const AdminLoginPage = () => {
     loginAPI
       .check()
       .then((res) => {
+        alert('Please log out before registering.');
         router.push('/main');
       })
       .catch((err) => {});
@@ -56,7 +58,14 @@ const AdminLoginPage = () => {
           <a href="/main" className="align-self-center login-logo">
             <Logo />
           </a>
-          <Form className="login-form" onSubmit={tryLogin}>
+          <Form className="login-form" onSubmit={tryRegister}>
+            <Form.Group>
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="name"
+                onChange={(value) => setName(value.target.value)}
+              />
+            </Form.Group>
             <Form.Group>
               <Form.Label>Email</Form.Label>
               <Form.Control
@@ -77,11 +86,8 @@ const AdminLoginPage = () => {
               className="login-button"
               variant="primary"
             >
-              Login
+              Register
             </Button>
-            <Form.Text className="text-muted">
-              New to Studyo? <a href="/register">Register</a>
-            </Form.Text>
           </Form>
         </div>
       </div>
