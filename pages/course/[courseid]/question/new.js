@@ -40,8 +40,13 @@ const Course = () => {
     ) {
       questionAPI
         .post(newLecture, newTitle, newContent)
-        .then((res) => router.reload()); //Todo: change to next
+        .then((res) => router.reload())
+        .then(router.push(`/course/${courseid}/question`)); //Todo: change to next
     }
+  };
+
+  const onCancel = () => {
+    router.push(`/course/${courseid}/question`);
   };
 
   const lectureOptions = lectures.map((lecture) => (
@@ -96,7 +101,6 @@ const Course = () => {
         </form>
         <hr />
         <button
-          href={`/course/${courseid}/question`}
           type="button"
           className="mt-4 ml-3 custom-btn float-right"
           onClick={() => addQuestion()}
@@ -104,7 +108,7 @@ const Course = () => {
           Submit
         </button>
         <button
-          href={`/course/${courseid}/question`}
+          onClick={onCancel}
           type="button"
           className="mt-4 custom-btn-secondary float-right"
         >
