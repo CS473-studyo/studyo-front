@@ -7,8 +7,8 @@ const Footer = (props) => (
   //   <p>This is some content in sticky footer</p>
   // </div>
   <div className={styles['footer']}>
-    <Navbar as={Container}>
-      <Nav className="mr-auto">
+    <Navbar as={Container} className="justify-content-end">
+      <Nav>
         <a
           className="custom-btn"
           href={`/course/${props.courseid}/question`}
