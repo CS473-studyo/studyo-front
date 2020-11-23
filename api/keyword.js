@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const auth_Keyword = axios.create({
-  baseURL: `${process.env.BASE_URL}/keyword`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/keyword`,
   withCredentials: true,
 });
 

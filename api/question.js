@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const auth_Question = axios.create({
-  baseURL: `${process.env.BASE_URL}/question`,
+  baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/question`,
   withCredentials: true,
 });
 // export const courseLectures = (course) => lecture.get(`/${course}`);
