@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styles from 'components/header.module.css';
 import { withRouter } from 'react-router-dom';
 import Logo from 'public/Logo.svg';
@@ -8,10 +8,16 @@ import * as userAPI from 'api/user.js';
 const Header = ({ history, ...props }) => {
   const [auth, setAuth] = useState(false);
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
+  const [name, setName] = useState('');
 
   const checkAuth = async () => {
-    const access = await userAPI.check();
-    setAuth(access.data ? true : false);
+    const user = await userAPI.check();
+
+    const newName = user.data.name || 'NoName';
+    const id = user.data.id ? true : false;
+
+    setAuth(id);
+    setName(newName);
   };
 
   useEffect(() => {
@@ -26,11 +32,14 @@ const Header = ({ history, ...props }) => {
     if (auth)
       setAuthButtonBar(
         <div className="d-flex ml-auto">
-          <Nav>
-            <div className="header-logout" onClick={tryLogout}>
+          <NavDropdown alignRight title={name} id="user-name">
+            <NavDropdown.Item
+              onClick={tryLogout}
+              className="header-logout"
+            >
               Logout
-            </div>
-          </Nav>
+            </NavDropdown.Item>
+          </NavDropdown>
         </div>
       );
     else

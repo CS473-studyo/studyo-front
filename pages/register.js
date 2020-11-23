@@ -82,6 +82,7 @@ const AdminLoginPage = () => {
               />
             </Form.Group>
             <Button
+              disabled={!(name && email && password)}
               type="submit"
               className="login-button"
               variant="primary"
