@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
+import * as answerAPI from 'api/answer';
 
 const AnswerList = ({ answers }) => {
   const [expand, setExpand] = useState(0);
@@ -10,6 +11,29 @@ const AnswerList = ({ answers }) => {
     if (expand !== num) setExpand(num);
     else setExpand(0);
   };
+
+  const clapAnswer = (answerId) => {
+    answerAPI.clap(answerId).then((res) => {
+      setTotalCount(totalCount + 1);
+    });
+  };
+
+  // const getclap = (answerId) => {
+  //   useEffect(() => {
+  //     answerAPI.getClap(answerId).then((res) => {
+  //       setTotalCount(res.data.clap);
+  //     });
+  //   });
+  // };
+
+  useEffect(() => {
+    if (answers) {
+      console.log(answers[expand]);
+      answerAPI.getClap(answers[expand].id).then((res) => {
+        setTotalCount(res.data.clap);
+      });
+    }
+  }, [expand]);
 
   const AnswerElem = (props) => {
     if (props.num === expand)
@@ -42,12 +66,10 @@ const AnswerList = ({ answers }) => {
                 <ClapButton
                   className="col"
                   count={0}
-                  countTotal={totalCount}
+                  countTotal={props.clap}
                   isClicked={false}
                   maxCount={3}
-                  onCountChange={function onCountChange() {
-                    setTotalCount((totalCount) => totalCount + 1);
-                  }}
+                  onCountChange={() => clapAnswer(props.id)}
                   theme={{
                     secondaryColor: '#234382',
                   }}
@@ -86,6 +108,7 @@ const AnswerList = ({ answers }) => {
   const rows = answers.map((note) => (
     <>
       <AnswerElem
+        id={note.id}
         num={note.num}
         name={note.name}
         content={note.content}
