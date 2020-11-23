@@ -15,6 +15,7 @@ const QuizPage = () => {
   const onInput = ({ target: { value } }) => setAnswer(value);
 
   const [displayQuiz, setDisplayQuiz] = useState(-1);
+
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
   }
