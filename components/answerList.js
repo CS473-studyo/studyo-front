@@ -62,7 +62,10 @@ const AnswerList = ({ answers }) => {
             <div className="card-body">
               <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
-                <div className="col body-text align-center">
+                <div
+                  className="col body-text align-center"
+                  style={{ color: '#234382' }}
+                >
                   {totalCount} claps for this note!
                 </div>
                 <ClapButton
@@ -112,7 +115,7 @@ const AnswerList = ({ answers }) => {
       <AnswerElem
         id={answer.id}
         index={index}
-        name={answer.name}
+        name={answer.User.name}
         content={answer.content}
         clap={answer.clap}
       />

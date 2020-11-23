@@ -246,8 +246,12 @@ const QuizPage = () => {
             </form>
           </div>
           <div class="col">
-            <div class="subtitle-text">Answers from course students</div>
-            <AnswerList answers={answers} />
+            <div class="subtitle-text mb-3">
+              Answers from course students
+            </div>
+            <div className="pl-3">
+              <AnswerList answers={answers} />
+            </div>
           </div>
         </div>
       </div>
