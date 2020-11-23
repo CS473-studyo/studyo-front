@@ -70,7 +70,7 @@ const Header = ({ history, ...props }) => {
   return (
     <div style={{ backgroundColor: '#fff' }}>
       <Navbar as={Container} collapseOnSelect expand="lg">
-        <Navbar.Brand href="/main">
+        <Navbar.Brand href="/">
           <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

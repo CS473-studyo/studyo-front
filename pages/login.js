@@ -18,7 +18,7 @@ const AdminLoginPage = () => {
     loginAPI
       .login({ email, password })
       .then((res) => {
-        router.push('/main');
+        router.push('/');
       })
       .catch((err) => {
         setShowModal(true);
@@ -30,7 +30,7 @@ const AdminLoginPage = () => {
     loginAPI
       .check()
       .then((res) => {
-        router.push('/main');
+        router.push('/');
       })
       .catch((err) => {});
   });
@@ -53,7 +53,7 @@ const AdminLoginPage = () => {
       </Modal>
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
-          <a href="/main" className="align-self-center login-logo">
+          <a href="/" className="align-self-center login-logo">
             <Logo />
           </a>
           <Form className="login-form" onSubmit={tryLogin}>

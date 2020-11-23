@@ -23,7 +23,7 @@ const CourseHeader = ({ courseid }) => {
           <div className="row">
             <div className={`col ${styles['course-title']}`}>
               <a
-                href="/main"
+                href="/"
                 className={`title-text ${styles['course-title']}`}
               >
                 {/* <ArrowBackIcon fontSize="large"></ArrowBackIcon>
