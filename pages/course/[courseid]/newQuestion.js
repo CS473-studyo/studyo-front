@@ -14,8 +14,10 @@ const Course = () => {
   const [newContent, setNewContent] = useState();
   const onInputContent = ({ target: { value } }) => setNewContent(value);
   const [newLecture, setNewLecture] = useState();
-  const onInputLecture = ({ target: { value } }) => setNewLecture(value);
-  
+  const onInputLecture = ({ target: { value } }) => {
+    setNewLecture(value);
+  };
+
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
     if (courseid) {
@@ -27,19 +29,20 @@ const Course = () => {
   }, [courseid]);
 
   const addQuestion = () => {
-    if (newKeyword && !/^\s+$/.test(newKeyword)) //?
+    if (newKeyword && !/^\s+$/.test(newKeyword))
+      //?
       questionAPI
         .post({
           lectureId: newLecture.lectureId,
           title: newTitle,
-          content: newContent
+          content: newContent,
         })
-        .then((res) => router.reload());//Todo: change to next
+        .then((res) => router.reload()); //Todo: change to next
   };
 
   const lectureOptions = lectures.map((lecture) => (
     <>
-      <option>{lecture.number}</option>
+      <option value={lecture.id}>{lecture.number}</option>
     </>
   ));
 
@@ -78,9 +81,9 @@ const Course = () => {
             <label class="subtitle-text mt-2" for="exampleInputEmail1">
               Lecture
             </label>
-            <select class="form-control"
-            onChange={onInputLecture}
-            >{lectureOptions}</select>
+            <select class="form-control" onChange={onInputLecture}>
+              {lectureOptions}
+            </select>
             <small id="emailHelp" class="form-text text-muted">
               Your question will be shared to your classmates in the review
               quiz.
