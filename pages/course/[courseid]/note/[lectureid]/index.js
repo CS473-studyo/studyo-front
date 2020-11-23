@@ -175,7 +175,9 @@ function LectureNote() {
                 <button className="custom-btn">Upload My Note</button>
               </ReactFileReader> */}
             </div>
-            <NoteList pageNumber={pageNumber} notes={notes} />
+            <div className="pl-3">
+              <NoteList pageNumber={pageNumber} notes={notes} />
+            </div>
           </Col>
         </div>
       </div>
