@@ -64,7 +64,7 @@ const QuestionDetail = () => {
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
-          <Link href={`/course/${courseid}/questionlist`}>
+          <Link href={`/course/${courseid}/question`}>
             <a style={{ textDecoration: 'none', color: '#234382' }}>
               <ArrowBackIcon
                 fontSize="large"

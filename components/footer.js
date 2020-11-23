@@ -13,7 +13,7 @@ const Footer = (props) => (
           className="custom-btn"
           href={`/course/${props.courseid}/question`}
         >
-          New Question
+          My Questions
         </a>
       </Nav>
     </Navbar>
