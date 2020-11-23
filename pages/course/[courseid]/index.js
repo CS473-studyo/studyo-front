@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import Link from 'next/link';
 import Header from '../../../components/header';
 import CourseHeader from '../../../components/courseHeader';
+import Footer from 'components/footer';
 import * as courseAPI from 'api/course';
 
 const Course = () => {
@@ -87,6 +88,7 @@ const Course = () => {
       <Header />
       <CourseHeader courseid={courseid} />
       <div className="container mt-2">{rows}</div>
+      <Footer courseid={courseid} />
     </>
   );
 };

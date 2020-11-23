@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import Header from 'components/header.js';
+import Header from 'components/header';
 import { Card } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 
