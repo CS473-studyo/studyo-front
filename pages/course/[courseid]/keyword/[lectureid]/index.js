@@ -71,11 +71,14 @@ const KeywordPage = () => {
   };
 
   const submitKeywordVote = () => {
-    keywordSelection.map((selected) => {
-      keywordAPI.vote(selected).then((res) => {
-        if (res.status == 200) {
-          handleShow();
-        } else console.log('fail');
+    keywordAPI.dropVote().then((res) => {
+      keywordSelection.map((selected) => {
+        console.log(selected);
+        keywordAPI.vote(selected).then((res) => {
+          if (res.status == 200) {
+            handleShow();
+          } else console.log('fail');
+        });
       });
     });
   };
