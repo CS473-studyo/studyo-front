@@ -11,7 +11,7 @@ const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
-  const [displayQuiz, setDisplayQuiz] = useState(0);
+  const [displayQuiz, setDisplayQuiz] = useState(-1);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
   }
@@ -27,18 +27,25 @@ const QuizPage = () => {
 
   useEffect(() => {
     if (lectureid) {
-      questionAPI.quizList(lectureid).then((res) => {
-        setQuizzes(res.data);
-      });
+      getQuestions();
     }
   }, [lectureid]);
+
+  const getQuestions = () => {
+    questionAPI.quizList(lectureid).then((res) => {
+      setQuizzes(res.data);
+      setDisplayQuiz(0);
+    });
+  };
 
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     if (quizzes[displayQuiz] && quizzes[displayQuiz].id) {
+      console.log(quizzes[displayQuiz].id);
       answerAPI.answers(quizzes[displayQuiz].id).then((res) => {
         setAnswers(res.data);
+        console.log(res.data);
       });
     }
   }, [displayQuiz]);
@@ -162,7 +169,7 @@ const QuizPage = () => {
   }
 
   const QuizContent = () => {
-    if (quizzes)
+    if (quizzes && quizzes[displayQuiz])
       return (
         <div>
           <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
@@ -173,6 +180,7 @@ const QuizPage = () => {
           </div>
         </div>
       );
+    return null;
   };
 
   return (
