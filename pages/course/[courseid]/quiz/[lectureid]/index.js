@@ -11,6 +11,9 @@ const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
+  const [answer, setAnswer] = useState('');
+  const onInput = ({ target: { value } }) => setAnswer(value);
+
   const [displayQuiz, setDisplayQuiz] = useState(-1);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
@@ -23,6 +26,16 @@ const QuizPage = () => {
   function nextQuiz() {
     changeQuiz(1);
   }
+
+  function nextQuizwithSubmit() {
+    // console.log(quizzes[displayQuiz].id);
+    // console.log(answer);
+    answerAPI.submit(quizzes[displayQuiz].id, answer).then((res) => {
+      console.log(answer);
+    });
+    nextQuiz();
+  }
+
   const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
@@ -58,7 +71,7 @@ const QuizPage = () => {
             <button
               type="submit"
               class="btn btn-primary mr-2"
-              onClick={() => nextQuiz()}
+              onClick={() => nextQuizwithSubmit()}
             >
               Submit
             </button>
@@ -86,7 +99,7 @@ const QuizPage = () => {
           <button
             type="submit"
             class="btn btn-primary mr-2"
-            onClick={() => nextQuiz()}
+            onClick={() => nextQuizwithSubmit()}
           >
             Submit
           </button>
@@ -102,7 +115,7 @@ const QuizPage = () => {
     );
   };
 
-  console.log(quizzes.length);
+  // console.log(quizzes.length);
 
   if (quizzes.length === 0) {
     return (
@@ -223,6 +236,7 @@ const QuizPage = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Your Answer"
+                  onChange={onInput}
                 />
                 <small id="emailHelp" class="form-text text-muted">
                   Your answer will be shared to your classmates.
