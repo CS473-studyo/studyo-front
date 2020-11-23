@@ -2,7 +2,7 @@ This project is for the Milestone 4: High-Fi Prototype of **KAIST CS473 Introduc
 
 ## Project Name & Pitch
 
-<img src="https://github.com/CS473-studyo/studyo-front/blob/develop/public/Logo.png" width="90%"></img>
+<img src="https://github.com/CS473-studyo/studyo-front/blob/develop/public/Logo.png" width="40%"></img>
 
 **Studyo**
 
