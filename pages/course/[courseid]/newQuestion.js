@@ -10,26 +10,30 @@ const Course = () => {
   const { courseid } = router.query;
 
   const [newTitle, setNewTitle] = useState();
-  const onInputTitle = ({ target: { value } }) => setNewTitle(value);
+  const onInputTitle = ({ target: { value } }) => {
+    setNewTitle(value)
+  };
   const [newContent, setNewContent] = useState();
   const onInputContent = ({ target: { value } }) => setNewContent(value);
   const [newLecture, setNewLecture] = useState();
-  const onInputLecture = ({ target: { value } }) => {
-    setNewLecture(value);
-  };
+  const onInputLecture = ({ target: { value } }) => setNewLecture(value);
+  
 
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
+        if(res.data.length > 0) {
+          setNewLecture(res.data[0].id);
+        }
       });
     }
   }, [courseid]);
 
   const addQuestion = () => {
     if (newTitle && newContent && newLecture && !/^\s+$/.test(newTitle) && !/^\s+$/.test(newContent)) {
-    questionAPI
+      questionAPI
         .post( newLecture, newTitle, newContent)
         .then((res) => router.reload()); //Todo: change to next
     }
