@@ -23,21 +23,16 @@ const Course = () => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
-        console.log(res.data);
       });
     }
   }, [courseid]);
 
   const addQuestion = () => {
-    if (newKeyword && !/^\s+$/.test(newKeyword))
-      //?
-      questionAPI
-        .post({
-          lectureId: newLecture.lectureId,
-          title: newTitle,
-          content: newContent,
-        })
+    if (newTitle && newContent && newLecture && !/^\s+$/.test(newTitle) && !/^\s+$/.test(newContent)) {
+    questionAPI
+        .post( newLecture, newTitle, newContent)
         .then((res) => router.reload()); //Todo: change to next
+    }
   };
 
   const lectureOptions = lectures.map((lecture) => (
