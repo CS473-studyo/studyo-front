@@ -19,7 +19,6 @@ module.exports = {
 
     return config;
   },
-  env: {
-    BASE_URL: 'http://localhost:8080',
-  },
+  assetPrefix: '/studyo-front/',
+  basePath: '/studyo-front',
 };
