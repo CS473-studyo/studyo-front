@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Card } from 'react-bootstrap';
 import Link from 'next/link';
-import Header from '../../../components/header';
-import CourseHeader from '../../../components/courseHeader';
+import Header from 'components/header';
+import CourseHeader from 'components/courseHeader';
 import Footer from 'components/footer';
 import * as courseAPI from 'api/course';
 

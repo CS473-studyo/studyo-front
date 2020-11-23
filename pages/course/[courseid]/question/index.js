@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Header from '../../../../components/header';
-import CourseHeader from '../../../../components/courseHeader';
+import Header from 'components/header';
+import CourseHeader from 'components/courseHeader';
 import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
 
