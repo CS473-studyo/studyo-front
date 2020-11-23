@@ -1,5 +1,5 @@
 import React, { PureComponent, useEffect, useState } from 'react';
-import { Col, Form } from 'react-bootstrap';
+import { Col, Modal, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Document, Page } from 'react-pdf';
@@ -25,6 +25,14 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 function LectureNote() {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
+
+  const [show, setShow] = useState(false);
+
+  const handleClose = () => {
+    setShow(false);
+    router.reload(`/course/${courseid}/note/${lectureid}`);
+  };
+  const handleShow = () => setShow(true);
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -165,9 +173,9 @@ function LectureNote() {
                 style={{ display: 'none' }}
                 onInput={() => handleFiles()}
               />
-              <label className="custom-btn" for="input">
-                Upload my note
-              </label>
+              <button className="custom-btn" onClick={handleShow}>
+                Upload My Note
+              </button>
               {/* <ReactFileReader
                 handleFiles={handleFiles}
                 fileTypes={'.pdf'}
@@ -175,10 +183,30 @@ function LectureNote() {
                 <button className="custom-btn">Upload My Note</button>
               </ReactFileReader> */}
             </div>
-            <NoteList pageNumber={pageNumber} notes={notes} />
+            <div className="pl-3">
+              <NoteList pageNumber={pageNumber} notes={notes} />
+            </div>
           </Col>
         </div>
       </div>
+
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Your Note</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="body-text mb-4 text-center">
+            You can only upload notes in PDF format that you have written
+            above the original Lecture notes. The uploaded note must have
+            the same number of pages as the original copy note.
+          </div>
+          <div className="d-flex justify-content-center">
+            <label className="custom-btn" for="input">
+              Upload PDF
+            </label>
+          </div>
+        </Modal.Body>
+      </Modal>
     </div>
   );
 }

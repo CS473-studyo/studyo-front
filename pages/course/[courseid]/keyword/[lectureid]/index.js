@@ -27,7 +27,7 @@ const KeywordPage = () => {
 
   const handleClose = () => {
     setShow(false);
-    Router.push(`/course/${courseid}`);
+    Router.reload(`/course/${courseid}/keyword/${lectureid}`);
   };
   const handleShow = () => setShow(true);
 
@@ -226,8 +226,8 @@ const KeywordPage = () => {
         </Modal.Header>
         <Modal.Body>Your vote successfully applied!</Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
+          <Button variant="primary" onClick={handleClose}>
+            Okay
           </Button>
         </Modal.Footer>
       </Modal>
