@@ -4,31 +4,18 @@ import Header from 'components/header';
 import CourseHeader from 'components/courseHeader';
 import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 const Course = () => {
   let result;
-  const [questions, setQuestions] = useState([
-    {
-      num: '1',
-      title: 'hello',
-      date: 'Aug. 8',
-      lecture: '4',
-      id: '123',
-    },
-    {
-      num: '2',
-      title: 'bye',
-      date: 'Aug. 10',
-      lecture: '5',
-      id: '234',
-    },
-  ]);
+  const [questions, setQuestions] = useState([]);
 
   const router = useRouter();
   const { courseid } = router.query;
 
   const getQuestionList = async () => {
     result = await questionAPI.list();
+    console.log(result.data);
     setQuestions(result.data);
   };
 
@@ -36,24 +23,19 @@ const Course = () => {
     getQuestionList();
   }, []);
 
-  const Hashtag = (props) => {
-    return (
-      <div className="hashtag body-text">Lecture {props.lecture}</div>
-    );
-  };
-
   const QuestionElem = (props) => {
     return (
       <div>
         <Link href={`/course/${courseid}/question/${props.id}`}>
           <a style={{ textDecoration: 'none', color: 'black' }}>
             <div className="row mt-3 body-text ml-2 mr-2">
-              <div className="col-1">{props.num}</div>
+              <div className="col-2" style={{ fontWeight: '600' }}>
+                Lecture {props.lecture}
+              </div>
               <div className="col-8 row align-items-center">
-                <Hashtag lecture={props.lecture} />
                 {props.title}
               </div>
-              <div className="col-3">{props.date}</div>
+              <div className="col-2">{props.date}</div>
             </div>
           </a>
         </Link>
@@ -64,10 +46,9 @@ const Course = () => {
   const rows = questions.map((question) => (
     <div>
       <QuestionElem
-        num={question.num}
         title={question.title}
         date={question.date}
-        lecture={question.lecture}
+        lecture={question.Lecture.number}
         id={question.id}
       />
       <hr />
@@ -80,12 +61,20 @@ const Course = () => {
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
-          My Questions
+          <Link href={`/course/${courseid}`}>
+            <div style={{ cursor: 'pointer' }}>
+              <ArrowBackIcon
+                fontSize="large"
+                classNmae="mr-1"
+              ></ArrowBackIcon>
+              My Questions
+            </div>
+          </Link>
         </div>
         <div className="row mt-4 subtitle-text ml-2 mr-2">
-          <div className="col-1">#</div>
+          <div className="col-2">Lecture</div>
           <div className="col-8 row align-items-center">Title</div>
-          <div className="col-3">Date</div>
+          <div className="col-2">Date</div>
         </div>
         <hr />
         <div className="mt-2">{rows}</div>

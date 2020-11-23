@@ -37,9 +37,12 @@ const Course = () => {
             <div className="body-text-light mt-2">{date}</div>
           </div>
           <div className="mt-2 body-text row">
-            {props.keywords.slice(0, 3).map((keyword) => (
-              <Hashtag keyword={keyword.word} />
-            ))}
+            {props.keywords
+              .sort((a, b) => b.votes - a.votes)
+              .slice(0, 3)
+              .map((keyword) => (
+                <Hashtag keyword={keyword.word} />
+              ))}
             <a
               href={`/course/${courseid}/keyword/${props.id}`}
               // type="button"
@@ -88,6 +91,7 @@ const Course = () => {
       <Header />
       <CourseHeader courseid={courseid} />
       <div className="container mt-2">{rows}</div>
+      <div style={{ height: '50px' }}></div>
       <Footer courseid={courseid} />
     </>
   );
