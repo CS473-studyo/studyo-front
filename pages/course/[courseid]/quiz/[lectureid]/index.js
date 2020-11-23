@@ -11,7 +11,10 @@ const QuizPage = () => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
-  const [displayQuiz, setDisplayQuiz] = useState(0);
+  const [answer, setAnswer] = useState('');
+  const onInput = ({ target: { value } }) => setAnswer(value);
+
+  const [displayQuiz, setDisplayQuiz] = useState(-1);
   function changeQuiz(offset) {
     setDisplayQuiz((prevQuizNumber) => prevQuizNumber + offset);
   }
@@ -23,22 +26,39 @@ const QuizPage = () => {
   function nextQuiz() {
     changeQuiz(1);
   }
+
+  function nextQuizwithSubmit() {
+    // console.log(quizzes[displayQuiz].id);
+    // console.log(answer);
+    answerAPI.submit(quizzes[displayQuiz].id, answer).then((res) => {
+      console.log(answer);
+    });
+    nextQuiz();
+  }
+
   const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
     if (lectureid) {
-      questionAPI.quizList(lectureid).then((res) => {
-        setQuizzes(res.data);
-      });
+      getQuestions();
     }
   }, [lectureid]);
+
+  const getQuestions = () => {
+    questionAPI.quizList(lectureid).then((res) => {
+      setQuizzes(res.data);
+      setDisplayQuiz(0);
+    });
+  };
 
   const [answers, setAnswers] = useState([]);
 
   useEffect(() => {
     if (quizzes[displayQuiz] && quizzes[displayQuiz].id) {
+      console.log(quizzes[displayQuiz].id);
       answerAPI.answers(quizzes[displayQuiz].id).then((res) => {
         setAnswers(res.data);
+        console.log(res.data);
       });
     }
   }, [displayQuiz]);
@@ -51,7 +71,7 @@ const QuizPage = () => {
             <button
               type="submit"
               class="btn btn-primary mr-2"
-              onClick={() => nextQuiz()}
+              onClick={() => nextQuizwithSubmit()}
             >
               Submit
             </button>
@@ -79,7 +99,7 @@ const QuizPage = () => {
           <button
             type="submit"
             class="btn btn-primary mr-2"
-            onClick={() => nextQuiz()}
+            onClick={() => nextQuizwithSubmit()}
           >
             Submit
           </button>
@@ -95,7 +115,7 @@ const QuizPage = () => {
     );
   };
 
-  console.log(quizzes.length);
+  // console.log(quizzes.length);
 
   if (quizzes.length === 0) {
     return (
@@ -162,7 +182,7 @@ const QuizPage = () => {
   }
 
   const QuizContent = () => {
-    if (quizzes)
+    if (quizzes && quizzes[displayQuiz])
       return (
         <div>
           <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
@@ -173,6 +193,7 @@ const QuizPage = () => {
           </div>
         </div>
       );
+    return null;
   };
 
   return (
@@ -215,6 +236,7 @@ const QuizPage = () => {
                   id="exampleInputEmail1"
                   aria-describedby="emailHelp"
                   placeholder="Your Answer"
+                  onChange={onInput}
                 />
                 <small id="emailHelp" class="form-text text-muted">
                   Your answer will be shared to your classmates.
