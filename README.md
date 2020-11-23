@@ -4,7 +4,7 @@ This project is for the Milestone 4: High-Fi Prototype of **KAIST CS473 Introduc
 
 **Studyo**
 
-An platform to boost the interaction between students in untact situation.
+Due to COVID-19, It becomes difficult to find a way of studying with others while staying apart, which was done easily by creating study groups back when everyone used to meet face-to-face. Therefore, we created a platform called "Studyo" that allows students to share their in-class lecture notes and ask each other questions. Unlike other learning platforms, "Studyo" focuses on learning by sharing ideas between classmates, not by the instructor.
 
 ## Build with
 
