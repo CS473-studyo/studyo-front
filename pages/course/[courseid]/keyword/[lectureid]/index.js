@@ -3,7 +3,7 @@ import Link from 'next/link';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
-import LectureHeader from 'components/lectureheader.js';
+import LectureHeader from 'components/lectureHeader';
 import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';

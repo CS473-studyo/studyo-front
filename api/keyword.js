@@ -8,7 +8,7 @@ const auth_Keyword = axios.create({
 export const add = ({ lectureId, word }) =>
   auth_Keyword.post(`/${lectureId}`, { word });
 
-export const dropVote = () => auth_Keyword.get(`/dropVote`);
+export const dropVote = () => auth_Keyword.delete(`/`);
 
 export const getList = (lectureid) => auth_Keyword.get(`/${lectureid}`);
 
