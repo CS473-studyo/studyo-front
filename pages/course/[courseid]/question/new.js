@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import Header from '../../../components/header';
-import CourseHeader from '../../../components/courseHeader';
+import Header from 'components/header';
+import CourseHeader from 'components/courseHeader';
 import * as courseAPI from 'api/course';
 import * as questionAPI from 'api/question';
 
@@ -11,20 +11,19 @@ const Course = () => {
 
   const [newTitle, setNewTitle] = useState();
   const onInputTitle = ({ target: { value } }) => {
-    setNewTitle(value)
+    setNewTitle(value);
   };
   const [newContent, setNewContent] = useState();
   const onInputContent = ({ target: { value } }) => setNewContent(value);
   const [newLecture, setNewLecture] = useState();
   const onInputLecture = ({ target: { value } }) => setNewLecture(value);
-  
 
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
     if (courseid) {
       courseAPI.courseLectures(courseid).then((res) => {
         setLectures(res.data);
-        if(res.data.length > 0) {
+        if (res.data.length > 0) {
           setNewLecture(res.data[0].id);
         }
       });
@@ -32,9 +31,15 @@ const Course = () => {
   }, [courseid]);
 
   const addQuestion = () => {
-    if (newTitle && newContent && newLecture && !/^\s+$/.test(newTitle) && !/^\s+$/.test(newContent)) {
+    if (
+      newTitle &&
+      newContent &&
+      newLecture &&
+      !/^\s+$/.test(newTitle) &&
+      !/^\s+$/.test(newContent)
+    ) {
       questionAPI
-        .post( newLecture, newTitle, newContent)
+        .post(newLecture, newTitle, newContent)
         .then((res) => router.reload()); //Todo: change to next
     }
   };
@@ -91,7 +96,7 @@ const Course = () => {
         </form>
         <hr />
         <button
-          href={`/course/${courseid}/questionlist`}
+          href={`/course/${courseid}/question`}
           type="button"
           className="mt-4 ml-3 custom-btn float-right"
           onClick={() => addQuestion()}
@@ -99,7 +104,7 @@ const Course = () => {
           Submit
         </button>
         <button
-          href={`/course/${courseid}/questionlist`}
+          href={`/course/${courseid}/question`}
           type="button"
           className="mt-4 custom-btn-secondary float-right"
         >

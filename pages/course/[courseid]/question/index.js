@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Header from '../../../../components/header';
-import CourseHeader from '../../../../components/courseHeader';
+import Header from 'components/header';
+import CourseHeader from 'components/courseHeader';
 import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
 
@@ -90,7 +90,7 @@ const Course = () => {
         <hr />
         <div className="mt-2">{rows}</div>
         <a
-          href={`/course/${courseid}/newQuestion`}
+          href={`/course/${courseid}/question/new`}
           type="button"
           className="mt-4 custom-btn float-right"
         >

@@ -29,7 +29,11 @@ const AnswerList = ({ answers }) => {
   useEffect(() => {
     if (answers && expand !== -1) {
       console.log('yahoo');
-      setTotalCount(answers[expand].clap);
+      answerAPI.getClap(answers[expand].id).then((res) => {
+        console.log(res.data);
+        setTotalCount(res.data);
+      });
+      // setTotalCount(answers[expand].clap);
     }
   }, [expand]);
 
