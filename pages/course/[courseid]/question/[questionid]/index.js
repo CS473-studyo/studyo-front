@@ -81,7 +81,7 @@ const QuestionDetail = () => {
           </div>
           <div class="body-text mb-2">{question.content}</div>
           <hr />
-          <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
+          <div class="subtitle-text mb-4" style={{ color: '#234382' }}>
             Answers from course students
           </div>
           <div className="row">

@@ -92,8 +92,33 @@ body {
   border: none;
 }
 
+.custom-btn-outline {
+  background: #ffffff;
+  box-sizing: border-box;
+  box-shadow: 0px 4px 10px rgba(36, 50, 124, 0.4);
+  border: 1px solid #234382;
+  border-radius: 50px;
+  color: #000000;
+
+  font-family: Nanum Gothic;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 140%;
+
+  padding-left: 1.5rem;
+  padding-right: 1.5rem;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
 .custom-btn:hover {
   color: #c3d1ef !important;
+  text-decoration: none;
+}
+
+.custom-btn-outline:hover {
+  color: $primary !important;
   text-decoration: none;
 }
 

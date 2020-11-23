@@ -10,8 +10,9 @@ const Footer = (props) => (
     <Navbar as={Container} className="justify-content-end">
       <Nav>
         <a
-          className="custom-btn"
+          className="custom-btn-outline"
           href={`/course/${props.courseid}/question`}
+          style={{ textDecoration: 'none' }}
         >
           My Questions
         </a>
