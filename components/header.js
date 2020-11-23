@@ -16,6 +16,8 @@ const Header = ({ history, ...props }) => {
     const newName = user.data.name || 'NoName';
     const id = user.data.id ? true : false;
 
+    console.log('newName : ' + newName);
+
     setAuth(id);
     setName(newName);
   };
@@ -34,7 +36,15 @@ const Header = ({ history, ...props }) => {
     if (auth)
       setAuthButtonBar(
         <div className="d-flex ml-auto">
-          <NavDropdown alignRight title={name} id="user-name">
+          <NavDropdown
+            alignRight
+            title={name}
+            id="user-name"
+            className="body-text"
+          >
+            <NavDropdown.Item className="header-logout">
+              Mypage
+            </NavDropdown.Item>
             <NavDropdown.Item
               onClick={tryLogout}
               className="header-logout"
@@ -59,7 +69,7 @@ const Header = ({ history, ...props }) => {
           </Nav>
         </div>
       );
-  }, [auth]);
+  }, [auth, name]);
 
   return (
     <div style={{ backgroundColor: '#fff' }}>
