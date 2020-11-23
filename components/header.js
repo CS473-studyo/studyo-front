@@ -16,6 +16,8 @@ const Header = ({ history, ...props }) => {
     const newName = user.data.name || 'NoName';
     const id = user.data.id ? true : false;
 
+    console.log(id);
+
     setAuth(id);
     setName(newName);
   };
@@ -23,6 +25,8 @@ const Header = ({ history, ...props }) => {
   useEffect(() => {
     checkAuth();
   }, []);
+
+  console.log(auth);
 
   const tryLogout = () => {
     userAPI.logout().then((res) => setAuth(false));
