@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import Header from 'components/header';
 import { Card } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
+import Link from 'next/link';
 
 import * as courseAPI from 'api/course';
 
@@ -20,13 +21,11 @@ const MainPage = () => {
             <div className="title-text-light">{props.name}</div>
           </div>
           <div className="mt-2 body-text">Prof. {props.professor}</div>
-          <a
-            href={`/course/${props.code}`}
-            type="button"
-            className="mt-4 custom-btn"
-          >
-            Enter
-          </a>
+          <Link href={`/course/${props.code}`}>
+            <a type="button" className="mt-4 custom-btn">
+              Enter
+            </a>
+          </Link>
         </Card.Body>
       </Card>
     );

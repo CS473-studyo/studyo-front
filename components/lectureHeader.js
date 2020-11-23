@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import styles from './lectureHeader.module.scss';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import * as lectureAPI from 'api/lecture';
+import Link from 'next/link';
 
 const LectureHeader = ({ lectureid, courseid }) => {
   const [lecture, setLecture] = useState({});
@@ -20,13 +21,12 @@ const LectureHeader = ({ lectureid, courseid }) => {
         <div className="container h-100">
           <div className="row h-100">
             <div className={`col ${styles['course-title']}`}>
-              <a
-                href={`/course/${courseid}`}
-                className={`subtitle-text ${styles['course-title']}`}
-              >
-                <ArrowBackIcon></ArrowBackIcon>
-                {courseid}
-              </a>
+              <Link href={`/course/${courseid}`}>
+                <a className={`subtitle-text ${styles['course-title']}`}>
+                  <ArrowBackIcon></ArrowBackIcon>
+                  {courseid}
+                </a>
+              </Link>
             </div>
             <h1
               className={`col-6 title-text text-center ${styles['course-title']}`}

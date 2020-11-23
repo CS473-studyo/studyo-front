@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Button, Form, Modal } from 'react-bootstrap';
 import Logo from '../public/Logo.svg';
 import * as loginAPI from 'api/user';
+import Link from 'next/link';
 
 const AdminLoginPage = () => {
   const router = useRouter();
@@ -55,9 +56,11 @@ const AdminLoginPage = () => {
       </Modal>
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
-          <a href="/" className="align-self-center login-logo">
-            <Logo />
-          </a>
+          <Link href="/">
+            <a className="align-self-center login-logo">
+              <Logo />
+            </a>
+          </Link>
           <Form className="login-form" onSubmit={tryRegister}>
             <Form.Group>
               <Form.Label>Name</Form.Label>

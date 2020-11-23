@@ -1,7 +1,8 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styles from 'components/header.module.css';
-import { withRouter } from 'react-router-dom';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Logo from 'public/Logo.svg';
 import * as userAPI from 'api/user.js';
 
@@ -19,6 +20,8 @@ const Header = ({ history, ...props }) => {
     setAuth(id);
     setName(newName);
   };
+
+  const router = useRouter();
 
   useEffect(() => {
     checkAuth();
@@ -54,12 +57,18 @@ const Header = ({ history, ...props }) => {
       setAuthButtonBar(
         <div className="d-flex ml-auto">
           <Nav>
-            <Nav.Link className="header-login" href="/login">
+            <Nav.Link
+              onClick={() => router.push('/login')}
+              className="header-login"
+            >
               Login
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link className="header-login" href="/register">
+            <Nav.Link
+              className="header-login"
+              onClick={() => router.push('/register')}
+            >
               Register
             </Nav.Link>
           </Nav>
@@ -70,7 +79,7 @@ const Header = ({ history, ...props }) => {
   return (
     <div style={{ backgroundColor: '#fff' }}>
       <Navbar as={Container} collapseOnSelect expand="lg">
-        <Navbar.Brand href="/">
+        <Navbar.Brand onClick={() => router.push('/')}>
           <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

@@ -21,27 +21,16 @@ const CourseHeader = ({ courseid }) => {
       <div className={`h-100 w-100 ${styles['header-overlay']}`}>
         <div className="container">
           <div className="row">
-            <div className={`col ${styles['course-title']}`}>
-              <a
-                href="/"
-                className={`title-text ${styles['course-title']}`}
-              >
-                {/* <ArrowBackIcon fontSize="large"></ArrowBackIcon>
-                Main */}
-              </a>
-            </div>
+            <div className={`col ${styles['course-title']}`}></div>
             <div className="col-6">
               <h1
                 className={`title-text text-center ${styles['course-title']}`}
               >
-                <a
-                  href={`/course/${courseid}`}
-                  style={{ textDecoration: 'none', color: 'white' }}
-                >
-                  <div>
+                <Link href={`/course/${courseid}`}>
+                  <a style={{ textDecoration: 'none', color: 'white' }}>
                     {courseid} {course.name}
-                  </div>
-                </a>
+                  </a>
+                </Link>
               </h1>
             </div>
             <div className="col">

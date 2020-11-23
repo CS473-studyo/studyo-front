@@ -168,13 +168,11 @@ const QuizPage = () => {
               You completed all review quiz!
             </div>
             <div class="d-flex justify-content-center mt-5">
-              <a
-                type="submit"
-                className="custom-btn mr-2 align-middle"
-                href={`/course/${courseid}`}
-              >
-                Back to home
-              </a>
+              <Link href={`/course/${courseid}`}>
+                <a type="submit" className="custom-btn mr-2 align-middle">
+                  Back to home
+                </a>
+              </Link>
             </div>
           </div>
         </div>

@@ -78,13 +78,9 @@ const Course = () => {
         </div>
         <hr />
         <div className="mt-2">{rows}</div>
-        <a
-          href={`/course/${courseid}/question/new`}
-          type="button"
-          className="mt-4 custom-btn float-right"
-        >
-          New Question
-        </a>
+        <Link href={`/course/${courseid}/question/new`}>
+          <a className="mt-4 custom-btn float-right">New Question</a>
+        </Link>
       </div>
     </>
   );

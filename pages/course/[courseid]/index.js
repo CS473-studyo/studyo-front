@@ -43,30 +43,22 @@ const Course = () => {
               .map((keyword) => (
                 <Hashtag keyword={keyword.word} />
               ))}
-            <a
-              href={`/course/${courseid}/keyword/${props.id}`}
-              // type="button"
-              className="ml-2 align-self-center"
-              style={{ fontWeight: '600' }}
-            >
-              Vote keywords here
-            </a>
+            <Link href={`/course/${courseid}/keyword/${props.id}`}>
+              <a
+                className="ml-2 align-self-center"
+                style={{ fontWeight: '600' }}
+              >
+                Vote keywords here
+              </a>
+            </Link>
           </div>
           <div className="row">
-            <a
-              href={`/course/${courseid}/note/${props.id}`}
-              type="button"
-              className="mt-4 custom-btn mr-3"
-            >
-              Lecture Note
-            </a>
-            <a
-              href={`/course/${courseid}/quiz/${props.id}`}
-              type="button"
-              className="mt-4 custom-btn"
-            >
-              Review Quiz
-            </a>
+            <Link href={`/course/${courseid}/note/${props.id}`}>
+              <a className="mt-4 custom-btn mr-3">Lecture Note</a>
+            </Link>
+            <Link href={`/course/${courseid}/quiz/${props.id}`}>
+              <a className="mt-4 custom-btn">Review Quiz</a>
+            </Link>
           </div>
         </Card.Body>
       </Card>

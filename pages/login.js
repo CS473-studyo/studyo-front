@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Button, Form, Modal } from 'react-bootstrap';
 import Logo from '../public/Logo.svg';
 import * as loginAPI from 'api/user';
+import Link from 'next/link';
 
 const AdminLoginPage = () => {
   const router = useRouter();
@@ -53,9 +54,11 @@ const AdminLoginPage = () => {
       </Modal>
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
-          <a href="/" className="align-self-center login-logo">
-            <Logo />
-          </a>
+          <Link href="/">
+            <a className="align-self-center login-logo">
+              <Logo />
+            </a>
+          </Link>
           <Form className="login-form" onSubmit={tryLogin}>
             <Form.Group>
               <Form.Label>Email</Form.Label>
@@ -80,7 +83,7 @@ const AdminLoginPage = () => {
               Login
             </Button>
             <Form.Text className="text-muted">
-              New to Studyo? <a href="/register">Register</a>
+              New to Studyo? <Link href="/register">Register</Link>
             </Form.Text>
           </Form>
         </div>
