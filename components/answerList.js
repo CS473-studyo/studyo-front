@@ -18,14 +18,6 @@ const AnswerList = ({ answers }) => {
     });
   };
 
-  // const getclap = (answerId) => {
-  //   useEffect(() => {
-  //     answerAPI.getClap(answerId).then((res) => {
-  //       setTotalCount(res.data.clap);
-  //     });
-  //   });
-  // };
-
   useEffect(() => {
     setExpand(-1);
     setTotalCount(0);

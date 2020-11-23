@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
 import { Document, Page } from 'react-pdf';
@@ -17,6 +17,23 @@ const NoteList = ({ notes, pageNumber }) => {
     if (expand !== num) setExpand(num);
     else setExpand(-1);
   };
+
+  const clapNote = (noteId) => {
+    noteAPI.clap(noteId).then((res) => {
+      console.log('hi');
+      setTotalCount(totalCount + 1);
+    });
+  };
+
+  useEffect(() => {
+    if (notes && expand !== -1) {
+      noteAPI.getClap(notes[expand].id).then((res) => {
+        console.log(res.data);
+        setTotalCount(res.data);
+      });
+      // setTotalCount(answers[expand].clap);
+    }
+  }, [expand]);
 
   const NoteElem = (props) => {
     const isSelected = props.num === expand;
@@ -42,17 +59,15 @@ const NoteList = ({ notes, pageNumber }) => {
                   {totalCount} claps for this note!{' '}
                 </div>
                 <ClapButton
-                  // className="col"
-                  count={50}
-                  countTotal={0}
-                  // isClicked={true}
-                  // maxCount={3}
-                  onCountChange={function onCountChange(_, total) {
-                    setTotalCount(total);
+                  className="col"
+                  count={0}
+                  countTotal={props.clap}
+                  isClicked={false}
+                  maxCount={3}
+                  onCountChange={() => clapNote(notes[expand].id)}
+                  theme={{
+                    secondaryColor: '#234382',
                   }}
-                  // theme={{
-                  //   secondaryColor: '#234382',
-                  // }}
                 />
               </div>
             </>
