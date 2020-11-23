@@ -1,23 +1,19 @@
 This project is for the Milestone 4: High-Fi Prototype of **KAIST CS473 Introduction to Social Computing**.
 
-## Api
-
-
-## pages
-
-
-
-## Tools We've Used
-* React.js
-
------
-
 ## Project Name & Pitch
 
 **Studyo**
 
-An platform to boost the interaction between students in untact situation.
-Build with React.js, Next.js, Bootstrap, Javascrip and CSS.
+Due to COVID-19, It becomes difficult to find a way of studying with others while staying apart, which was done easily by creating study groups back when everyone used to meet face-to-face. Therefore, we created a platform called "Studyo" that allows students to share their in-class lecture notes and ask each other questions. Unlike other learning platforms, "Studyo" focuses on learning by sharing ideas between classmates, not by the instructor.
+
+## Build with
+
+- [React.js](https://reactjs.org)
+- [Next.js](https://nextjs.org)
+- [React-pdf](https://react-pdf.org) & [react-sizeme](https://github.com/ctrlplusb/react-sizeme)
+- [React-Bootstrap](https://react-bootstrap.github.io)
+- [Material-UI](https://material-ui.com)
+
 
 ## Project Status
 
@@ -49,13 +45,7 @@ Not yet added
 
 ## Project Structure
 
-### Pages
-
-#### `main.js`
-Main page containing list of courses that the users are joined.
-
-#### `login.js` `register.js`
-Pages for user login & register.
+### Main Pages
 
 #### `course/[courseid]/index.js`
 Course main page containing list of lectures of the course.
