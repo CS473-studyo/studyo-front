@@ -1,7 +1,8 @@
 import React, { PureComponent, useEffect, useState } from 'react';
+import { Col, Form } from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import { Document, Page, Outline } from 'react-pdf';
+import { Document, Page } from 'react-pdf';
 import { pdfjs } from 'react-pdf';
 import Header from 'components/header.js';
 import NoteList from 'components/noteList.js';
@@ -10,7 +11,6 @@ import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import ReactFileReader from 'react-file-reader';
-import { NotListedLocationSharp } from '@material-ui/icons';
 
 import { SizeMe } from 'react-sizeme';
 
@@ -28,31 +28,11 @@ function LectureNote() {
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [width, setWidth] = useState(window.innerWidth * 0.4);
-  const [notes, setNotes] = useState([
-    {
-      num: '1',
-      name: 'Daeun Choi',
-      clap: '2',
-    },
-    {
-      num: '2',
-      name: 'Dan Choi',
-      clap: '5',
-    },
-  ]); // Todo: get notes list(현재 course,lecture의 모든 note 가져오기)
-  // To backend: 연결할 때 num이라는 property가 있는데,
-  // 이거 그냥 처음 들어오는 순서대로 1부터 numbering 해주시면 됩니다!
-  // 아니면 아무 숫자로 된 id같은 게 있으면 그냥 그걸 써도 되는데,
-  // 어쨌든 answer별로 구분되는 고유의 무언가의 값이 들어있으면 됨.)
+  const [notes, setNotes] = useState([]);
 
   function onDocumentLoadSuccess(pdf) {
     setNumPages(pdf.numPages);
     setPageNumber(1);
-  }
-
-  function onItemClick({ pageNumber: itemPageNumber }) {
-    setPageNumber(itemPageNumber);
   }
 
   function changePage(offset) {
@@ -66,21 +46,24 @@ function LectureNote() {
   function nextPage() {
     changePage(1);
   }
+
   useEffect(() => {
-    setWidth(window.innerWidth * 0.4);
-  }, [window.innerWidth]);
+    noteAPI.lectureNotes(lectureid).then((res) => {
+      setNotes(res.data);
+    });
+  }, [lectureid]);
 
-  const handleFiles = (files) => {
-    const pdf = files[0];
+  const file = React.createRef();
 
-    // const storeAsImage = fromBase64(files.base64);
-
-    // console.log(storeAsImage);
+  const handleFiles = () => {
+    const pdf = file.current.files[0];
     const data = new FormData();
     data.append('file', pdf);
 
+    console.log(pdf);
+
     noteAPI.upload(lectureid, data).then((res) => {
-      // router.reload()
+      router.reload();
     });
   };
 
@@ -133,7 +116,7 @@ function LectureNote() {
                             <Page
                               key={index}
                               pageIndex={index}
-                              width={size.width / 4}
+                              width={size.width / 5}
                               renderAnnotationLayer={false}
                             />
                           </div>
@@ -170,18 +153,30 @@ function LectureNote() {
                 </div>
               )}
             />
-            <ReactFileReader
-              handleFiles={(e) => handleFiles(e)}
-              fileTypes={'.pdf'}
-              // base64={true}
-            >
-              <button className="btn">Upload My Note</button>
-            </ReactFileReader>
           </div>
-          <div className="col">
-            <h1 className="title-text">Notes from course students</h1>
-            <NoteList notes={notes} />
-          </div>
+          <Col>
+            <div className="d-flex flex-row justify-content-between student-note">
+              <h1 className="title-text">Notes from course students</h1>
+              <input
+                type="file"
+                accept=".pdf"
+                id="input"
+                ref={file}
+                style={{ display: 'none' }}
+                onInput={() => handleFiles()}
+              />
+              <label className="custom-btn" for="input">
+                Upload my note
+              </label>
+              {/* <ReactFileReader
+                handleFiles={handleFiles}
+                fileTypes={'.pdf'}
+              >
+                <button className="custom-btn">Upload My Note</button>
+              </ReactFileReader> */}
+            </div>
+            <NoteList pageNumber={pageNumber} notes={notes} />
+          </Col>
         </div>
       </div>
     </div>

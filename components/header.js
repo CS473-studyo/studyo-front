@@ -24,8 +24,6 @@ const Header = ({ history, ...props }) => {
     checkAuth();
   }, []);
 
-  console.log(auth);
-
   const tryLogout = () => {
     userAPI.logout().then((res) => setAuth(false));
   };

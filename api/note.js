@@ -8,4 +8,8 @@ const note = axios.create({
 export const upload = (lectureId, file) =>
   note.post(`/${lectureId}`, file);
 
+export const lectureNotes = (lectureId) => note.get(`/${lectureId}`);
+
+export const clap = (noteId) => note.post(`/clap/${noteId}`);
+
 export const getClap = (noteId) => note.get(`/clap/${noteId}`);
