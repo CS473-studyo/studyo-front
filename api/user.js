@@ -3,6 +3,9 @@ import axios from 'axios';
 const auth = axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_BASE_URL}/user`,
   withCredentials: true,
+  headers: {
+    'Access-Control-Allow-Origin': process.ENV_FRONT,
+  },
 });
 
 export const register = ({ name, email, password }) =>
