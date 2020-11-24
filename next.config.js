@@ -9,7 +9,6 @@ module.exports = {
       },
       use: ['@svgr/webpack'],
     });
-
     return config;
   },
   // assetPrefix: '/studyo-front/',
