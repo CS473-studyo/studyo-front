@@ -123,7 +123,6 @@ const QuizPage = () => {
       <div
         style={{
           minHeight: '100vh',
-          fontFamily: 'NanumSquare',
         }}
         className="d-flex flex-column"
       >
@@ -144,7 +143,6 @@ const QuizPage = () => {
       <div
         style={{
           minHeight: '100vh',
-          fontFamily: 'NanumSquare',
         }}
         className="d-flex flex-column"
       >
@@ -199,7 +197,6 @@ const QuizPage = () => {
     <div
       style={{
         minHeight: '100vh',
-        fontFamily: 'NanumSquare',
       }}
       className="d-flex flex-column"
     >

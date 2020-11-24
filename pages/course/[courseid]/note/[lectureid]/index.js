@@ -89,7 +89,6 @@ function LectureNote() {
     <div
       style={{
         minHeight: '100vh',
-        fontFamily: 'NanumSquare',
       }}
       className="d-flex flex-column"
     >

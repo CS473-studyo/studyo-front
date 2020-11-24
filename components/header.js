@@ -11,24 +11,30 @@ const Header = ({ history, ...props }) => {
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
   const [name, setName] = useState('');
 
-  const checkAuth = async () => {
-    const user = await userAPI.check();
-
-    const newName = user.data.name || 'NoName';
-    const id = user.data.id ? true : false;
-
-    setAuth(id);
-    setName(newName);
-  };
-
   const router = useRouter();
 
+  const checkAuth = async () => {
+    try {
+      const user = await userAPI.check();
+
+      const newName = user.data.name || 'NoName';
+      const id = user.data.id ? true : false;
+
+      setAuth(id);
+      setName(newName);
+    } catch {
+      router.push('/home');
+    }
+  };
+
   useEffect(() => {
-    checkAuth();
+    if (router.pathname !== '/home') {
+      checkAuth();
+    }
   }, []);
 
   const tryLogout = () => {
-    userAPI.logout().then((res) => setAuth(false));
+    userAPI.logout().then((res) => router.reload());
   };
 
   useEffect(() => {
@@ -41,9 +47,6 @@ const Header = ({ history, ...props }) => {
             id="user-name"
             className="body-text"
           >
-            <NavDropdown.Item className="header-logout">
-              Mypage
-            </NavDropdown.Item>
             <NavDropdown.Item
               onClick={tryLogout}
               className="header-logout"
