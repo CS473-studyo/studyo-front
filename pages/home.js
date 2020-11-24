@@ -18,7 +18,6 @@ const MainPage = () => {
       })
       .catch((_) => {});
   };
-
   const buttonStyle = {
     fontSize: '20px',
     fontWeight: '600',
