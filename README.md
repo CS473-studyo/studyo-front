@@ -5,7 +5,6 @@
 </p>
 <p>This project is for the Milestone 4: High-Fi Prototype of <b>KAIST CS473 Introduction to Social Computing</b>.<p/>
 
-
 ## Project Name & Pitch
 
 **Studyo**
@@ -20,71 +19,89 @@ Due to COVID-19, It becomes difficult to find a way of studying with others whil
 - [React-Bootstrap](https://react-bootstrap.github.io)
 - [Material-UI](https://material-ui.com)
 
-
 ## Project Status
 
 This project is almost completed. We are going to add some additional features based on users' requirement.
 
 ## Installation and Setup Instructions
 
-Clone down this repository. You will need `node` and `npm` installed globally on your machine.  
+Clone down this repository. You will need `node` and `npm` installed globally on your machine.
 
 Installation:
 
-`npm install`  
+`npm install`
 
-To Run Development Suite:  
+To Run Development Suite:
 
-`npm run dev`  
+`npm run dev`
 
 To Visit App:
 
-`localhost:3000/main`  
+`localhost:3000/main`
 
-## Project Screen Shot(s)
+## Project Screenshots
 
-Not yet added
+<div style="text-align:center">
+<img src="images/1.png" style="width: 80%;"/>
+</div>
+<br/>
 
-[ PRETEND SCREEN SHOT IS HERE ]
+<div style="text-align:center">
+<img src="images/3.png" style="width: 80%;"/>
+</div>
+<br/>
 
-[ PRETEND OTHER SCREEN SHOT IS HERE ]
+<div style="text-align:center">
+<img src="images/4.png" style="width: 80%;"/>
+</div>
+<br/>
 
 ## Project Structure
 
 ### Main Pages
 
 #### `course/[courseid]/index.js`
+
 Course main page containing list of lectures of the course.
 
 #### `course/[courseid]/note/[lectureid]/index.js`
+
 Page containing lecture note & shared notes from classmates. It also supports the upload notes function.
 
 #### `course/[courseid]/quiz/[lectureid]/index.js`
+
 Page with quizzes for review each lecture. This quizzes are made by other classmates' questions.
 
 #### `course/[courseid]/keyword/[lectureid]/index.js`
+
 Page to vote for the keyword of the lecture. The top 3 keywords are displayed in the course main page to for overview of the lectures.
 
 #### `course/[courseid]/question/index.js`
+
 List of the questions uploaded by the current user.
 
 #### `course/[courseid]/question/new.js`
+
 Page for uploading new question.
 
 #### `course/[courseid]/question/[questionid]/index.js`
-Page for each question. Containing the details of the question and the answers collected from review quiz page.
 
+Page for each question. Containing the details of the question and the answers collected from review quiz page.
 
 ### Components
 
 #### `header.js`
+
 Header for all pages. Conatining logo and login.
 
 #### `courseHeader.js`, `lectureHeader.js`
+
 Header for each course/lecture.
 
 #### `answerList.js`, `noteList.js`
+
 Expandable list to display other students' answer for the quiz or note.
 
 #### `pdfViewer.js`
+
 Displaying lecture note pdf file. Built with the `react-pdf` module.

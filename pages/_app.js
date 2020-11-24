@@ -5,12 +5,8 @@ export default function MyApp({ Component, pageProps }) {
   return (
     <>
       <Head>
-        <link
-          rel="icon"
-          type="image/png"
-          href="/studyo-front/favicon.png"
-        />
         <title>Studyo</title>
+        <link rel="icon" type="image/png" href="/favicon.png" />
       </Head>
 
       <Component {...pageProps} />
