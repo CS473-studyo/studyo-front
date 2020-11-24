@@ -1,17 +1,19 @@
-language: node_js # Node.js based project
+language: node_js
 node_js:
-  - 12 # Level of Node.js to use
+  - 12
 cache:
   directories:
-    - node_modules # Cache the node_modules folder for quicker build times
+    - node_modules
 script:
-  - npm run build # Runs next build
-  - npm run export # Runs next export and generates the out directory
-  - touch out/.nojekyll # Creates a file telling Github not to build the project using Jekyll
+  - npm run eslint
+  - npm run build
+  - npm run export
+  - touch out/.nojekyll
 deploy:
-  provider: pages # Informs Travis this is a deployment to GitHub Pages
-  skip_cleanup: true # Prevents Travis from resetting the working directory made during the build
-  github_token: $github_token # GitHub access token to use when pushing to the gh-pages branch
-  local_dir: out # Directory to push to the gh-pages branch
+  provider: pages
+  skip_cleanup: true
+  github_token: $github_token
+  local_dir: out
+  fqdn: studyo.tk # This instructs Travis to create a CNAME file with wallisconsultancy.co.uk as the contents on every deployment to the gh-pages branch
   on:
-    branch: master # Only deploy when the build is on master branch
+    branch: master
