@@ -12,6 +12,7 @@ export default function MyApp({ Component, pageProps }) {
         />
         <title>Studyo</title>
       </Head>
+
       <Component {...pageProps} />
     </>
   );
