@@ -13,5 +13,5 @@ module.exports = {
     return config;
   },
   // assetPrefix: '/studyo-front/',
-  basePath: '/studyo-front',
+  // basePath: '/studyo-front',
 };
