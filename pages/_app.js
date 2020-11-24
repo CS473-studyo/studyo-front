@@ -10,6 +10,7 @@ export default function MyApp({ Component, pageProps }) {
           type="image/png"
           href="/studyo-front/favicon.png"
         />
+        <title>Studyo</title>
       </Head>
       <Component {...pageProps} />
     </>
