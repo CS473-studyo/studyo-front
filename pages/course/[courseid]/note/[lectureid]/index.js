@@ -92,7 +92,7 @@ function LectureNote() {
       }}
       className="d-flex flex-column"
     >
-      <Header></Header>
+      <Header />
       <div className="mt-3 row ml-5 mr-5">
         <Link href={`/course/${courseid}`}>
           <a
@@ -185,12 +185,6 @@ function LectureNote() {
               <button className="custom-btn" onClick={handleShow}>
                 Upload My Note
               </button>
-              {/* <ReactFileReader
-                handleFiles={handleFiles}
-                fileTypes={'.pdf'}
-              >
-                <button className="custom-btn">Upload My Note</button>
-              </ReactFileReader> */}
             </div>
             <div className="pl-3">
               <NoteList pageNumber={pageNumber} notes={notes} />

@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ClapButton from 'react-clap-button';
 import { Document, Page } from 'react-pdf';
 import { SizeMe } from 'react-sizeme';
-
+import Clap from 'components/clap';
 import * as noteAPI from 'api/note';
 
 if (typeof window === 'undefined') {
@@ -11,70 +10,15 @@ if (typeof window === 'undefined') {
 }
 const NoteList = ({ notes, pageNumber }) => {
   const [expand, setExpand] = useState(-1);
-  const [totalCount, setTotalCount] = useState(0);
 
   const expandToggle = (num) => {
     if (expand !== num) setExpand(num);
     else setExpand(-1);
   };
 
-  const clapNote = (noteId) => {
-    noteAPI.clap(noteId).then((res) => {
-      console.log('hi');
-      setTotalCount(totalCount + 1);
-    });
-  };
-
-  useEffect(() => {
-    if (notes && expand !== -1) {
-      noteAPI.getClap(notes[expand].id).then((res) => {
-        console.log(res.data);
-        setTotalCount(res.data);
-      });
-      // setTotalCount(answers[expand].clap);
-    }
-  }, [expand]);
-
   const NoteElem = (props) => {
     const isSelected = props.num === expand;
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
-
-    const userNote = (
-      <div className="card-body">
-        <SizeMe
-          monitorHeight
-          refreshRate={128}
-          refreshMode={'debounce'}
-          render={({ size }) => (
-            <>
-              <Document file={props.pdf}>
-                <Page
-                  pageNumber={props.pageNumber}
-                  width={size.width}
-                  renderAnnotationLayer={false}
-                />
-              </Document>
-              <div className="w-100 row align-items-center">
-                <div className="col body-text align-center">
-                  {totalCount} claps for this note!{' '}
-                </div>
-                <ClapButton
-                  className="col"
-                  count={0}
-                  countTotal={props.clap}
-                  isClicked={false}
-                  maxCount={3}
-                  onCountChange={() => clapNote(notes[expand].id)}
-                  theme={{
-                    secondaryColor: '#234382',
-                  }}
-                />
-              </div>
-            </>
-          )}
-        />
-      </div>
-    );
 
     return (
       <div className="row">
@@ -96,7 +40,27 @@ const NoteList = ({ notes, pageNumber }) => {
               </button>
             </h5>
           </div>
-          {isSelected ? userNote : null}
+          {isSelected ? (
+            <div className="card-body">
+              <SizeMe
+                monitorHeight
+                refreshRate={128}
+                refreshMode={'debounce'}
+                render={({ size }) => (
+                  <>
+                    <Document file={props.pdf}>
+                      <Page
+                        pageNumber={props.pageNumber}
+                        width={size.width}
+                        renderAnnotationLayer={false}
+                      />
+                    </Document>
+                    <Clap noteId={props.noteId} />
+                  </>
+                )}
+              />
+            </div>
+          ) : null}
         </div>
       </div>
     );
@@ -105,10 +69,10 @@ const NoteList = ({ notes, pageNumber }) => {
   const rows = notes.map((note, index) => (
     <>
       <NoteElem
+        noteId={note.id}
         num={index}
         pageNumber={pageNumber}
         pdf={note.pdf}
-        clap={note.clap}
         name={note.User.name}
       />
       <div className="divider" />

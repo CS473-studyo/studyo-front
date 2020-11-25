@@ -12,4 +12,4 @@ export const lectureNotes = (lectureId) => note.get(`/${lectureId}`);
 
 export const clap = (noteId) => note.post(`/clap/${noteId}`);
 
-export const getClap = (noteId) => note.get(`/getclap/${noteId}`);
+export const getClap = (noteId) => note.get(`/clap/${noteId}`);
