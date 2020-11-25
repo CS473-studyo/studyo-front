@@ -5,7 +5,10 @@ import CourseHeader from 'components/courseHeader';
 import * as courseAPI from 'api/course';
 import * as questionAPI from 'api/question';
 
-const Course = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const NewQuestion = (props) => {
   const router = useRouter();
   const { courseid } = router.query;
 
@@ -21,10 +24,10 @@ const Course = () => {
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
     if (courseid) {
-      courseAPI.courseLectures(courseid).then((res) => {
-        setLectures(res.data);
-        if (res.data.length > 0) {
-          setNewLecture(res.data[0].id);
+      courseAPI.courseLectures(courseid).then(({ data }) => {
+        setLectures(data);
+        if (data.length > 0) {
+          setNewLecture(data[0].id);
         }
       });
     }
@@ -57,7 +60,7 @@ const Course = () => {
 
   return (
     <>
-      <Header />
+      <Header name={props.name} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
@@ -119,4 +122,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default NewQuestion;

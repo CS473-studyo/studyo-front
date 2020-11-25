@@ -7,7 +7,10 @@ import { useRouter } from 'next/router';
 
 import * as courseAPI from 'api/course';
 
-const MainPage = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const MainPage = (props) => {
   const router = useRouter();
   const [courses, setCourses] = useState([]);
   const [filteredCourses, setFilteredCourses] = useState([]);
@@ -127,7 +130,7 @@ const MainPage = () => {
           ))}
         </Modal.Body>
       </Modal>
-      <Header />
+      <Header name={props.name} />
       <div className="container">
         <div className="d-flex justify-content-between">
           <div className="mt-5 pt-5 mb-3 title-text">My Courses</div>

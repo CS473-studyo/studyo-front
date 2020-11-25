@@ -9,9 +9,8 @@ const CourseHeader = ({ courseid }) => {
 
   useEffect(() => {
     if (courseid) {
-      courseAPI.courseInfo(courseid).then((res) => {
-        setCourse(res.data);
-        console.log(res.data);
+      courseAPI.courseInfo(courseid).then(({ data }) => {
+        setCourse(data);
       });
     }
   }, [courseid]);

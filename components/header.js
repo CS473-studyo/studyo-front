@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import styles from 'components/header.module.css';
 import Link from 'next/link';
@@ -6,39 +6,19 @@ import { useRouter } from 'next/router';
 import Logo from 'public/Logo.svg';
 import * as userAPI from 'api/user.js';
 
-const Header = ({ history, ...props }) => {
+const Header = (props) => {
   const [auth, setAuth] = useState(false);
   const [authButtonBar, setAuthButtonBar] = useState(<div />);
-  const [name, setName] = useState('');
+  const [name, setName] = useState(props.name || 'NoName');
 
   const router = useRouter();
-
-  const checkAuth = async () => {
-    try {
-      const user = await userAPI.check();
-
-      const newName = user.data.name || 'NoName';
-      const id = user.data.id ? true : false;
-
-      setAuth(id);
-      setName(newName);
-    } catch {
-      router.push('/home');
-    }
-  };
-
-  useEffect(() => {
-    if (router.pathname !== '/home') {
-      checkAuth();
-    }
-  }, []);
 
   const tryLogout = () => {
     userAPI.logout().then((res) => router.reload());
   };
 
   useEffect(() => {
-    if (auth)
+    if (name)
       setAuthButtonBar(
         <div className="d-flex ml-auto">
           <NavDropdown
@@ -77,12 +57,15 @@ const Header = ({ history, ...props }) => {
           </Nav>
         </div>
       );
-  }, [auth, name]);
+  }, [name]);
 
   return (
     <div style={{ backgroundColor: '#fff' }}>
       <Navbar as={Container} collapseOnSelect expand="lg">
-        <Navbar.Brand onClick={() => router.push('/')}>
+        <Navbar.Brand
+          onClick={() => router.push('/')}
+          style={{ cursor: 'pointer' }}
+        >
           <Logo />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />

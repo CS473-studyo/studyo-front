@@ -7,7 +7,10 @@ import AnswerList from 'components/answerList.js';
 import * as questionAPI from 'api/question';
 import * as answerAPI from 'api/answer';
 
-const QuizPage = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const Quiz = (props) => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
@@ -46,8 +49,8 @@ const QuizPage = () => {
   }, [lectureid]);
 
   const getQuestions = () => {
-    questionAPI.quizList(lectureid).then((res) => {
-      setQuizzes(res.data);
+    questionAPI.quizList(lectureid).then(({ data }) => {
+      setQuizzes(data);
       setDisplayQuiz(0);
     });
   };
@@ -57,9 +60,9 @@ const QuizPage = () => {
   useEffect(() => {
     if (quizzes[displayQuiz] && quizzes[displayQuiz].id) {
       console.log(quizzes[displayQuiz].id);
-      answerAPI.answers(quizzes[displayQuiz].id).then((res) => {
-        setAnswers(res.data);
-        console.log(res.data);
+      answerAPI.answers(quizzes[displayQuiz].id).then(({ data }) => {
+        setAnswers(data);
+        console.log(data);
       });
     }
   }, [displayQuiz]);
@@ -126,7 +129,7 @@ const QuizPage = () => {
         }}
         className="d-flex flex-column"
       >
-        <Header />
+        <Header name={props.name} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
         <div class="h-100 mt-5">
           <div class="title-text text-center">No Quizzes Exist Yet!</div>
@@ -146,7 +149,7 @@ const QuizPage = () => {
         }}
         className="d-flex flex-column"
       >
-        <Header />
+        <Header name={props.name} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
         <div className="container">
           <div class="progress mt-4 mb-4">
@@ -200,7 +203,7 @@ const QuizPage = () => {
       }}
       className="d-flex flex-column"
     >
-      <Header />
+      <Header name={props.name} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div class="container">
         <div class="progress mt-4 mb-4">
@@ -255,4 +258,4 @@ const QuizPage = () => {
   );
 };
 
-export default QuizPage;
+export default Quiz;

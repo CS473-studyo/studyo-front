@@ -12,7 +12,10 @@ import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
 import * as keywordAPI from 'api/keyword';
 import * as courseAPI from 'api/course';
 
-const KeywordPage = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const KeywordPage = (props) => {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
@@ -33,9 +36,9 @@ const KeywordPage = () => {
 
   useEffect(() => {
     if (lectureid) {
-      keywordAPI.getUserList(lectureid).then((res) => {
+      keywordAPI.getUserList(lectureid).then(({ data }) => {
         const newKeywordSelection = [];
-        res.data.map((selected) => newKeywordSelection.push(selected.id));
+        data.map((selected) => newKeywordSelection.push(selected.id));
         setKeywordSelection(newKeywordSelection);
       });
     }
@@ -43,16 +46,16 @@ const KeywordPage = () => {
 
   useEffect(() => {
     if (lectureid) {
-      keywordAPI.getList(lectureid).then((res) => {
-        setKeywords(res.data);
+      keywordAPI.getList(lectureid).then(({ data }) => {
+        setKeywords(data);
       });
     }
   }, [lectureid]);
 
   useEffect(() => {
     if (courseid) {
-      courseAPI.courseInfo(courseid).then((res) => {
-        setStudentNum(res.data.userNumber);
+      courseAPI.courseInfo(courseid).then(({ data }) => {
+        setStudentNum(data.userNumber);
       });
     }
   }, [courseid]);
@@ -131,7 +134,7 @@ const KeywordPage = () => {
       }}
       className="d-flex flex-column"
     >
-      <Header />
+      <Header name={props.name} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div className="container">
         <div className="title-text mb-2 mt-5">Keyword</div>

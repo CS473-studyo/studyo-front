@@ -10,7 +10,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import * as questionAPI from 'api/question';
 import * as answerAPI from 'api/answer';
 
-const QuestionDetail = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const QuestionDetail = (props) => {
   const router = useRouter();
   const { courseid, questionid } = router.query;
 
@@ -61,7 +64,7 @@ const QuestionDetail = () => {
 
   return (
     <>
-      <Header />
+      <Header name={props.name} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>

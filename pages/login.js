@@ -5,6 +5,9 @@ import Logo from '../public/Logo.svg';
 import * as loginAPI from 'api/user';
 import Link from 'next/link';
 
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
 const AdminLoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
@@ -27,15 +30,6 @@ const AdminLoginPage = () => {
       });
   };
 
-  useEffect(() => {
-    loginAPI
-      .check()
-      .then((res) => {
-        router.push('/');
-      })
-      .catch((err) => {});
-  });
-
   return (
     <div
       style={{
@@ -54,7 +48,7 @@ const AdminLoginPage = () => {
       </Modal>
       <div className="d-flex login-content">
         <div className="flex-grow-1 login-module d-flex flex-column">
-          <Link href="/">
+          <Link href="/home">
             <a className="align-self-center login-logo">
               <Logo />
             </a>

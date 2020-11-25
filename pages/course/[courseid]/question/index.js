@@ -6,7 +6,10 @@ import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-const Course = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const Question = (props) => {
   let result;
   const [questions, setQuestions] = useState([]);
 
@@ -57,7 +60,7 @@ const Course = () => {
 
   return (
     <>
-      <Header />
+      <Header name={props.name} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
@@ -86,4 +89,4 @@ const Course = () => {
   );
 };
 
-export default Course;
+export default Question;

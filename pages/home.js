@@ -1,32 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { useRouter } from 'next/router';
-import Link from 'next/link';
 
-import * as userAPI from 'api/user';
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
 import Logo from 'public/Logo2.svg';
 
-const MainPage = () => {
+const Home = () => {
   const router = useRouter();
-
-  const checkAuth = async () => {
-    userAPI
-      .check()
-      .then((_) => {
-        router.push('/');
-      })
-      .catch((_) => {});
-  };
   const buttonStyle = {
     fontSize: '20px',
     fontWeight: '600',
     fontFamily: 'NanumSquare',
   };
-
-  useEffect(() => {
-    checkAuth();
-  }, []);
 
   return (
     <div
@@ -63,4 +50,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default Home;

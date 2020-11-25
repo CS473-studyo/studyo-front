@@ -10,20 +10,17 @@ import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import ReactFileReader from 'react-file-reader';
-
 import { SizeMe } from 'react-sizeme';
 
 import * as noteAPI from 'api/note';
 import * as lectureAPI from 'api/lecture';
 
-if (typeof window === 'undefined') {
-  global.window = {};
-}
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
 
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
-function LectureNote() {
+function LectureNote(props) {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
@@ -59,12 +56,11 @@ function LectureNote() {
 
   useEffect(() => {
     if (lectureid) {
-      lectureAPI.lectureInfo(lectureid).then((res) => {
-        console.log(res.data);
-        setPdf(res.data.pdf);
+      lectureAPI.lectureInfo(lectureid).then(({ data }) => {
+        setPdf(data.pdf);
       });
-      noteAPI.lectureNotes(lectureid).then((res) => {
-        setNotes(res.data);
+      noteAPI.lectureNotes(lectureid).then(({ data }) => {
+        setNotes(data);
       });
     }
   }, [lectureid, pdf]);
@@ -92,7 +88,7 @@ function LectureNote() {
       }}
       className="d-flex flex-column"
     >
-      <Header />
+      <Header name={props.name} />
       <div className="mt-3 row ml-5 mr-5">
         <Link href={`/course/${courseid}`}>
           <a

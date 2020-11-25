@@ -7,7 +7,10 @@ import CourseHeader from 'components/courseHeader';
 import Footer from 'components/footer';
 import * as courseAPI from 'api/course';
 
-const Course = () => {
+import getServerSideProps from 'utils/checkAuth';
+export { getServerSideProps };
+
+const Course = (props) => {
   const [lectures, setLectures] = useState([]);
 
   const router = useRouter();
@@ -16,9 +19,8 @@ const Course = () => {
   // console.log(router.query)
   useEffect(() => {
     if (courseid) {
-      courseAPI.courseLectures(courseid).then((res) => {
-        setLectures(res.data);
-        console.log(res.data);
+      courseAPI.courseLectures(courseid).then(({ data }) => {
+        setLectures(data);
       });
     }
   }, [courseid]);
@@ -80,7 +82,7 @@ const Course = () => {
 
   return (
     <>
-      <Header />
+      <Header name={props.name} />
       <CourseHeader courseid={courseid} />
       <div className="container mt-2">{rows}</div>
       <div style={{ height: '50px' }}></div>

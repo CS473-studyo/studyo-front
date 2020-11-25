@@ -9,8 +9,8 @@ const LectureHeader = ({ lectureid, courseid }) => {
 
   useEffect(() => {
     if (lectureid) {
-      lectureAPI.lectureInfo(lectureid).then((res) => {
-        setLecture(res.data);
+      lectureAPI.lectureInfo(lectureid).then(({ data }) => {
+        setLecture(data);
       });
     }
   }, [lectureid]);

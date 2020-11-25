@@ -25,11 +25,9 @@ const AnswerList = ({ answers }) => {
 
   useEffect(() => {
     if (answers && expand !== -1) {
-      answerAPI.getClap(answers[expand].id).then((res) => {
-        console.log(res.data);
-        setTotalCount(res.data);
+      answerAPI.getClap(answers[expand].id).then(({ data }) => {
+        setTotalCount(data);
       });
-      // setTotalCount(answers[expand].clap);
     }
   }, [expand]);
 
