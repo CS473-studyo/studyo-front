@@ -59,7 +59,7 @@ const Course = (props) => {
               <a className="mt-4 custom-btn mr-3">Lecture Note</a>
             </Link>
             <Link href={`/course/${courseid}/quiz/${props.id}`}>
-              <a className="mt-4 custom-btn">Review Quiz</a>
+              <a className="mt-4 custom-btn">Review</a>
             </Link>
           </div>
         </Card.Body>
