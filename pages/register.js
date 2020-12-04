@@ -20,9 +20,6 @@ const AdminLoginPage = () => {
 
   const tryRegister = (e) => {
     e.preventDefault();
-    if (!email.includes('@kaist.ac.kr')){
-      /*To do: show the message 'Please use @kaist.ac.kr' */
-    }
     loginAPI
       .register({ name, email, password })
       .then((res) => {
@@ -59,14 +56,14 @@ const AdminLoginPage = () => {
           </Link>
           <Form className="login-form" onSubmit={tryRegister}>
             <Form.Group>
-              <Form.Label>Name</Form.Label>
+              <Form.Label>Name (English)  </Form.Label>
               <Form.Control
                 type="name"
                 onChange={(value) => setName(value.target.value)}
               />
             </Form.Group>
             <Form.Group>
-              <Form.Label>Email</Form.Label>
+              <Form.Label>Email (KAIST)</Form.Label>
               <Form.Control
                 type="text"
                 onChange={(value) => setEmail(value.target.value)}
