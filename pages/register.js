@@ -20,6 +20,9 @@ const AdminLoginPage = () => {
 
   const tryRegister = (e) => {
     e.preventDefault();
+    if (!email.includes('@kaist.ac.kr')){
+      /*To do: show the message 'Please use @kaist.ac.kr' */
+    }
     loginAPI
       .register({ name, email, password })
       .then((res) => {
