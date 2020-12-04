@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Header from 'components/header.js';
 import LectureHeader from 'components/lectureHeader';
 
@@ -119,7 +120,8 @@ const Quiz = (props) => {
     );
   };
 
-  // console.log(quizzes.length);
+  console.log('quiz length: ' + quizzes.length);
+  console.log('display quiz: ' + displayQuiz);
 
   if (quizzes.length === 0) {
     return (
