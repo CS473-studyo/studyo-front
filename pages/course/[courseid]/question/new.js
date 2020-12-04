@@ -52,11 +52,24 @@ const NewQuestion = (props) => {
     router.push(`/course/${courseid}/question`);
   };
 
-  const lectureOptions = lectures.map((lecture) => (
-    <>
-      <option value={lecture.id}>{lecture.number}</option>
-    </>
-  ));
+  const lectureOptions = lectures.map((lecture) => {
+    if (lecture) {
+      let keywordsString = '';
+      lecture.Keywords.sort((a, b) => b.votes - a.votes)
+        .slice(0, 3)
+        .map((keyword, index) => {
+          if (index === 0) keywordsString += keyword.word;
+          else keywordsString += ', ' + keyword.word;
+        });
+      return (
+        <>
+          <option value={lecture.id}>
+            Lecture {lecture.number} - {keywordsString}
+          </option>
+        </>
+      );
+    }
+  });
 
   return (
     <>
