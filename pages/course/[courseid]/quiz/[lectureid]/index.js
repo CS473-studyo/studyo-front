@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Header from 'components/header.js';
 import LectureHeader from 'components/lectureHeader';
