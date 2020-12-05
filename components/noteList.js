@@ -75,7 +75,7 @@ const NoteList = ({
       .then(() => router.reload());
   };
 
-  const NoteElem = ({ index, user, pdf, comment }) => {
+  const NoteElem = ({ index, user, pdf, comment, owner }) => {
     const isSelected = index === expand;
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
 
@@ -84,23 +84,19 @@ const NoteList = ({
         <div style={{ backgroundColor: leftBarColor, width: '3px' }} />
         <div className="col w-100 border border-light pr-0 pl-0">
           <div
-            className={isSelected ? 'list-selected' : 'list-unselected'}
+            className="d-flex align-items-center"
+            style={{
+              cursor: 'pointer',
+              height: '50px',
+              backgroundColor: isSelected ? '#ebebeb' : 'white',
+              paddingLeft: '16px',
+            }}
+            onClick={() => expandToggle(index)}
           >
-            <h5 className="mb-0">
-              <button
-                style={{ width: '100%' }}
-                className="btn subtitle-text"
-                type="button"
-                onClick={() => expandToggle(index)}
-              >
-                <div className="row ml-1">
-                  <div className="row">
-                    <div className="p-2 ml-2">{user.name}</div>
-                    <UserIcon className="p-2" badge={user.badge} />
-                  </div>
-                </div>
-              </button>
-            </h5>
+            <div className="row ml-1">
+              <AccountCircleIcon className="mr-3"></AccountCircleIcon>
+              {user.name}
+            </div>
           </div>
           {isSelected ? (
             <div>
@@ -137,7 +133,11 @@ const NoteList = ({
     userNotes && (userNotes.pdf || userNotes.pages.size > 0)
       ? [
           <NoteElem
+<<<<<<< HEAD
+            owner
+=======
             className="ml-3"
+>>>>>>> 501827f005597e3d18d9393d99a581f2d00bf8d9
             index={0}
             user={{ name: userName, id: UserId, badge: userBadge }}
             pdf={userNotes.pdf}
