@@ -9,7 +9,6 @@ import Clap from '../public/Clap.svg';
 const AnswerList = ({ answers }) => {
   const [expand, setExpand] = useState(-1);
   const [totalCount, setTotalCount] = useState(0);
-  const [approvalDisplay, setApprovalDiaplay] = useState(<></>);
   const [clapOn, setClapOn] = useState(false);
 
   const toggleClap = () => setClapOn(!clapOn);
@@ -35,14 +34,6 @@ const AnswerList = ({ answers }) => {
       answerAPI.getClap(answers[expand].id).then(({ data }) => {
         setTotalCount(data);
       });
-      console.log(answers[expand]);
-      if (answers[expand].isSelected)
-        setApprovalDiaplay(
-          <div className="body-text mb-2" style={{ color: '#3B9312' }}>
-            This answer is approved by TA
-          </div>
-        );
-      else setApprovalDiaplay(<></>);
     }
   }, [expand]);
 
@@ -57,19 +48,46 @@ const AnswerList = ({ answers }) => {
             <div className="list-selected">
               <h5 className="mb-0">
                 <button
-                  className="btn subtitle-text"
+                  className="btn subtitle-text w-100"
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div style={{ fontWeight: '600' }} className="row ml-1">
-                    {props.name}
-                    <UserIcon badge={props.badge} />
+                  <div
+                    style={{ fontWeight: '600' }}
+                    className="d-flex justify-content-between ml-1"
+                  >
+                    <div className="row">
+                      <div className="p-2 ml-2">{props.name}</div>
+                      <UserIcon className="p-2" badge={props.badge} />
+                    </div>
+                    <div className="row align-items-center">
+                      {props.approved ? (
+                        <div
+                          className="body-text align-middle text-center mr-3 px-3 py-1"
+                          style={{
+                            borderRadius: '3px',
+                            backgroundColor: 'green',
+                            color: 'white',
+                          }}
+                        >
+                          Approved
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   </div>
                 </button>
               </h5>
             </div>
             <div className="card-body">
-              {approvalDisplay}
+              {props.approved ? (
+                <div className="body-text mb-2" style={{ color: 'green' }}>
+                  This answer is approved by TA
+                </div>
+              ) : (
+                <></>
+              )}
               <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
                 <div
@@ -105,13 +123,34 @@ const AnswerList = ({ answers }) => {
             <div className="list-unselected">
               <h5 className="mb-0">
                 <button
-                  className="btn subtitle-text"
+                  className="btn subtitle-text w-100"
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div style={{ fontWeight: '600' }} className="row ml-1">
-                    {props.name}
-                    <UserIcon badge={props.badge} />
+                  <div
+                    style={{ fontWeight: '600' }}
+                    className="d-flex justify-content-between ml-1"
+                  >
+                    <div className="row">
+                      <div className="p-2 ml-2">{props.name}</div>
+                      <UserIcon className="p-2" badge={props.badge} />
+                    </div>
+                    <div className="row align-items-center">
+                      {props.approved ? (
+                        <div
+                          className="body-text align-middle text-center mr-3 px-3 py-1"
+                          style={{
+                            borderRadius: '3px',
+                            backgroundColor: 'green',
+                            color: 'white',
+                          }}
+                        >
+                          Approved
+                        </div>
+                      ) : (
+                        <></>
+                      )}
+                    </div>
                   </div>
                 </button>
               </h5>
@@ -131,6 +170,7 @@ const AnswerList = ({ answers }) => {
           content={answer.content}
           clap={answer.clap}
           badge={answer.User.badge}
+          approved={answer.isSelected}
         />
         <div className="divider" />
       </>
