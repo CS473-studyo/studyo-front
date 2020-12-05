@@ -5,11 +5,20 @@ const note = axios.create({
   withCredentials: true,
 });
 
-export const upload = (lectureId, file) =>
-  note.post(`/${lectureId}`, file);
+export const upload = (LectureId, file) =>
+  note.post(`/${LectureId}`, file);
 
-export const lectureNotes = (lectureId) => note.get(`/${lectureId}`);
+export const comment = (LectureId, page, text) =>
+  note.post(`/text/${LectureId}`, { page, text });
 
-export const clap = (noteId) => note.post(`/clap/${noteId}`);
+export const userLectureNotes = (LectureId, page) =>
+  note.get(`/user/${LectureId}/${page}`);
 
-export const getClap = (noteId) => note.get(`/clap/${noteId}`);
+export const otherLectureNotes = (LectureId, page) =>
+  note.get(`/other/${LectureId}/${page}`);
+
+export const clap = (LectureId, UserId, page) =>
+  note.post(`/clap`, { LectureId, UserId, page });
+
+export const getClap = (LectureId, UserId, page) =>
+  note.get(`/clap/${LectureId}/${UserId}/${page}`);
