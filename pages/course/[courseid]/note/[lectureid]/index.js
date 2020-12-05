@@ -95,10 +95,27 @@ function LectureNote(props) {
       />
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Upload Your Note</Modal.Title>
+          <Modal.Title className="title-text">
+            Upload Your Note
+          </Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <div className="body-text mb-4 text-center">
+          <div className="body-text mb-3 text-center">
+            You can add simple text note by page.
+          </div>
+          <div className="d-flex justify-content-center">
+            <button
+              className="custom-btn"
+              onClick={() => {
+                handleClose();
+                setToggleComment(true);
+              }}
+            >
+              Add/Edit text note
+            </button>
+          </div>
+          <hr />
+          <div className="body-text mb-3 text-center">
             You can only upload notes in PDF format that you have written
             above the original Lecture notes. The uploaded note must have
             the same number of pages as the original copy note.
@@ -192,31 +209,11 @@ function LectureNote(props) {
           <Col>
             <div className="d-flex flex-row justify-content-between student-note">
               <h1 className="title-text">Students' notes on this page</h1>
-              <OverlayTrigger
-                trigger="click"
-                placement="bottom"
-                rootClose
-                overlay={
-                  <Popover id={`popover-positioned-bottom`}>
-                    <Popover.Content
-                      style={{ cursor: 'pointer' }}
-                      onClick={handleShow}
-                    >
-                      Upload your notes
-                    </Popover.Content>
-                    <Popover.Content
-                      style={{ cursor: 'pointer' }}
-                      onClick={() => setToggleComment(true)}
-                    >
-                      Add/edit your comment to this page
-                    </Popover.Content>
-                  </Popover>
-                }
-              >
-                <button className="custom-btn">Add notes</button>
-              </OverlayTrigger>
+              <button className="custom-btn" onClick={handleShow}>
+                Add/Edit notes
+              </button>
             </div>
-            <div className="pl-3">
+            <div>
               <NoteList
                 LectureId={lectureid}
                 page={pageNumber}

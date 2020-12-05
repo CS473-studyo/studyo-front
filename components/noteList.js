@@ -80,7 +80,7 @@ const NoteList = ({
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
 
     return (
-      <div className="row">
+      <div className="row ml-1">
         <div style={{ backgroundColor: leftBarColor, width: '3px' }} />
         <div className="col w-100 border border-light pr-0 pl-0">
           <div
@@ -104,7 +104,9 @@ const NoteList = ({
           </div>
           {isSelected ? (
             <div>
-              <div style={{ padding: '16px 24px' }}>{comment}</div>
+              <div className="body-text" style={{ padding: '16px 24px' }}>
+                {comment}
+              </div>
               {pdf ? (
                 <SizeMe
                   monitorHeight
@@ -135,6 +137,7 @@ const NoteList = ({
     userNotes && (userNotes.pdf || userNotes.pages.size > 0)
       ? [
           <NoteElem
+            className="ml-3"
             index={0}
             user={{ name: userName, id: UserId, badge: userBadge }}
             pdf={userNotes.pdf}
@@ -147,6 +150,7 @@ const NoteList = ({
 
   const otherTabs = otherNotes.map((note, index) => (
     <NoteElem
+      className="ml-3"
       index={index + 1}
       user={{
         name: note.user.name,
@@ -168,14 +172,14 @@ const NoteList = ({
           onSubmit={handleSubmit}
         >
           <Form.Group controlId="formBasicEmail">
-            <Form.Label>Your comment</Form.Label>
+            <Form.Label className="subtitle-text">Your comment</Form.Label>
             <Form.Control
               type="text"
               onChange={(value) => setNewComment(value.target.value)}
               value={newComment}
             />
           </Form.Group>
-          <button type="submit" className="custom-btn">
+          <button type="submit" className="custom-btn align-right">
             Save
           </button>
         </Form>

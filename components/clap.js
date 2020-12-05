@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { clap, getClap } from 'api/note';
 import { Spinner } from 'react-bootstrap';
-
-import ClapButton from 'react-clap-button';
+import ClapIcon from '../public/Clap.svg';
 
 const Clap = ({ LectureId, UserId, page }) => {
   const [totalCount, setTotalCount] = useState(-1);
+  const [clapOn, setClapOn] = useState(false);
+  const toggleClap = () => setClapOn(!clapOn);
 
   useEffect(() => {
     getClap(LectureId, UserId, page).then(({ data }) => {
@@ -26,19 +27,24 @@ const Clap = ({ LectureId, UserId, page }) => {
       style={{ margin: '8px 8px' }}
       className="d-flex justify-content-between align-items-center"
     >
-      <div className="col body-text align-center">
-        {totalCount} claps for this note!{' '}
+      <div
+        className="col body-text align-center text-right"
+        style={{ color: '#234382' }}
+      >
+        {totalCount} claps for this note!
       </div>
-      <ClapButton
-        className="col"
-        count={false}
-        countTotal={totalCount}
-        isClicked={false}
-        onCountChange={clapNote}
-        theme={{
-          secondaryColor: '#234382',
-        }}
-      />
+      <button
+        className="clap-btn"
+        onMouseEnter={toggleClap}
+        onMouseLeave={toggleClap}
+        onClick={clapNote}
+      >
+        {clapOn ? (
+          <ClapIcon width="20px" fill="#ffffff" />
+        ) : (
+          <ClapIcon width="20px" fill="#234382" />
+        )}
+      </button>
     </div>
   );
 };
