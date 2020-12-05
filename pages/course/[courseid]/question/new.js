@@ -81,36 +81,26 @@ const NewQuestion = (props) => {
         </div>
         <form>
           <div class="form-group">
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Lecture
-            </label>
+            <label class="subtitle-text mt-2">Lecture</label>
             <select class="form-control" onChange={onInputLecture}>
               {lectureOptions}
             </select>
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Title
-            </label>
+            <label class="subtitle-text mt-2">Title</label>
             <input
               type="text"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               placeholder="Title"
               onChange={onInputTitle}
             />
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Content
-            </label>
+            <label class="subtitle-text mt-2">Content</label>
             <textarea
               type="text"
               class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
               placeholder="Write your question here!"
               onChange={onInputContent}
             />
 
-            <small id="emailHelp" class="form-text text-muted">
+            <small class="form-text text-muted">
               Your question will be shared to your classmates in the review
               quiz.
             </small>
