@@ -171,10 +171,10 @@ const NoteList = ({
           style={{ marginRight: '16px', paddingBottom: '16px' }}
           onSubmit={handleSubmit}
         >
-          <Form.Group controlId="formBasicEmail">
+          <Form.Group controlId="exampleForm.ControlTextarea1">
             <Form.Label className="subtitle-text">Your comment</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
               onChange={(value) => setNewComment(value.target.value)}
               value={newComment}
             />
