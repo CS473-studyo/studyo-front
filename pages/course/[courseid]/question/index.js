@@ -68,7 +68,7 @@ const Question = (props) => {
             <div style={{ cursor: 'pointer' }}>
               <ArrowBackIcon
                 fontSize="large"
-                classNmae="mr-1"
+                className="mr-1"
               ></ArrowBackIcon>
               My Questions
             </div>

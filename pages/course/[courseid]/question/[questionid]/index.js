@@ -15,13 +15,13 @@ export { getServerSideProps };
 
 const QuestionDetail = (props) => {
   const router = useRouter();
-  const { courseid, questionId } = router.query;
+  const { courseid, questionid } = router.query;
 
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
 
   const getQuestionList = () => {
-    questionAPI.question(questionId).then(({ data }) => setQuestion(data));
+    questionAPI.question(questionid).then(({ data }) => setQuestion(data));
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const QuestionDetail = (props) => {
   }, []);
 
   const getAnswerList = async () => {
-    answerAPI.answers(questionId).then(({ data }) => setAnswers(data));
+    answerAPI.answers(questionid).then(({ data }) => setAnswers(data));
   };
 
   useEffect(() => {
@@ -65,7 +65,7 @@ const QuestionDetail = (props) => {
             <a style={{ textDecoration: 'none', color: '#234382' }}>
               <ArrowBackIcon
                 fontSize="large"
-                classNmae="mr-1"
+                className="mr-1"
               ></ArrowBackIcon>
               Question{question.num}
             </a>
