@@ -169,6 +169,7 @@ const NoteList = ({
       {toggleComment ? (
         <Form
           style={{ marginRight: '16px', paddingBottom: '16px' }}
+          className="d-flex flex-column align-items-right"
           onSubmit={handleSubmit}
         >
           <Form.Group controlId="exampleForm.ControlTextarea1">
@@ -179,7 +180,7 @@ const NoteList = ({
               value={newComment}
             />
           </Form.Group>
-          <button type="submit" className="custom-btn align-right">
+          <button type="submit" className="custom-btn">
             Save
           </button>
         </Form>
