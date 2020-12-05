@@ -2,10 +2,12 @@ import React, { useEffect, useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
 import * as answerAPI from 'api/answer';
+import ApprovedBadge from './approvedBadge';
 
 const AnswerList = ({ answers }) => {
   const [expand, setExpand] = useState(-1);
   const [totalCount, setTotalCount] = useState(0);
+  const [approvalDisplay, setApprovalDiaplay] = useState(<></>);
 
   const expandToggle = (num) => {
     if (expand !== num) setExpand(num);
@@ -28,6 +30,14 @@ const AnswerList = ({ answers }) => {
       answerAPI.getClap(answers[expand].id).then(({ data }) => {
         setTotalCount(data);
       });
+      console.log(answers[expand]);
+      if (answers[expand].isSelected)
+        setApprovalDiaplay(
+          <div className="body-text mb-2" style={{ color: '#3B9312' }}>
+            This answer is approved by TA
+          </div>
+        );
+      else setApprovalDiaplay(<></>);
     }
   }, [expand]);
 
@@ -48,19 +58,23 @@ const AnswerList = ({ answers }) => {
                 >
                   <div className="row ml-1">
                     <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                    {props.name}
+                    <span>
+                      {props.name}
+                      <ApprovedBadge approved={props.approved} />
+                    </span>
                   </div>
                 </button>
               </h5>
             </div>
             <div className="card-body">
+              {approvalDisplay}
               <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
                 <div
                   className="col body-text align-center"
                   style={{ color: '#234382' }}
                 >
-                  {totalCount} claps for this note!
+                  {totalCount} claps for this answer!
                 </div>
                 <ClapButton
                   className="col"
@@ -94,7 +108,10 @@ const AnswerList = ({ answers }) => {
                 >
                   <div className="row ml-1">
                     <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                    {props.name}
+                    <span>
+                      {props.name}
+                      <ApprovedBadge approved={props.approved} />
+                    </span>
                   </div>
                 </button>
               </h5>
@@ -104,18 +121,21 @@ const AnswerList = ({ answers }) => {
       );
   };
 
-  const rows = answers.map((answer, index) => (
-    <>
-      <AnswerElem
-        id={answer.id}
-        index={index}
-        name={answer.User.name}
-        content={answer.content}
-        clap={answer.clap}
-      />
-      <div className="divider" />
-    </>
-  ));
+  const rows = answers.map((answer, index) => {
+    return (
+      <>
+        <AnswerElem
+          id={answer.id}
+          index={index}
+          name={answer.User.name}
+          content={answer.content}
+          clap={answer.clap}
+          approved={answer.User.badge}
+        />
+        <div className="divider" />
+      </>
+    );
+  });
 
   return <div className="w-100">{rows}</div>;
 };
