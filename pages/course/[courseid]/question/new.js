@@ -81,7 +81,13 @@ const NewQuestion = (props) => {
         </div>
         <form>
           <div class="form-group">
-            <label class="subtitle-text" for="exampleInputEmail1">
+            <label class="subtitle-text mt-2" for="exampleInputEmail1">
+              Lecture
+            </label>
+            <select class="form-control" onChange={onInputLecture}>
+              {lectureOptions}
+            </select>
+            <label class="subtitle-text mt-2" for="exampleInputEmail1">
               Title
             </label>
             <input
@@ -103,12 +109,7 @@ const NewQuestion = (props) => {
               placeholder="Write your question here!"
               onChange={onInputContent}
             />
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Lecture
-            </label>
-            <select class="form-control" onChange={onInputLecture}>
-              {lectureOptions}
-            </select>
+
             <small id="emailHelp" class="form-text text-muted">
               Your question will be shared to your classmates in the review
               quiz.
