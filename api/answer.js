@@ -16,3 +16,5 @@ export const userAnswer = (questionId) =>
 export const clap = (answerId) => answer.post(`/clap/${answerId}`);
 
 export const getClap = (answerId) => answer.get(`/clap/${answerId}`);
+
+export const approve = (answerId) => answer.post(`/select/${answerId}`);

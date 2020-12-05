@@ -6,7 +6,7 @@ import * as answerAPI from 'api/answer';
 import UserIcon from './UserIcon';
 import Clap from '../public/Clap.svg';
 
-const AnswerList = ({ answers }) => {
+const AnswerList = ({ answers, admin }) => {
   const [expand, setExpand] = useState(-1);
   const [totalCount, setTotalCount] = useState(0);
   const [clapOn, setClapOn] = useState(false);
@@ -22,6 +22,10 @@ const AnswerList = ({ answers }) => {
     answerAPI.clap(answerId).then((res) => {
       setTotalCount(totalCount + 1);
     });
+  };
+
+  const approveAnswer = (answerId) => {
+    answerAPI.approve(answerId);
   };
 
   useEffect(() => {
@@ -89,26 +93,43 @@ const AnswerList = ({ answers }) => {
                 <></>
               )}
               <div className="body-text">{props.content}</div>
-              <div className="w-100 row align-items-center">
-                <div
-                  className="col body-text align-center text-right"
-                  style={{ color: '#234382' }}
-                >
-                  {totalCount} claps for this answer!
+              {admin ? (
+                <div className="w-100 row align-items-center mt-2">
+                  <div
+                    className="col body-text align-center text-right"
+                    style={{ color: '#234382' }}
+                  >
+                    {totalCount} claps for this answer!
+                  </div>
+                  <button
+                    className="clap-btn"
+                    onClick={() => approveAnswer(props.id)}
+                  >
+                    <div className="body-text">Approve</div>
+                  </button>
                 </div>
-                <button
-                  className="clap-btn"
-                  onMouseEnter={toggleClap}
-                  onMouseLeave={toggleClap}
-                  onClick={() => clapAnswer(props.id)}
-                >
-                  {clapOn ? (
-                    <Clap width="30px" fill="#ffffff" />
-                  ) : (
-                    <Clap width="30px" fill="#234382" />
-                  )}
-                </button>
-              </div>
+              ) : (
+                <div className="w-100 row align-items-center mt-2">
+                  <div
+                    className="col body-text align-center text-right"
+                    style={{ color: '#234382' }}
+                  >
+                    {totalCount} claps for this answer!
+                  </div>
+                  <button
+                    className="clap-btn"
+                    onMouseEnter={toggleClap}
+                    onMouseLeave={toggleClap}
+                    onClick={() => clapAnswer(props.id)}
+                  >
+                    {clapOn ? (
+                      <Clap width="20px" fill="#ffffff" />
+                    ) : (
+                      <Clap width="20px" fill="#234382" />
+                    )}
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         </div>

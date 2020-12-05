@@ -251,7 +251,7 @@ const Quiz = (props) => {
               Answers from course students
             </div>
             <div className="pl-3">
-              <AnswerList answers={answers} />
+              <AnswerList answers={answers} admin={props.admin} />
             </div>
           </div>
         </div>
