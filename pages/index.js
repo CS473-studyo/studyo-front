@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/header';
-import { Card, Modal, ModalDialog } from 'react-bootstrap';
+import { Card, Modal } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -63,10 +63,12 @@ const MainPage = (props) => {
 
   const getCourseList = async () => {
     courseAPI.userCourses().then(({ data }) => {
+      data.sort((a, b) => (a.code < b.code ? -1 : 1));
       setCourses(data);
       setFilteredCourses(data);
     });
     courseAPI.newCourses().then(({ data }) => {
+      data.sort((a, b) => (a.code < b.code ? -1 : 1));
       setNewCourses(data);
       setFilteredNewCourses(data);
     });

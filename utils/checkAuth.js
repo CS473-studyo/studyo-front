@@ -11,14 +11,14 @@ export default async function getServerSideProps(ctx) {
     const { data } = await check({ headers: { cookie } });
     return isAuthRoute
       ? {
-          props: { name: data.name },
+          props: { id: data.id, name: data.name },
         }
       : {
           redirect: {
             destination: '/',
             permanent: false,
           },
-          props: { name: data.name },
+          props: { id: data.id, name: data.name },
         };
   } catch (err) {
     console.log(err);

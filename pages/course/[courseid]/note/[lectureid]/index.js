@@ -1,5 +1,11 @@
-import React, { PureComponent, useEffect, useState } from 'react';
-import { Col, Modal, Button } from 'react-bootstrap';
+import React, { useEffect, useState } from 'react';
+import {
+  Col,
+  Modal,
+  OverlayTrigger,
+  Popover,
+  Button,
+} from 'react-bootstrap';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Document, Page } from 'react-pdf';
@@ -24,18 +30,11 @@ function LectureNote(props) {
   const router = useRouter();
   const { courseid, lectureid } = router.query;
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => {
-    setShow(false);
-    router.reload(`/course/${courseid}/note/${lectureid}`);
-  };
-  const handleShow = () => setShow(true);
-
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
-  const [notes, setNotes] = useState([]);
   const [pdf, setPdf] = useState('');
+  const [toggleComment, setToggleComment] = useState(false);
+  const [show, setShow] = useState(false);
 
   function onDocumentLoadSuccess(pdf) {
     setNumPages(pdf.numPages);
@@ -59,22 +58,20 @@ function LectureNote(props) {
       lectureAPI.lectureInfo(lectureid).then(({ data }) => {
         setPdf(data.pdf);
       });
-      noteAPI.lectureNotes(lectureid).then(({ data }) => {
-        setNotes(data);
-      });
     }
   }, [lectureid, pdf]);
 
-  const file = React.createRef();
+  const handleClose = () => {
+    setShow(false);
+  };
+  const handleShow = () => setShow(true);
 
-  console.log(pdf);
+  const file = React.createRef();
 
   const handleFiles = () => {
     const pdf = file.current.files[0];
     const data = new FormData();
     data.append('file', pdf);
-
-    console.log(pdf);
 
     noteAPI.upload(lectureid, data).then((res) => {
       router.reload();
@@ -88,6 +85,31 @@ function LectureNote(props) {
       }}
       className="d-flex flex-column"
     >
+      <input
+        type="file"
+        accept=".pdf"
+        id="input"
+        ref={file}
+        style={{ display: 'none' }}
+        onInput={() => handleFiles()}
+      />
+      <Modal show={show} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Upload Your Note</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <div className="body-text mb-4 text-center">
+            You can only upload notes in PDF format that you have written
+            above the original Lecture notes. The uploaded note must have
+            the same number of pages as the original copy note.
+          </div>
+          <div className="d-flex justify-content-center">
+            <label className="custom-btn" for="input">
+              Upload PDF
+            </label>
+          </div>
+        </Modal.Body>
+      </Modal>
       <Header name={props.name} />
       <div className="mt-3 row ml-5 mr-5">
         <Link href={`/course/${courseid}`}>
@@ -169,43 +191,43 @@ function LectureNote(props) {
           </div>
           <Col>
             <div className="d-flex flex-row justify-content-between student-note">
-              <h1 className="title-text">Notes from course students</h1>
-              <input
-                type="file"
-                accept=".pdf"
-                id="input"
-                ref={file}
-                style={{ display: 'none' }}
-                onInput={() => handleFiles()}
-              />
-              <button className="custom-btn" onClick={handleShow}>
-                Upload My Note
-              </button>
+              <h1 className="title-text">Students' notes on this page</h1>
+              <OverlayTrigger
+                trigger="click"
+                placement="bottom"
+                rootClose
+                overlay={
+                  <Popover id={`popover-positioned-bottom`}>
+                    <Popover.Content
+                      style={{ cursor: 'pointer' }}
+                      onClick={handleShow}
+                    >
+                      Upload your notes
+                    </Popover.Content>
+                    <Popover.Content
+                      style={{ cursor: 'pointer' }}
+                      onClick={() => setToggleComment(true)}
+                    >
+                      Add/edit your comment to this page
+                    </Popover.Content>
+                  </Popover>
+                }
+              >
+                <button className="custom-btn">Add notes</button>
+              </OverlayTrigger>
             </div>
             <div className="pl-3">
-              <NoteList pageNumber={pageNumber} notes={notes} />
+              <NoteList
+                LectureId={lectureid}
+                page={pageNumber}
+                UserId={props.id}
+                userName={props.name}
+                toggleComment={toggleComment}
+              />
             </div>
           </Col>
         </div>
       </div>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Upload Your Note</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          <div className="body-text mb-4 text-center">
-            You can only upload notes in PDF format that you have written
-            above the original Lecture notes. The uploaded note must have
-            the same number of pages as the original copy note.
-          </div>
-          <div className="d-flex justify-content-center">
-            <label className="custom-btn" for="input">
-              Upload PDF
-            </label>
-          </div>
-        </Modal.Body>
-      </Modal>
     </div>
   );
 }
