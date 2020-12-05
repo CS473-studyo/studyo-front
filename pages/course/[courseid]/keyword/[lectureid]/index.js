@@ -123,7 +123,7 @@ const KeywordPage = (props) => {
       }}
       className="d-flex flex-column"
     >
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div className="container">
         <div className="title-text mb-2 mt-5">Keyword</div>

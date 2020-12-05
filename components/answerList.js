@@ -1,7 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
-import ClapButton from 'react-clap-button';
-import { Button } from 'react-bootstrap';
 import * as answerAPI from 'api/answer';
 import UserIcon from './UserIcon';
 import Clap from '../public/Clap.svg';

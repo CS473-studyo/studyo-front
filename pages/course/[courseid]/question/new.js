@@ -73,7 +73,7 @@ const NewQuestion = (props) => {
 
   return (
     <>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>

@@ -57,7 +57,7 @@ const QuestionDetail = (props) => {
 
   return (
     <>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>

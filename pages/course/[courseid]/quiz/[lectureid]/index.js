@@ -131,7 +131,7 @@ const Quiz = (props) => {
         }}
         className="d-flex flex-column"
       >
-        <Header name={props.name} />
+        <Header name={props.name} badge={props.badge} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
         <div class="h-100 mt-5">
           <div class="title-text text-center">No Quizzes Exist Yet!</div>
@@ -151,7 +151,7 @@ const Quiz = (props) => {
         }}
         className="d-flex flex-column"
       >
-        <Header name={props.name} />
+        <Header name={props.name} badge={props.badge} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
         <div className="container">
           <div class="progress mt-4 mb-4">
@@ -205,7 +205,7 @@ const Quiz = (props) => {
       }}
       className="d-flex flex-column"
     >
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div class="container">
         <div class="progress mt-4 mb-4">

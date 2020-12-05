@@ -110,7 +110,7 @@ function LectureNote(props) {
           </div>
         </Modal.Body>
       </Modal>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <div className="mt-3 row ml-5 mr-5">
         <Link href={`/course/${courseid}`}>
           <a
@@ -222,6 +222,7 @@ function LectureNote(props) {
                 page={pageNumber}
                 UserId={props.id}
                 userName={props.name}
+                userBadge={props.badge}
                 toggleComment={toggleComment}
               />
             </div>

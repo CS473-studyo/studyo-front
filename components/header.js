@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Logo from 'public/Logo.svg';
 import * as userAPI from 'api/user.js';
+import UserIcon from 'components/UserIcon';
 
 const Header = (props) => {
   const [auth, setAuth] = useState(false);
@@ -17,13 +18,21 @@ const Header = (props) => {
     userAPI.logout().then((res) => router.reload());
   };
 
+  const nametoIcon = (name) => (
+    <>
+      <span className="mr-1">{name}</span>
+      <UserIcon badge={props.badge} />
+      <span className="mr-1"></span>
+    </>
+  );
+
   useEffect(() => {
     if (name)
       setAuthButtonBar(
         <div className="d-flex ml-auto">
           <NavDropdown
             alignRight
-            title={name}
+            title={nametoIcon(name)}
             id="user-name"
             className="body-text"
           >

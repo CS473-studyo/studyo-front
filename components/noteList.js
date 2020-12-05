@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Modal } from 'react-bootstrap';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Document, Page } from 'react-pdf';
 import { SizeMe } from 'react-sizeme';
 import Clap from 'components/clap';
 import * as noteAPI from 'api/note';
+import UserIcon from './UserIcon';
 
 if (typeof window === 'undefined') {
   global.window = {};
@@ -42,6 +42,7 @@ const NoteList = ({
   page,
   UserId,
   userName,
+  userBadge,
   toggleComment,
 }) => {
   const router = useRouter();
@@ -93,8 +94,10 @@ const NoteList = ({
                 onClick={() => expandToggle(index)}
               >
                 <div className="row ml-1">
-                  <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                  {user.name}
+                  <div className="row">
+                    <div className="p-2 ml-2">{user.name}</div>
+                    <UserIcon className="p-2" badge={user.badge} />
+                  </div>
                 </div>
               </button>
             </h5>
@@ -133,7 +136,7 @@ const NoteList = ({
       ? [
           <NoteElem
             index={0}
-            user={{ name: userName, id: UserId }}
+            user={{ name: userName, id: UserId, badge: userBadge }}
             pdf={userNotes.pdf}
             comment={userNotes.pages.get(page)}
           />,
@@ -145,7 +148,11 @@ const NoteList = ({
   const otherTabs = otherNotes.map((note, index) => (
     <NoteElem
       index={index + 1}
-      user={{ name: note.user.name, id: note.user.id }}
+      user={{
+        name: note.user.name,
+        id: note.user.id,
+        badge: note.user.badge,
+      }}
       pdf={note.pdf}
       comment={note.pages.get(page)}
     />
