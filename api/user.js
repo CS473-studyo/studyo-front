@@ -14,3 +14,6 @@ export const login = ({ email, password }) =>
 export const check = (options) => auth.get(`/check`, options);
 
 export const logout = () => auth.get(`/logout`);
+
+export const getTutorial = () => auth.get(`/tutorial`);
+export const checkTutorial = () => auth.post(`/tutorial`);

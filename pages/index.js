@@ -6,8 +6,11 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 
 import * as courseAPI from 'api/course';
+import * as userAPI from 'api/user';
 
 import getServerSideProps from 'utils/checkAuth';
+// import img1 from '../public/UserGuide1.png';
+
 export { getServerSideProps };
 
 const MainPage = (props) => {
@@ -18,6 +21,9 @@ const MainPage = (props) => {
   const [filteredNewCourses, setFilteredNewCourses] = useState([]);
   const [search, setSearch] = useState('');
   const [newSearch, setNewSearch] = useState('');
+
+  const [tutorialShow, setTutorialShow] = useState(false);
+  const [tutorialPage, setTutorialPage] = useState(1);
 
   const [showNew, setShowNew] = useState(false);
 
@@ -76,6 +82,9 @@ const MainPage = (props) => {
 
   useEffect(() => {
     getCourseList();
+    userAPI.getTutorial().then(({ data }) => {
+      if (!data) setTutorialShow(true);
+    });
   }, []);
 
   useEffect(() => {
@@ -87,6 +96,12 @@ const MainPage = (props) => {
       )
     );
   }, [newSearch]);
+
+  const handleCheckTutorial = () => {
+    userAPI.checkTutorial().then(() => {
+      router.reload();
+    });
+  };
 
   const handleCloseNew = () => setShowNew(false);
   const handleOpenNew = () => setShowNew(true);
@@ -104,7 +119,7 @@ const MainPage = (props) => {
       }}
       className="d-flex flex-column"
     >
-      <Modal show={showNew} onHide={handleCloseNew}>
+      {/* <Modal show={showNew} onHide={handleCloseNew}>
         <Modal.Header>
           <Modal.Title>Add new course</Modal.Title>
         </Modal.Header>
@@ -131,6 +146,27 @@ const MainPage = (props) => {
             </div>
           ))}
         </Modal.Body>
+      </Modal> */}
+      <Modal
+        size="xl"
+        show={tutorialShow}
+        onHide={() => setTutorialShow(false)}
+      >
+        <Modal.Header>
+          <Modal.Title>Welcome to Studyo!</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>{/* <image layout="fill" src={img1} /> */}</Modal.Body>
+        <Modal.Footer>
+          <button
+            className="custom-btn"
+            onClick={() => setTutorialShow(false)}
+          >
+            Close
+          </button>
+          <button className="custom-btn" onClick={handleCheckTutorial}>
+            Do not show this again
+          </button>
+        </Modal.Footer>
       </Modal>
       <Header name={props.name} badge={props.badge} />
       <div className="container">

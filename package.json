@@ -21,6 +21,7 @@
     "child_process": "^1.0.2",
     "fs": "0.0.1-security",
     "next": "^10.0.0",
+    "next-images": "^1.6.2",
     "node-sass": "^4.14.1",
     "pdf2pic": "^2.1.2",
     "pdfjs-dist": "^2.5.207",
