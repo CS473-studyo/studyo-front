@@ -49,6 +49,10 @@ const NoteList = ({
   const [userNotes, setUserNotes] = useState({ pages: new Map() });
   const [otherNotes, setOtherNotes] = useState([]);
   const [newComment, setNewComment] = useState('');
+  useEffect(() => {
+    const comment = userNotes.pages.get(page);
+    setNewComment(comment);
+  }, [userNotes]);
 
   useEffect(() => {
     noteAPI.userLectureNotes(LectureId, page).then(({ data }) => {
@@ -58,10 +62,6 @@ const NoteList = ({
       setOtherNotes(groupNotesByUser(data));
     });
   }, [page]);
-
-  useEffect(() => {
-    setNewComment(userNotes.pages ? userNotes.pages[page] : '');
-  }, [userNotes]);
 
   const expandToggle = (index) => {
     setExpand(expand !== index ? index : -1);
