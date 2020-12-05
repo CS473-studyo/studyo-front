@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { Form, Modal } from 'react-bootstrap';
-import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { Document, Page } from 'react-pdf';
 import { SizeMe } from 'react-sizeme';
 import Clap from 'components/clap';
 import * as noteAPI from 'api/note';
+import UserIcon from './UserIcon';
 
 if (typeof window === 'undefined') {
   global.window = {};
@@ -42,6 +42,7 @@ const NoteList = ({
   page,
   UserId,
   userName,
+  userBadge,
   toggleComment,
 }) => {
   const router = useRouter();
@@ -79,7 +80,7 @@ const NoteList = ({
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
 
     return (
-      <div className="row">
+      <div className="row ml-1">
         <div style={{ backgroundColor: leftBarColor, width: '3px' }} />
         <div className="col w-100 border border-light pr-0 pl-0">
           <div
@@ -99,7 +100,9 @@ const NoteList = ({
           </div>
           {isSelected ? (
             <div>
-              <div style={{ padding: '16px 24px' }}>{comment}</div>
+              <div className="body-text" style={{ padding: '16px 24px' }}>
+                {comment}
+              </div>
               {pdf ? (
                 <SizeMe
                   monitorHeight
@@ -130,9 +133,13 @@ const NoteList = ({
     userNotes && (userNotes.pdf || userNotes.pages.size > 0)
       ? [
           <NoteElem
+<<<<<<< HEAD
             owner
+=======
+            className="ml-3"
+>>>>>>> 501827f005597e3d18d9393d99a581f2d00bf8d9
             index={0}
-            user={{ name: userName, id: UserId }}
+            user={{ name: userName, id: UserId, badge: userBadge }}
             pdf={userNotes.pdf}
             comment={userNotes.pages.get(page)}
           />,
@@ -143,8 +150,13 @@ const NoteList = ({
 
   const otherTabs = otherNotes.map((note, index) => (
     <NoteElem
+      className="ml-3"
       index={index + 1}
-      user={{ name: note.user.name, id: note.user.id }}
+      user={{
+        name: note.user.name,
+        id: note.user.id,
+        badge: note.user.badge,
+      }}
       pdf={note.pdf}
       comment={note.pages.get(page)}
     />
@@ -159,15 +171,15 @@ const NoteList = ({
           style={{ marginRight: '16px', paddingBottom: '16px' }}
           onSubmit={handleSubmit}
         >
-          <Form.Group controlId="formBasicEmail">
-            <Form.Label>Your comment</Form.Label>
+          <Form.Group controlId="exampleForm.ControlTextarea1">
+            <Form.Label className="subtitle-text">Your comment</Form.Label>
             <Form.Control
-              type="text"
+              as="textarea"
               onChange={(value) => setNewComment(value.target.value)}
               value={newComment}
             />
           </Form.Group>
-          <button type="submit" className="custom-btn">
+          <button type="submit" className="custom-btn align-right">
             Save
           </button>
         </Form>

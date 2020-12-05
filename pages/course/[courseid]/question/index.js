@@ -60,7 +60,7 @@ const Question = (props) => {
 
   return (
     <>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
@@ -68,7 +68,7 @@ const Question = (props) => {
             <div style={{ cursor: 'pointer' }}>
               <ArrowBackIcon
                 fontSize="large"
-                classNmae="mr-1"
+                className="mr-1"
               ></ArrowBackIcon>
               My Questions
             </div>

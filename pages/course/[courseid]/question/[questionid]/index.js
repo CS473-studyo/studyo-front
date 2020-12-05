@@ -15,13 +15,13 @@ export { getServerSideProps };
 
 const QuestionDetail = (props) => {
   const router = useRouter();
-  const { courseid, questionId } = router.query;
+  const { courseid, questionid } = router.query;
 
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
 
   const getQuestionList = () => {
-    questionAPI.question(questionId).then(({ data }) => setQuestion(data));
+    questionAPI.question(questionid).then(({ data }) => setQuestion(data));
   };
 
   useEffect(() => {
@@ -29,7 +29,7 @@ const QuestionDetail = (props) => {
   }, []);
 
   const getAnswerList = async () => {
-    answerAPI.answers(questionId).then(({ data }) => setAnswers(data));
+    answerAPI.answers(questionid).then(({ data }) => setAnswers(data));
   };
 
   useEffect(() => {
@@ -57,7 +57,7 @@ const QuestionDetail = (props) => {
 
   return (
     <>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
@@ -65,7 +65,7 @@ const QuestionDetail = (props) => {
             <a style={{ textDecoration: 'none', color: '#234382' }}>
               <ArrowBackIcon
                 fontSize="large"
-                classNmae="mr-1"
+                className="mr-1"
               ></ArrowBackIcon>
               Question{question.num}
             </a>
@@ -75,7 +75,9 @@ const QuestionDetail = (props) => {
           <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
             {question.title}
           </div>
-          <div class="body-text mb-2">{question.content}</div>
+          <div class="body-text mb-2" style={{ whiteSpace: 'pre' }}>
+            {question.content}
+          </div>
           <hr />
           <div class="subtitle-text mb-4" style={{ color: '#234382' }}>
             Answers from course students

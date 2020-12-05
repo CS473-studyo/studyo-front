@@ -132,7 +132,7 @@ const MainPage = (props) => {
           ))}
         </Modal.Body>
       </Modal>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <div className="container">
         <div className="d-flex justify-content-between">
           <div className="mt-5 pt-5 mb-3 title-text">My Courses</div>

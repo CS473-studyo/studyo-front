@@ -26,14 +26,6 @@ const KeywordPage = (props) => {
   const [newKeyword, setNewKeyword] = useState();
   const onInput = ({ target: { value } }) => setNewKeyword(value);
 
-  const [show, setShow] = useState(false);
-
-  const handleClose = () => {
-    setShow(false);
-    Router.reload(`/course/${courseid}/keyword/${lectureid}`);
-  };
-  const handleShow = () => setShow(true);
-
   useEffect(() => {
     if (lectureid) {
       keywordAPI.getUserList(lectureid).then(({ data }) => {
@@ -64,6 +56,11 @@ const KeywordPage = (props) => {
     const newKeywordSelection = keywordSelection.slice();
     newKeywordSelection.push(keyword.id);
     setKeywordSelection(newKeywordSelection);
+    keywordAPI.vote(keyword.id).then(() => {
+      keywordAPI.getList(lectureid).then(({ data }) => {
+        setKeywords(data);
+      });
+    });
   };
 
   const unselectKeyword = (keyword) => {
@@ -71,17 +68,9 @@ const KeywordPage = (props) => {
     const idx = newKeywordSelection.indexOf(keyword.id);
     if (idx > -1) newKeywordSelection.splice(idx, 1);
     setKeywordSelection(newKeywordSelection);
-  };
-
-  const submitKeywordVote = () => {
-    keywordAPI.dropVote().then((res) => {
-      keywordSelection.map((selected) => {
-        console.log(selected);
-        keywordAPI.vote(selected).then((res) => {
-          if (res.status == 200) {
-            handleShow();
-          } else console.log('fail');
-        });
+    keywordAPI.cancel(keyword.id).then(() => {
+      keywordAPI.getList(lectureid).then(({ data }) => {
+        setKeywords(data);
       });
     });
   };
@@ -134,7 +123,7 @@ const KeywordPage = (props) => {
       }}
       className="d-flex flex-column"
     >
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
       <div className="container">
         <div className="title-text mb-2 mt-5">Keyword</div>
@@ -172,23 +161,6 @@ const KeywordPage = (props) => {
                   </button>
                 </div>
               </div>
-              <div id="buttongroup" className="float-right mt-4">
-                <button
-                  type="submit"
-                  className="custom-btn mr-2"
-                  onClick={() => submitKeywordVote()}
-                  data-toggle="modal"
-                  data-target="#exampleModal"
-                >
-                  Submit
-                </button>
-
-                <Link href={`/course/${courseid}`}>
-                  <button type="pass" className="custom-btn-secondary">
-                    Cancel
-                  </button>
-                </Link>
-              </div>
             </div>
           </div>
           <div className="col">
@@ -199,40 +171,30 @@ const KeywordPage = (props) => {
               >
                 Vote from classmates
               </div>
-              {keywords.map((keyword) => {
-                let percent = (keyword.votes * 100) / studentNum;
-                return (
-                  <div className="w-100 d-flex py-1 pl-2">
-                    <div className="w-25">{keyword.word}</div>
-                    <div className="w-75 progress my-1">
-                      <div
-                        className="progress-bar"
-                        role="progressbar"
-                        style={{ width: `${percent}%` }}
-                        aria-valuenow="25"
-                        aria-valuemin="0"
-                        aria-valuemax={`${studentNum}`}
-                      ></div>
+              {keywords
+                .sort((a, b) => b.votes - a.votes)
+                .map((keyword) => {
+                  let percent = (keyword.votes * 100) / studentNum;
+                  return (
+                    <div className="w-100 d-flex py-1 pl-2">
+                      <div className="w-25">{keyword.word}</div>
+                      <div className="w-75 progress my-1">
+                        <div
+                          className="progress-bar"
+                          role="progressbar"
+                          style={{ width: `${percent}%` }}
+                          aria-valuenow="25"
+                          aria-valuemin="0"
+                          aria-valuemax={`${studentNum}`}
+                        ></div>
+                      </div>
                     </div>
-                  </div>
-                );
-              })}
+                  );
+                })}
             </div>
           </div>
         </div>
       </div>
-
-      <Modal show={show} onHide={handleClose}>
-        <Modal.Header closeButton>
-          <Modal.Title>Keyword Vote</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>Your vote successfully applied!</Modal.Body>
-        <Modal.Footer>
-          <Button variant="primary" onClick={handleClose}>
-            Okay
-          </Button>
-        </Modal.Footer>
-      </Modal>
     </div>
   );
 };

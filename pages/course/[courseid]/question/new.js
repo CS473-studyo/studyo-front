@@ -73,7 +73,7 @@ const NewQuestion = (props) => {
 
   return (
     <>
-      <Header name={props.name} />
+      <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container">
         <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
@@ -81,35 +81,26 @@ const NewQuestion = (props) => {
         </div>
         <form>
           <div class="form-group">
-            <label class="subtitle-text" for="exampleInputEmail1">
-              Title
-            </label>
-            <input
-              type="text"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Title"
-              onChange={onInputTitle}
-            />
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Content
-            </label>
-            <textarea
-              type="text"
-              class="form-control"
-              id="exampleInputEmail1"
-              aria-describedby="emailHelp"
-              placeholder="Write your question here!"
-              onChange={onInputContent}
-            />
-            <label class="subtitle-text mt-2" for="exampleInputEmail1">
-              Lecture
-            </label>
+            <label class="subtitle-text mt-2">Lecture</label>
             <select class="form-control" onChange={onInputLecture}>
               {lectureOptions}
             </select>
-            <small id="emailHelp" class="form-text text-muted">
+            <label class="subtitle-text mt-2">Title</label>
+            <input
+              type="text"
+              class="form-control"
+              placeholder="Title"
+              onChange={onInputTitle}
+            />
+            <label class="subtitle-text mt-2">Content</label>
+            <textarea
+              type="text"
+              class="form-control"
+              placeholder="Write your question here!"
+              onChange={onInputContent}
+            />
+
+            <small class="form-text text-muted">
               Your question will be shared to your classmates in the review
               quiz.
             </small>
