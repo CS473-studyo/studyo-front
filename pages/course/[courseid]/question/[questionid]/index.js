@@ -15,18 +15,13 @@ export { getServerSideProps };
 
 const QuestionDetail = (props) => {
   const router = useRouter();
-  const { courseid, questionid } = router.query;
+  const { courseid, questionId } = router.query;
 
-  const [question, setQuestion] = useState({}); //Todo: questionid 이용해서 question 가져오기
-
+  const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
 
-  let Qresult;
-  let Aresult;
-
-  const getQuestionList = async () => {
-    Qresult = await questionAPI.question(questionid);
-    setQuestion(Qresult.data);
+  const getQuestionList = () => {
+    questionAPI.question(questionId).then(({ data }) => setQuestion(data));
   };
 
   useEffect(() => {
@@ -34,9 +29,7 @@ const QuestionDetail = (props) => {
   }, []);
 
   const getAnswerList = async () => {
-    Aresult = await answerAPI.answers(questionid);
-    setAnswers(Aresult.data);
-    console.log(Aresult.data);
+    answerAPI.answers(questionId).then(({ data }) => setAnswers(data));
   };
 
   useEffect(() => {
