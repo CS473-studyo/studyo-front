@@ -85,8 +85,7 @@ const Course = (props) => {
       <Header name={props.name} />
       <CourseHeader courseid={courseid} />
       <div className="container mt-2">{rows}</div>
-      <div style={{ height: '50px' }}></div>
-      <Footer courseid={courseid} />
+      {/* <Footer courseid={courseid} /> */}
     </>
   );
 };
