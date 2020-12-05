@@ -1,13 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import ClapButton from 'react-clap-button';
+import { Button } from 'react-bootstrap';
 import * as answerAPI from 'api/answer';
-import ApprovedBadge from './approvedBadge';
+import UserIcon from './UserIcon';
+import Clap from '../public/Clap.svg';
 
 const AnswerList = ({ answers }) => {
   const [expand, setExpand] = useState(-1);
   const [totalCount, setTotalCount] = useState(0);
   const [approvalDisplay, setApprovalDiaplay] = useState(<></>);
+  const [clapOn, setClapOn] = useState(false);
+
+  const toggleClap = () => setClapOn(!clapOn);
 
   const expandToggle = (num) => {
     if (expand !== num) setExpand(num);
@@ -56,12 +61,9 @@ const AnswerList = ({ answers }) => {
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div className="row ml-1">
-                    <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                    <span>
-                      {props.name}
-                      <ApprovedBadge approved={props.approved} />
-                    </span>
+                  <div style={{ fontWeight: '600' }} className="row ml-1">
+                    {props.name}
+                    <UserIcon badge={props.badge} />
                   </div>
                 </button>
               </h5>
@@ -71,22 +73,23 @@ const AnswerList = ({ answers }) => {
               <div className="body-text">{props.content}</div>
               <div className="w-100 row align-items-center">
                 <div
-                  className="col body-text align-center"
+                  className="col body-text align-center text-right"
                   style={{ color: '#234382' }}
                 >
                   {totalCount} claps for this answer!
                 </div>
-                <ClapButton
-                  className="col"
-                  count={0}
-                  countTotal={props.clap}
-                  isClicked={false}
-                  maxCount={3}
-                  onCountChange={() => clapAnswer(props.id)}
-                  theme={{
-                    secondaryColor: '#234382',
-                  }}
-                />
+                <button
+                  className="clap-btn"
+                  onMouseEnter={toggleClap}
+                  onMouseLeave={toggleClap}
+                  onClick={() => clapAnswer(props.id)}
+                >
+                  {clapOn ? (
+                    <Clap width="30px" fill="#ffffff" />
+                  ) : (
+                    <Clap width="30px" fill="#234382" />
+                  )}
+                </button>
               </div>
             </div>
           </div>
@@ -106,12 +109,9 @@ const AnswerList = ({ answers }) => {
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div className="row ml-1">
-                    <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-                    <span>
-                      {props.name}
-                      <ApprovedBadge approved={props.approved} />
-                    </span>
+                  <div style={{ fontWeight: '600' }} className="row ml-1">
+                    {props.name}
+                    <UserIcon badge={props.badge} />
                   </div>
                 </button>
               </h5>
@@ -130,7 +130,7 @@ const AnswerList = ({ answers }) => {
           name={answer.User.name}
           content={answer.content}
           clap={answer.clap}
-          approved={answer.User.badge}
+          badge={answer.User.badge}
         />
         <div className="divider" />
       </>
