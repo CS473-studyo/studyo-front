@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { clap, getClap } from 'api/note';
 import { Spinner } from 'react-bootstrap';
-import ClapIcon from '../public/Clap.svg';
+import ClapIcon from 'public/Clap.svg';
 
 const Clap = ({ LectureId, UserId, page }) => {
   const [totalCount, setTotalCount] = useState(-1);
