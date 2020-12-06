@@ -56,11 +56,14 @@ const AdminLoginPage = () => {
           </Link>
           <Form className="login-form" onSubmit={tryRegister}>
             <Form.Group>
-              <Form.Label>Name (English)  </Form.Label>
+              <Form.Label>Name (English) </Form.Label>
               <Form.Control
                 type="name"
                 onChange={(value) => setName(value.target.value)}
               />
+              <Form.Text className="body-text">
+                실명을 영어로 써 주세요. (ex. Gildong Hong)
+              </Form.Text>
             </Form.Group>
             <Form.Group>
               <Form.Label>Email (KAIST)</Form.Label>
@@ -68,6 +71,9 @@ const AdminLoginPage = () => {
                 type="text"
                 onChange={(value) => setEmail(value.target.value)}
               />
+              <Form.Text className="body-text">
+                본인의 카이스트 메일을 사용해주세요.
+              </Form.Text>
             </Form.Group>
 
             <Form.Group>
