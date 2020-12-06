@@ -11,6 +11,8 @@ import * as userAPI from 'api/user';
 import getServerSideProps from 'utils/checkAuth';
 // import img1 from '../public/UserGuide1.png';
 
+import ImageGallery from 'react-image-gallery';
+
 export { getServerSideProps };
 
 const MainPage = (props) => {
@@ -112,6 +114,25 @@ const MainPage = (props) => {
     });
   };
 
+  const images = [
+    {
+      original:
+        'https://studyo-files.s3.ap-northeast-2.amazonaws.com/UserGuide1.png',
+    },
+    {
+      original:
+        'https://studyo-files.s3.ap-northeast-2.amazonaws.com/UserGuide2.png',
+    },
+    {
+      original:
+        'https://studyo-files.s3.ap-northeast-2.amazonaws.com/UserGuide3.png',
+    },
+    {
+      original:
+        'https://studyo-files.s3.ap-northeast-2.amazonaws.com/UserGuide4.png',
+    },
+  ];
+
   return (
     <div
       style={{
@@ -148,23 +169,35 @@ const MainPage = (props) => {
         </Modal.Body>
       </Modal> */}
       <Modal
-        size="xl"
+        size="lg"
         show={tutorialShow}
         onHide={() => setTutorialShow(false)}
       >
         <Modal.Header>
-          <Modal.Title>Welcome to Studyo!</Modal.Title>
+          <Modal.Title className="title-text">
+            Welcome to Studyo!
+          </Modal.Title>
         </Modal.Header>
-        <Modal.Body>{/* <image layout="fill" src={img1} /> */}</Modal.Body>
+        <Modal.Body>
+          <ImageGallery
+            showThumbnails={false}
+            showFullscreenButton={false}
+            showPlayButton={false}
+            items={images}
+          />
+        </Modal.Body>
         <Modal.Footer>
+          <button
+            className="custom-btn-secondary"
+            onClick={handleCheckTutorial}
+          >
+            Do not show this again
+          </button>
           <button
             className="custom-btn"
             onClick={() => setTutorialShow(false)}
           >
             Close
-          </button>
-          <button className="custom-btn" onClick={handleCheckTutorial}>
-            Do not show this again
           </button>
         </Modal.Footer>
       </Modal>
