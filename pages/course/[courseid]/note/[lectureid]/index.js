@@ -129,7 +129,7 @@ function LectureNote(props) {
         </Modal.Body>
       </Modal>
       <Header name={props.name} badge={props.badge} />
-      <div className="mt-3 row ml-5 mr-5 mb-3">
+      <div className="mt-3 row ml-5 mr-5 mb-3 flex-grow-1">
         <Link href={`/course/${courseid}`}>
           <a
             className="subtitle-text mb-2"
