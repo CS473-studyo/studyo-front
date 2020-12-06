@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Router from 'next/router';
 import { useRouter } from 'next/router';
-import Header from 'components/header.js';
+import Header from 'components/header';
+import Footer from 'components/footer';
 import LectureHeader from 'components/lectureHeader';
 import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
@@ -125,7 +126,7 @@ const KeywordPage = (props) => {
     >
       <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
-      <div className="container">
+      <div className="container mb-3">
         <div className="title-text mb-2 mt-5">Keyword</div>
         <div className="row">
           <div className="col">
@@ -195,6 +196,7 @@ const KeywordPage = (props) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

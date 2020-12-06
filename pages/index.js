@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from 'components/header';
+import Footer from 'components/footer';
 import { Card, Modal } from 'react-bootstrap';
 import SearchIcon from '@material-ui/icons/Search';
 import Link from 'next/link';
@@ -202,7 +203,7 @@ const MainPage = (props) => {
         </Modal.Footer>
       </Modal>
       <Header name={props.name} badge={props.badge} />
-      <div className="container">
+      <div className="container mb-2">
         <div className="d-flex justify-content-between">
           <div className="mt-5 pt-5 mb-3 title-text">My Courses</div>
           <button
@@ -239,6 +240,7 @@ const MainPage = (props) => {
         </div>
         {rows}
       </div>
+      <Footer />
     </div>
   );
 };

@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import Link from 'next/link';
 import Header from 'components/header';
+import Footer from 'components/footer';
 import CourseHeader from 'components/courseHeader';
 import React, { useEffect, useState } from 'react';
 import * as questionAPI from 'api/question';
@@ -59,10 +60,15 @@ const Question = (props) => {
   ));
 
   return (
-    <>
+    <div
+      style={{
+        minHeight: '100vh',
+      }}
+      className="d-flex flex-column"
+    >
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
-      <div className="container">
+      <div className="container mb-2 flex-grow-1">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
           <Link href={`/course/${courseid}`}>
             <div style={{ cursor: 'pointer' }}>
@@ -81,11 +87,15 @@ const Question = (props) => {
         </div>
         <hr />
         <div className="mt-2">{rows}</div>
-        <Link href={`/course/${courseid}/question/new`}>
-          <a className="mt-4 custom-btn float-right">New Question</a>
-        </Link>
+        <div className="d-flex flex-row justify-content-between student-note">
+          <h1 className="title-text"></h1>
+          <Link href={`/course/${courseid}/question/new`}>
+            <a className="custom-btn float-right">New Question</a>
+          </Link>
+        </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 

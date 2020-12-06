@@ -10,7 +10,8 @@ import { useRouter } from 'next/router';
 import Link from 'next/link';
 import { Document, Page } from 'react-pdf';
 import { pdfjs } from 'react-pdf';
-import Header from 'components/header.js';
+import Header from 'components/header';
+import Footer from 'components/footer';
 import NoteList from 'components/noteList.js';
 import NavigateBeforeIcon from '@material-ui/icons/NavigateBefore';
 import NavigateNextIcon from '@material-ui/icons/NavigateNext';
@@ -128,7 +129,7 @@ function LectureNote(props) {
         </Modal.Body>
       </Modal>
       <Header name={props.name} badge={props.badge} />
-      <div className="mt-3 row ml-5 mr-5">
+      <div className="mt-3 row ml-5 mr-5 mb-3">
         <Link href={`/course/${courseid}`}>
           <a
             className="subtitle-text mb-2"
@@ -226,6 +227,7 @@ function LectureNote(props) {
           </Col>
         </div>
       </div>
+      <Footer />
     </div>
   );
 }

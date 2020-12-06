@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
-import Header from 'components/header.js';
+import Header from 'components/header';
+import Footer from 'components/footer';
 import LectureHeader from 'components/lectureHeader';
 
 import AnswerList from 'components/answerList.js';
@@ -133,12 +134,15 @@ const Quiz = (props) => {
       >
         <Header name={props.name} badge={props.badge} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
-        <div class="h-100 mt-5">
-          <div class="title-text text-center">No Quizzes Exist Yet!</div>
-          <div class="body-text text-center mt-1">
+        <div className="container h-100 mt-5 mb-5 flex-grow-1">
+          <div className="title-text text-center">
+            No Quizzes Exist Yet!
+          </div>
+          <div className="body-text text-center mt-1">
             Please wait until your friends ask some quiestions.
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -153,7 +157,7 @@ const Quiz = (props) => {
       >
         <Header name={props.name} badge={props.badge} />
         <LectureHeader courseid={courseid} lectureid={lectureid} />
-        <div className="container">
+        <div className="container mb-3 flex-grow-1">
           <div class="progress mt-4 mb-4">
             <div
               class="progress-bar"
@@ -179,6 +183,7 @@ const Quiz = (props) => {
             </div>
           </div>
         </div>
+        <Footer />
       </div>
     );
   }
@@ -207,7 +212,7 @@ const Quiz = (props) => {
     >
       <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
-      <div class="container">
+      <div class="container mb-3 flex-grow-1">
         <div class="progress mt-4 mb-4">
           <div
             class="progress-bar progress-bar-striped progress-bar-animated"
@@ -256,6 +261,7 @@ const Quiz = (props) => {
           </div>
         </div>
       </div>
+      <Footer />
     </div>
   );
 };

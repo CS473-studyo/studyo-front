@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Header from 'components/header';
+import Footer from 'components/footer';
 import CourseHeader from 'components/courseHeader';
 import * as courseAPI from 'api/course';
 import * as questionAPI from 'api/question';
@@ -75,7 +76,7 @@ const NewQuestion = (props) => {
     <>
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
-      <div className="container">
+      <div className="container mb-3">
         <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
           New Questions
         </div>
@@ -107,21 +108,27 @@ const NewQuestion = (props) => {
           </div>
         </form>
         <hr />
-        <button
-          type="button"
-          className="mt-4 ml-3 custom-btn float-right"
-          onClick={() => addQuestion()}
-        >
-          Submit
-        </button>
-        <button
-          onClick={onCancel}
-          type="button"
-          className="mt-4 custom-btn-secondary float-right"
-        >
-          Cancel
-        </button>
+        <div className="d-flex flex-row justify-content-between student-note">
+          <h1 className="title-text"></h1>
+          <div>
+            <button
+              type="button"
+              className="mt-2 ml-3 custom-btn float-right"
+              onClick={() => addQuestion()}
+            >
+              Submit
+            </button>
+            <button
+              onClick={onCancel}
+              type="button"
+              className="mt-2 custom-btn-secondary float-right"
+            >
+              Cancel
+            </button>
+          </div>
+        </div>
       </div>
+      <Footer />
     </>
   );
 };

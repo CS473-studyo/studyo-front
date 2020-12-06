@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { Card } from 'react-bootstrap';
 
 import Header from 'components/header';
+import Footer from 'components/footer';
 import CourseHeader from 'components/courseHeader';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
@@ -56,10 +57,15 @@ const QuestionDetail = (props) => {
   };
 
   return (
-    <>
+    <div
+      style={{
+        minHeight: '100vh',
+      }}
+      className="d-flex flex-column"
+    >
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
-      <div className="container">
+      <div className="container mb-3 flex-grow-1">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
           <Link href={`/course/${courseid}/question`}>
             <a style={{ textDecoration: 'none', color: '#234382' }}>
@@ -93,7 +99,8 @@ const QuestionDetail = (props) => {
           </div>
         </div>
       </div>
-    </>
+      <Footer />
+    </div>
   );
 };
 

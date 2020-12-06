@@ -85,7 +85,7 @@ const Course = (props) => {
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseid={courseid} />
       <div className="container mt-2">{rows}</div>
-      {/* <Footer courseid={courseid} /> */}
+      <Footer />
     </>
   );
 };
