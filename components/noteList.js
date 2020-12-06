@@ -94,8 +94,10 @@ const NoteList = ({
             onClick={() => expandToggle(index)}
           >
             <div className="row ml-1">
-              <AccountCircleIcon className="mr-3"></AccountCircleIcon>
-              {user.name}
+              <div className="row">
+                <div className="p-2 ml-2">{user.name}</div>
+                <UserIcon className="p-2" badge={user.badge} />
+              </div>
             </div>
           </div>
           {isSelected ? (
@@ -133,11 +135,8 @@ const NoteList = ({
     userNotes && (userNotes.pdf || userNotes.pages.size > 0)
       ? [
           <NoteElem
-<<<<<<< HEAD
             owner
-=======
             className="ml-3"
->>>>>>> 501827f005597e3d18d9393d99a581f2d00bf8d9
             index={0}
             user={{ name: userName, id: UserId, badge: userBadge }}
             pdf={userNotes.pdf}
