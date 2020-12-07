@@ -126,7 +126,7 @@ const KeywordPage = (props) => {
     >
       <Header name={props.name} badge={props.badge} />
       <LectureHeader courseid={courseid} lectureid={lectureid} />
-      <div className="container mb-3">
+      <div className="container mb-3 flex-grow-1">
         <div className="title-text mb-2 mt-5">Keyword</div>
         <div className="row">
           <div className="col">
