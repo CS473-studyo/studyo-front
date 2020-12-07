@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import * as answerAPI from 'api/answer';
 import UserIcon from './UserIcon';
-import Clap from 'public/Clap.svg';
+import Clap from 'public/clap.svg';
 
 const AnswerList = ({ answers, admin }) => {
   const [expand, setExpand] = useState(-1);
