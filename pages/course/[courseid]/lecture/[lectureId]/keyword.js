@@ -22,6 +22,7 @@ const KeywordPage = (props) => {
 
   const [studentNum, setStudentNum] = useState(0);
   const [keywordList, setKeywordList] = useState([]);
+  const [sortedKeywordList, setSortedKeywordList] = useState([]);
 
   const [newKeyword, setNewKeyword] = useState();
   const onInput = ({ target: { value } }) => setNewKeyword(value);
@@ -31,6 +32,9 @@ const KeywordPage = (props) => {
       keywordAPI.getList(lectureId).then(({ data }) => {
         data.sort((a, b) => (a.id < b.id ? -1 : 1));
         setKeywordList(data);
+        const data2 = [...data];
+        data2.sort((a, b) => b.votes - a.votes);
+        setSortedKeywordList(data2);
       });
     }
   }, [lectureId]);
@@ -63,6 +67,9 @@ const KeywordPage = (props) => {
         setVote(true);
         keywordAPI.getList(lectureId).then(({ data }) => {
           setKeywordList(data);
+          const data2 = [...data];
+          data2.sort((a, b) => b.votes - a.votes);
+          setSortedKeywordList(data2);
         });
       });
     };
@@ -72,6 +79,9 @@ const KeywordPage = (props) => {
         setVote(false);
         keywordAPI.getList(lectureId).then(({ data }) => {
           setKeywordList(data);
+          const data2 = [...data];
+          data2.sort((a, b) => b.votes - a.votes);
+          setSortedKeywordList(data2);
         });
       });
     };
@@ -155,26 +165,24 @@ const KeywordPage = (props) => {
               >
                 Vote from classmates
               </div>
-              {keywordList
-                .sort((a, b) => b.votes - a.votes)
-                .map((keyword) => {
-                  let percent = (keyword.votes * 100) / studentNum;
-                  return (
-                    <div className="w-100 d-flex py-1 pl-2">
-                      <div className="w-25">{keyword.word}</div>
-                      <div className="w-75 progress my-1">
-                        <div
-                          className="progress-bar"
-                          role="progressbar"
-                          style={{ width: `${percent}%` }}
-                          aria-valuenow="25"
-                          aria-valuemin="0"
-                          aria-valuemax={`${studentNum}`}
-                        ></div>
-                      </div>
+              {sortedKeywordList.map((keyword) => {
+                let percent = (keyword.votes * 100) / studentNum;
+                return (
+                  <div className="w-100 d-flex py-1 pl-2">
+                    <div className="w-25">{keyword.word}</div>
+                    <div className="w-75 progress my-1">
+                      <div
+                        className="progress-bar"
+                        role="progressbar"
+                        style={{ width: `${percent}%` }}
+                        aria-valuenow="25"
+                        aria-valuemin="0"
+                        aria-valuemax={`${studentNum}`}
+                      ></div>
                     </div>
-                  );
-                })}
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>

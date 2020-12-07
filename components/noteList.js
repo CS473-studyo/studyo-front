@@ -76,6 +76,7 @@ const NoteList = ({
   };
 
   const NoteElem = ({ index, user, pdf, comment, owner }) => {
+    const [loading, setLoading] = useState(true);
     const isSelected = index === expand;
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
 
@@ -115,7 +116,13 @@ const NoteList = ({
                   refreshMode={'debounce'}
                   render={({ size }) => (
                     <>
-                      <Document file={pdf}>
+                      <Document
+                        file={pdf}
+                        onLoadSuccess={() => {
+                          console.log('loading');
+                          setLoading(false);
+                        }}
+                      >
                         <Page
                           pageNumber={page}
                           width={size.width}
@@ -126,7 +133,13 @@ const NoteList = ({
                   )}
                 />
               ) : null}
-              <Clap LectureId={LectureId} UserId={user.id} page={page} />
+              <Clap
+                LectureId={LectureId}
+                UserId={user.id}
+                page={page}
+                loading={loading}
+                pdf={pdf}
+              />
             </div>
           ) : null}
         </div>
@@ -147,8 +160,6 @@ const NoteList = ({
           />,
         ]
       : [];
-
-  console.log(userNotes);
 
   const otherTabs = otherNotes.map((note, index) => (
     <NoteElem

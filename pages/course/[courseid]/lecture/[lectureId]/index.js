@@ -129,16 +129,19 @@ function LectureNote(props) {
         </Modal.Body>
       </Modal>
       <Header name={props.name} badge={props.badge} />
-      <div className="mt-3 row ml-5 mr-5 mb-3 flex-grow-1">
+      <div className="mt-3 row ml-5 mr-5 mb-3 d-flex flex-column flex-grow-1">
         <Link href={`/course/${courseId}`}>
           <a
-            className="subtitle-text mb-2"
-            style={{ textDecoration: 'none', color: '#234382' }}
+            className="d-flex align-items-center align-self-start"
+            style={{
+              fontFamily: 'NanumSquare Bold',
+              fontSize: '20pt',
+              textDecoration: 'none',
+              color: '#234382',
+              padding: '8px 0',
+            }}
           >
-            <ArrowBackIcon
-              fontSize="large"
-              className="mr-1"
-            ></ArrowBackIcon>
+            <ArrowBackIcon className="mr-1"></ArrowBackIcon>
             {courseId}
           </a>
         </Link>
@@ -163,7 +166,11 @@ function LectureNote(props) {
                         new Array(numPages),
                         (el, index) => (
                           <div
-                            className="card"
+                            className={
+                              pageNumber - 1 === index
+                                ? 'card-selected'
+                                : `card`
+                            }
                             onClick={() => setPageNumber(index + 1)}
                           >
                             <Page
@@ -208,8 +215,10 @@ function LectureNote(props) {
             />
           </div>
           <Col>
-            <div className="d-flex flex-row justify-content-between student-note">
-              <h1 className="title-text">Students' notes on this page</h1>
+            <div className="d-flex justify-content-between align-items-center student-note">
+              <h1 className="title-text" style={{ marginBottom: '0' }}>
+                Students' notes on this page
+              </h1>
               <button className="custom-btn" onClick={handleShow}>
                 Add/Edit notes
               </button>

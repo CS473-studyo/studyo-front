@@ -201,6 +201,12 @@ body {
     display: inline-block;
     cursor: pointer;
   }
+
+  .card-selected {
+    display: inline-block;
+    cursor: pointer;
+    border: 1px solid #333;
+  }
 }
 
 .pdf-viewer {

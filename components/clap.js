@@ -3,7 +3,8 @@ import { clap, getClap } from 'api/note';
 import { Spinner } from 'react-bootstrap';
 import ClapIcon from 'public/Clap.svg';
 
-const Clap = ({ LectureId, UserId, page }) => {
+const Clap = ({ LectureId, UserId, page, loading, pdf }) => {
+  console.log(loading);
   const [totalCount, setTotalCount] = useState(-1);
   const [clapOn, setClapOn] = useState(false);
   const toggleClap = () => setClapOn(!clapOn);
@@ -20,8 +21,10 @@ const Clap = ({ LectureId, UserId, page }) => {
     });
   };
 
-  return totalCount === -1 ? (
-    <Spinner animation="border" />
+  return totalCount === -1 || (pdf && loading) ? (
+    <div className="d-flex justify-content-center align-items-center">
+      <Spinner animation="border" />
+    </div>
   ) : (
     <div
       style={{ margin: '8px 8px' }}
