@@ -11,7 +11,7 @@ export { getServerSideProps };
 
 const NewQuestion = (props) => {
   const router = useRouter();
-  const { courseid } = router.query;
+  const { courseId } = router.query;
 
   const [newTitle, setNewTitle] = useState();
   const onInputTitle = ({ target: { value } }) => {
@@ -24,15 +24,15 @@ const NewQuestion = (props) => {
 
   const [lectures, setLectures] = useState([]);
   useEffect(() => {
-    if (courseid) {
-      courseAPI.courseLectures(courseid).then(({ data }) => {
+    if (courseId) {
+      courseAPI.courseLectures(courseId).then(({ data }) => {
         setLectures(data);
         if (data.length > 0) {
           setNewLecture(data[0].id);
         }
       });
     }
-  }, [courseid]);
+  }, [courseId]);
 
   const addQuestion = () => {
     if (
@@ -45,12 +45,12 @@ const NewQuestion = (props) => {
       questionAPI
         .post(newLecture, newTitle, newContent)
         .then((res) => router.reload())
-        .then(router.push(`/course/${courseid}/question`)); //Todo: change to next
+        .then(router.push(`/course/${courseId}/question`)); //Todo: change to next
     }
   };
 
   const onCancel = () => {
-    router.push(`/course/${courseid}/question`);
+    router.push(`/course/${courseId}/question`);
   };
 
   const lectureOptions = lectures.map((lecture) => {
@@ -75,7 +75,7 @@ const NewQuestion = (props) => {
   return (
     <>
       <Header name={props.name} badge={props.badge} />
-      <CourseHeader courseid={courseid} />
+      <CourseHeader courseId={courseId} />
       <div className="container mb-3">
         <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
           New Questions

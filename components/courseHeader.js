@@ -4,16 +4,16 @@ import styles from './courseHeader.module.scss';
 import { Row, Col } from 'react-bootstrap';
 import * as courseAPI from 'api/course';
 
-const CourseHeader = ({ courseid }) => {
+const CourseHeader = ({ courseId }) => {
   const [course, setCourse] = useState({});
 
   useEffect(() => {
-    if (courseid) {
-      courseAPI.courseInfo(courseid).then(({ data }) => {
+    if (courseId) {
+      courseAPI.courseInfo(courseId).then(({ data }) => {
         setCourse(data);
       });
     }
-  }, [courseid]);
+  }, [courseId]);
 
   return (
     <div className={styles['header-fill-img']}>
@@ -22,11 +22,8 @@ const CourseHeader = ({ courseid }) => {
       >
         <div className="container d-flex justify-content-between align-items-center">
           <div className="d-flex flex-column">
-            <h1
-              style={{ color: '#ffffff' }}
-              className={`title-text text-center`}
-            >
-              {courseid} {course.name}
+            <h1 style={{ color: '#ffffff' }} className={`title-text`}>
+              {courseId} {course.name}
             </h1>
             <div style={{ color: '#ffffff' }}>
               Prof. {course.professor}
@@ -35,7 +32,7 @@ const CourseHeader = ({ courseid }) => {
               {course.userNumber} students joined
             </div>
           </div>
-          <Link href={`/course/${courseid}/question`}>
+          <Link href={`/course/${courseId}/question`}>
             <a className="custom-btn-transparent">My Questions</a>
           </Link>
         </div>

@@ -60,31 +60,31 @@ To Visit App:
 
 ### Main Pages
 
-#### `course/[courseid]/index.js`
+#### `course/[courseId]`
 
 Course main page containing list of lectures of the course.
 
-#### `course/[courseid]/note/[lectureid]/index.js`
+#### `course/[courseId]/lecture/[lectureid]`
 
 Page containing lecture note & shared notes from classmates. It also supports the upload notes function.
 
-#### `course/[courseid]/quiz/[lectureid]/index.js`
+#### `course/[courseId]/lecture/[lectureid]/quiz`
 
 Page with quizzes for review each lecture. This quizzes are made by other classmates' questions.
 
-#### `course/[courseid]/keyword/[lectureid]/index.js`
+#### `course/[courseId]/lecture/[lectureid]/keyword`
 
 Page to vote for the keyword of the lecture. The top 3 keywords are displayed in the course main page to for overview of the lectures.
 
-#### `course/[courseid]/question/index.js`
+#### `course/[courseId]/question`
 
 List of the questions uploaded by the current user.
 
-#### `course/[courseid]/question/new.js`
+#### `course/[courseId]/question/new.js`
 
 Page for uploading new question.
 
-#### `course/[courseid]/question/[questionid]/index.js`
+#### `course/[courseId]/question/[questionId]`
 
 Page for each question. Containing the details of the question and the answers collected from review quiz page.
 

@@ -203,10 +203,10 @@ const MainPage = (props) => {
         </Modal.Footer>
       </Modal>
       <Header name={props.name} badge={props.badge} />
-      <div className="container mb-2">
+      <div className="container mb-2 flex-grow-1">
         <div className="d-flex justify-content-between">
-          <div className="mt-5 pt-5 mb-3 title-text">My Courses</div>
-          <button
+          <div className="mt-5 mb-3 title-text">My Courses</div>
+          {/* <button
             className="custom-btn"
             style={{
               height: 'fit-content',
@@ -216,7 +216,7 @@ const MainPage = (props) => {
             onClick={handleOpenNew}
           >
             Add new course
-          </button>
+          </button> */}
         </div>
         <div className="p-1 bg-light shadow-sm mb-4">
           <div className="input-group">

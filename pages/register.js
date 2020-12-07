@@ -12,6 +12,7 @@ const AdminLoginPage = () => {
   const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [secondPassword, setSecondPassword] = useState('');
   const [name, setName] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modal, setModal] = useState('');
@@ -20,6 +21,11 @@ const AdminLoginPage = () => {
 
   const tryRegister = (e) => {
     e.preventDefault();
+    if (password !== secondPassword) {
+      setShowModal(true);
+      setModal('Your passwords do not match.');
+      return;
+    }
     loginAPI
       .register({ name, email, password })
       .then((res) => {
@@ -81,6 +87,14 @@ const AdminLoginPage = () => {
               <Form.Control
                 type="password"
                 onChange={(value) => setPassword(value.target.value)}
+              />
+            </Form.Group>
+
+            <Form.Group>
+              <Form.Label>Retype password</Form.Label>
+              <Form.Control
+                type="password"
+                onChange={(value) => setSecondPassword(value.target.value)}
               />
             </Form.Group>
             <Button

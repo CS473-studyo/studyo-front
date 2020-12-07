@@ -6,6 +6,8 @@ $headerHeight: 150px;
 
 .header-fill-img {
   background-image: url('../public/CourseHeaderBackground.png');
+  background-repeat: no-repeat;
+  background-size: cover;
   background-color: white;
   height: $headerHeight;
 }

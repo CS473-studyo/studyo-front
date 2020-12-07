@@ -18,103 +18,86 @@ export { getServerSideProps };
 
 const KeywordPage = (props) => {
   const router = useRouter();
-  const { courseid, lectureid } = router.query;
+  const { courseId, lectureId } = router.query;
 
   const [studentNum, setStudentNum] = useState(0);
-  const [keywords, setKeywords] = useState([]);
-  const [keywordSelection, setKeywordSelection] = useState([]);
+  const [keywordList, setKeywordList] = useState([]);
 
   const [newKeyword, setNewKeyword] = useState();
   const onInput = ({ target: { value } }) => setNewKeyword(value);
 
   useEffect(() => {
-    if (lectureid) {
-      keywordAPI.getUserList(lectureid).then(({ data }) => {
-        const newKeywordSelection = [];
-        data.map((selected) => newKeywordSelection.push(selected.id));
-        setKeywordSelection(newKeywordSelection);
+    if (lectureId) {
+      keywordAPI.getList(lectureId).then(({ data }) => {
+        data.sort((a, b) => (a.id < b.id ? -1 : 1));
+        setKeywordList(data);
       });
     }
-  }, [lectureid]);
+  }, [lectureId]);
 
   useEffect(() => {
-    if (lectureid) {
-      keywordAPI.getList(lectureid).then(({ data }) => {
-        setKeywords(data);
-      });
-    }
-  }, [lectureid]);
-
-  useEffect(() => {
-    if (courseid) {
-      courseAPI.courseInfo(courseid).then(({ data }) => {
+    if (courseId) {
+      courseAPI.courseInfo(courseId).then(({ data }) => {
         setStudentNum(data.userNumber);
       });
     }
-  }, [courseid]);
-
-  const selectKeyword = (keyword) => {
-    const newKeywordSelection = keywordSelection.slice();
-    newKeywordSelection.push(keyword.id);
-    setKeywordSelection(newKeywordSelection);
-    keywordAPI.vote(keyword.id).then(() => {
-      keywordAPI.getList(lectureid).then(({ data }) => {
-        setKeywords(data);
-      });
-    });
-  };
-
-  const unselectKeyword = (keyword) => {
-    const newKeywordSelection = keywordSelection.slice();
-    const idx = newKeywordSelection.indexOf(keyword.id);
-    if (idx > -1) newKeywordSelection.splice(idx, 1);
-    setKeywordSelection(newKeywordSelection);
-    keywordAPI.cancel(keyword.id).then(() => {
-      keywordAPI.getList(lectureid).then(({ data }) => {
-        setKeywords(data);
-      });
-    });
-  };
+  }, [courseId]);
 
   const addKeyword = () => {
     if (newKeyword && !/^\s+$/.test(newKeyword))
       keywordAPI
         .add({
-          lectureId: lectureid,
+          lectureId: lectureId,
           word: newKeyword,
         })
         .then((res) => router.reload());
   };
 
   const Keyword = ({ keyword }) => {
-    if (keywordSelection.includes(keyword.id))
-      return (
-        <div className="rounded border">
-          <div className="d-flex justify-content-between p-2">
-            <div className="body-text p-2">{keyword.word}</div>
+    console.log(keyword);
+    const [vote, setVote] = useState(
+      keyword.Users.some((user) => user.id === props.id)
+    );
+    const selectKeyword = (id) => {
+      keywordAPI.vote(id).then(() => {
+        setVote(true);
+        keywordAPI.getList(lectureId).then(({ data }) => {
+          setKeywordList(data);
+        });
+      });
+    };
+
+    const unselectKeyword = (id) => {
+      keywordAPI.cancel(id).then(() => {
+        setVote(false);
+        keywordAPI.getList(lectureId).then(({ data }) => {
+          setKeywordList(data);
+        });
+      });
+    };
+
+    return (
+      <div className="rounded border">
+        <div className="d-flex justify-content-between p-2">
+          <div className="body-text p-2">{keyword.word}</div>
+          {vote ? (
             <button
               className="body-text btn btn-primary"
-              onClick={() => unselectKeyword(keyword)}
+              onClick={() => unselectKeyword(keyword.id)}
             >
               <CheckCircleIcon />
             </button>
-          </div>
-        </div>
-      );
-    else
-      return (
-        <div className="rounded border">
-          <div className="d-flex justify-content-between p-2">
-            <div className="body-text p-2">{keyword.word}</div>
+          ) : (
             <button
               className="body-text btn btn-outline-primary"
-              onClick={() => selectKeyword(keyword)}
+              onClick={() => selectKeyword(keyword.id)}
             >
               <CheckCircleOutlineIcon />
             </button>
-          </div>
+          )}
         </div>
-      );
+      </div>
+    );
   };
 
   return (
@@ -125,9 +108,9 @@ const KeywordPage = (props) => {
       className="d-flex flex-column"
     >
       <Header name={props.name} badge={props.badge} />
-      <LectureHeader courseid={courseid} lectureid={lectureid} />
+      <LectureHeader courseId={courseId} lectureId={lectureId} />
       <div className="container mb-3 flex-grow-1">
-        <div className="title-text mb-2 mt-5">Keyword</div>
+        <div className="title-text mb-2 mt-5">Keywords</div>
         <div className="row">
           <div className="col">
             <div className="w-100">
@@ -135,9 +118,9 @@ const KeywordPage = (props) => {
                 className="subtitle-text mb-4"
                 style={{ color: '#234382' }}
               >
-                Vote for this lecture's keyword.
+                Vote for this lecture's keywords.
               </div>
-              {keywords.map((keyword) => (
+              {keywordList.map((keyword) => (
                 <Keyword keyword={keyword} />
               ))}
               <div className="rounded border">
@@ -172,7 +155,7 @@ const KeywordPage = (props) => {
               >
                 Vote from classmates
               </div>
-              {keywords
+              {keywordList
                 .sort((a, b) => b.votes - a.votes)
                 .map((keyword) => {
                   let percent = (keyword.votes * 100) / studentNum;

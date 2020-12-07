@@ -29,7 +29,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 function LectureNote(props) {
   const router = useRouter();
-  const { courseid, lectureid } = router.query;
+  const { courseId, lectureId } = router.query;
 
   const [numPages, setNumPages] = useState(null);
   const [pageNumber, setPageNumber] = useState(1);
@@ -55,12 +55,12 @@ function LectureNote(props) {
   }
 
   useEffect(() => {
-    if (lectureid) {
-      lectureAPI.lectureInfo(lectureid).then(({ data }) => {
+    if (lectureId) {
+      lectureAPI.lectureInfo(lectureId).then(({ data }) => {
         setPdf(data.pdf);
       });
     }
-  }, [lectureid, pdf]);
+  }, [lectureId, pdf]);
 
   const handleClose = () => {
     setShow(false);
@@ -74,7 +74,7 @@ function LectureNote(props) {
     const data = new FormData();
     data.append('file', pdf);
 
-    noteAPI.upload(lectureid, data).then((res) => {
+    noteAPI.upload(lectureId, data).then((res) => {
       router.reload();
     });
   };
@@ -130,7 +130,7 @@ function LectureNote(props) {
       </Modal>
       <Header name={props.name} badge={props.badge} />
       <div className="mt-3 row ml-5 mr-5 mb-3 flex-grow-1">
-        <Link href={`/course/${courseid}`}>
+        <Link href={`/course/${courseId}`}>
           <a
             className="subtitle-text mb-2"
             style={{ textDecoration: 'none', color: '#234382' }}
@@ -139,7 +139,7 @@ function LectureNote(props) {
               fontSize="large"
               className="mr-1"
             ></ArrowBackIcon>
-            {courseid}
+            {courseId}
           </a>
         </Link>
         <div className="row w-100">
@@ -216,7 +216,7 @@ function LectureNote(props) {
             </div>
             <div>
               <NoteList
-                LectureId={lectureid}
+                LectureId={lectureId}
                 page={pageNumber}
                 UserId={props.id}
                 userName={props.name}

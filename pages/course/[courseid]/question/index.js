@@ -15,7 +15,7 @@ const Question = (props) => {
   const [questions, setQuestions] = useState([]);
 
   const router = useRouter();
-  const { courseid } = router.query;
+  const { courseId } = router.query;
 
   const getQuestionList = async () => {
     result = await questionAPI.list();
@@ -30,7 +30,7 @@ const Question = (props) => {
   const QuestionElem = (props) => {
     return (
       <div>
-        <Link href={`/course/${courseid}/question/${props.id}`}>
+        <Link href={`/course/${courseId}/question/${props.id}`}>
           <a style={{ textDecoration: 'none', color: 'black' }}>
             <div className="row mt-3 body-text ml-2 mr-2">
               <div className="col-2" style={{ fontWeight: '600' }}>
@@ -67,10 +67,10 @@ const Question = (props) => {
       className="d-flex flex-column"
     >
       <Header name={props.name} badge={props.badge} />
-      <CourseHeader courseid={courseid} />
+      <CourseHeader courseId={courseId} />
       <div className="container mb-2 flex-grow-1">
         <div className="title-text mt-5" style={{ color: '#234382' }}>
-          <Link href={`/course/${courseid}`}>
+          <Link href={`/course/${courseId}`}>
             <div style={{ cursor: 'pointer' }}>
               <ArrowBackIcon
                 fontSize="large"
@@ -89,7 +89,7 @@ const Question = (props) => {
         <div className="mt-2">{rows}</div>
         <div className="d-flex flex-row justify-content-between student-note">
           <h1 className="title-text"></h1>
-          <Link href={`/course/${courseid}/question/new`}>
+          <Link href={`/course/${courseId}/question/new`}>
             <a className="custom-btn float-right">New Question</a>
           </Link>
         </div>

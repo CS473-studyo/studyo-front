@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
-import { Card } from 'react-bootstrap';
+import { Card, Badge } from 'react-bootstrap';
 import Link from 'next/link';
 import Header from 'components/header';
 import CourseHeader from 'components/courseHeader';
@@ -14,19 +14,26 @@ const Course = (props) => {
   const [lectures, setLectures] = useState([]);
 
   const router = useRouter();
-  const { courseid } = router.query;
+  const { courseId } = router.query;
 
   // console.log(router.query)
   useEffect(() => {
-    if (courseid) {
-      courseAPI.courseLectures(courseid).then(({ data }) => {
+    if (courseId) {
+      courseAPI.courseLectures(courseId).then(({ data }) => {
         setLectures(data);
       });
     }
-  }, [courseid]);
+  }, [courseId]);
 
   const Hashtag = (props) => {
-    return <div className="hashtag body-text">#{props.keyword}</div>;
+    return (
+      <Badge
+        variant="secondary"
+        style={{ paddingTop: '5px', marginRight: '4px' }}
+      >
+        #{props.keyword}
+      </Badge>
+    );
   };
 
   const LectureElem = (props) => {
@@ -45,7 +52,7 @@ const Course = (props) => {
               .map((keyword) => (
                 <Hashtag keyword={keyword.word} />
               ))}
-            <Link href={`/course/${courseid}/keyword/${props.id}`}>
+            <Link href={`/course/${courseId}/lecture/${props.id}/keyword`}>
               <a
                 className="ml-2 align-self-center"
                 style={{ fontWeight: '600' }}
@@ -55,10 +62,10 @@ const Course = (props) => {
             </Link>
           </div>
           <div className="row">
-            <Link href={`/course/${courseid}/note/${props.id}`}>
+            <Link href={`/course/${courseId}/lecture/${props.id}`}>
               <a className="mt-4 custom-btn mr-3">Lecture Note</a>
             </Link>
-            <Link href={`/course/${courseid}/quiz/${props.id}`}>
+            <Link href={`/course/${courseId}/lecture/${props.id}/quiz`}>
               <a className="mt-4 custom-btn">Review</a>
             </Link>
           </div>
@@ -81,12 +88,12 @@ const Course = (props) => {
   ));
 
   return (
-    <>
+    <div className="d-flex flex-column">
       <Header name={props.name} badge={props.badge} />
-      <CourseHeader courseid={courseid} />
-      <div className="container mt-2">{rows}</div>
+      <CourseHeader courseId={courseId} />
+      <div className="container mt-2 flex-grow-1">{rows}</div>
       <Footer />
-    </>
+    </div>
   );
 };
 

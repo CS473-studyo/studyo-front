@@ -16,13 +16,13 @@ export { getServerSideProps };
 
 const QuestionDetail = (props) => {
   const router = useRouter();
-  const { courseid, questionid } = router.query;
+  const { courseId, questionId } = router.query;
 
   const [question, setQuestion] = useState({});
   const [answers, setAnswers] = useState([]);
 
   const getQuestionList = () => {
-    questionAPI.question(questionid).then(({ data }) => setQuestion(data));
+    questionAPI.question(questionId).then(({ data }) => setQuestion(data));
   };
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const QuestionDetail = (props) => {
   }, []);
 
   const getAnswerList = async () => {
-    answerAPI.answers(questionid).then(({ data }) => setAnswers(data));
+    answerAPI.answers(questionId).then(({ data }) => setAnswers(data));
   };
 
   useEffect(() => {
@@ -64,10 +64,10 @@ const QuestionDetail = (props) => {
       className="d-flex flex-column"
     >
       <Header name={props.name} badge={props.badge} />
-      <CourseHeader courseid={courseid} />
+      <CourseHeader courseId={courseId} />
       <div className="container mb-3 flex-grow-1">
         <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
-          <Link href={`/course/${courseid}/question`}>
+          <Link href={`/course/${courseId}/question`}>
             <a style={{ textDecoration: 'none', color: '#234382' }}>
               <ArrowBackIcon
                 fontSize="large"

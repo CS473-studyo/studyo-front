@@ -4,16 +4,16 @@ import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import * as lectureAPI from 'api/lecture';
 import Link from 'next/link';
 
-const LectureHeader = ({ lectureid, courseid }) => {
+const LectureHeader = ({ lectureId, courseId }) => {
   const [lecture, setLecture] = useState({});
 
   useEffect(() => {
-    if (lectureid) {
-      lectureAPI.lectureInfo(lectureid).then(({ data }) => {
+    if (lectureId) {
+      lectureAPI.lectureInfo(lectureId).then(({ data }) => {
         setLecture(data);
       });
     }
-  }, [lectureid]);
+  }, [lectureId]);
 
   return (
     <div className={styles['header-fill']}>
@@ -21,10 +21,10 @@ const LectureHeader = ({ lectureid, courseid }) => {
         <div className="container h-100">
           <div className="row h-100">
             <div className={`col ${styles['course-title']}`}>
-              <Link href={`/course/${courseid}`}>
+              <Link href={`/course/${courseId}`}>
                 <a className={`subtitle-text ${styles['course-title']}`}>
                   <ArrowBackIcon></ArrowBackIcon>
-                  {courseid}
+                  {courseId}
                 </a>
               </Link>
             </div>

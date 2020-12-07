@@ -14,7 +14,7 @@ export { getServerSideProps };
 
 const Quiz = (props) => {
   const router = useRouter();
-  const { courseid, lectureid } = router.query;
+  const { courseId, lectureId } = router.query;
 
   const [answer, setAnswer] = useState('');
   const onInput = ({ target: { value } }) => setAnswer(value);
@@ -45,13 +45,13 @@ const Quiz = (props) => {
   const [quizzes, setQuizzes] = useState([]);
 
   useEffect(() => {
-    if (lectureid) {
+    if (lectureId) {
       getQuestions();
     }
-  }, [lectureid]);
+  }, [lectureId]);
 
   const getQuestions = () => {
-    questionAPI.quizList(lectureid).then(({ data }) => {
+    questionAPI.quizList(lectureId).then(({ data }) => {
       setQuizzes(data);
       setDisplayQuiz(0);
     });
@@ -133,7 +133,7 @@ const Quiz = (props) => {
         className="d-flex flex-column"
       >
         <Header name={props.name} badge={props.badge} />
-        <LectureHeader courseid={courseid} lectureid={lectureid} />
+        <LectureHeader courseId={courseId} lectureId={lectureId} />
         <div className="container h-100 mt-5 mb-5 flex-grow-1">
           <div className="title-text text-center">
             No Quizzes Exist Yet!
@@ -156,7 +156,7 @@ const Quiz = (props) => {
         className="d-flex flex-column"
       >
         <Header name={props.name} badge={props.badge} />
-        <LectureHeader courseid={courseid} lectureid={lectureid} />
+        <LectureHeader courseId={courseId} lectureId={lectureId} />
         <div className="container mb-3 flex-grow-1">
           <div class="progress mt-4 mb-4">
             <div
@@ -175,7 +175,7 @@ const Quiz = (props) => {
               You completed all review quiz!
             </div>
             <div class="d-flex justify-content-center mt-5">
-              <Link href={`/course/${courseid}`}>
+              <Link href={`/course/${courseId}`}>
                 <a type="submit" className="custom-btn mr-2 align-middle">
                   Back to home
                 </a>
@@ -211,7 +211,7 @@ const Quiz = (props) => {
       className="d-flex flex-column"
     >
       <Header name={props.name} badge={props.badge} />
-      <LectureHeader courseid={courseid} lectureid={lectureid} />
+      <LectureHeader courseId={courseId} lectureId={lectureId} />
       <div class="container mb-3 flex-grow-1">
         <div class="progress mt-4 mb-4">
           <div
