@@ -88,7 +88,7 @@ const Course = (props) => {
   ));
 
   return (
-    <div className="d-flex flex-column">
+    <div style={{ height: '100vh' }} className="d-flex flex-column">
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseId={courseId} />
       <div className="container mt-2 flex-grow-1">{rows}</div>
