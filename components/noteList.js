@@ -93,9 +93,12 @@ const NoteList = ({
             }}
             onClick={() => expandToggle(index)}
           >
-            <div className="row ml-1">
-              <div className="row">
-                <div className="p-2 ml-2">{user.name}</div>
+            <div className="d-flex justify-content-between ml-1">
+              <div
+                style={{ fontWeight: '600' }}
+                className="d-flex align-items-center"
+              >
+                <div style={{ paddingRight: '8px' }}>{user.name}</div>
                 <UserIcon className="p-2" badge={user.badge} />
               </div>
             </div>

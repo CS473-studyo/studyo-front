@@ -53,13 +53,15 @@ const AnswerList = ({ answers, admin }) => {
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div
-                    style={{ fontWeight: '600' }}
-                    className="d-flex justify-content-between ml-1"
-                  >
-                    <div className="row">
-                      <div className="p-2 ml-2">{props.name}</div>
-                      <UserIcon className="p-2" badge={props.badge} />
+                  <div className="d-flex justify-content-between ml-1">
+                    <div
+                      style={{ fontWeight: '600' }}
+                      className="d-flex align-items-center"
+                    >
+                      <div style={{ paddingRight: '8px' }}>
+                        {props.name}
+                      </div>
+                      <UserIcon badge={props.badge} />
                     </div>
                     <div className="row align-items-center">
                       {props.approved ? (
@@ -145,12 +147,14 @@ const AnswerList = ({ answers, admin }) => {
                   type="button"
                   onClick={() => expandToggle(props.index)}
                 >
-                  <div
-                    style={{ fontWeight: '600' }}
-                    className="d-flex justify-content-between ml-1"
-                  >
-                    <div className="row">
-                      <div className="p-2 ml-2">{props.name}</div>
+                  <div className="d-flex justify-content-between ml-1">
+                    <div
+                      style={{ fontWeight: '600' }}
+                      className="d-flex align-items-center"
+                    >
+                      <div style={{ paddingRight: '8px' }}>
+                        {props.name}
+                      </div>
                       <UserIcon className="p-2" badge={props.badge} />
                     </div>
                     <div className="row align-items-center">

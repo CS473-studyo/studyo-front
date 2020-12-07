@@ -48,11 +48,9 @@ const MainPage = (props) => {
             <div className="title-text mr-2">{props.code}</div>
             <div className="title-text-light">{props.name}</div>
           </div>
-          <div className="mt-2 body-text">Prof. {props.professor}</div>
+          <div className="my-3 body-text">Prof. {props.professor}</div>
           <Link href={`/course/${props.code}`}>
-            <a type="button" className="mt-4 custom-btn">
-              Enter
-            </a>
+            <a className="custom-btn">Enter</a>
           </Link>
         </Card.Body>
       </Card>
