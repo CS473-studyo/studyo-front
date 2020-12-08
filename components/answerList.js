@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import Router from 'next/router';
 import * as answerAPI from 'api/answer';
 import UserIcon from './UserIcon';
 import Clap from 'public/clap.svg';
@@ -22,7 +23,7 @@ const AnswerList = ({ answers, admin }) => {
   };
 
   const approveAnswer = (answerId) => {
-    answerAPI.approve(answerId);
+    answerAPI.approve(answerId).then(() => Router.reload());
   };
 
   useEffect(() => {
@@ -104,7 +105,9 @@ const AnswerList = ({ answers, admin }) => {
                     className="clap-btn"
                     onClick={() => approveAnswer(props.id)}
                   >
-                    <div className="body-text">Approve</div>
+                    <div className="body-text">
+                      {props.approved ? 'Cancel approve' : 'Approve'}
+                    </div>
                   </button>
                 </div>
               ) : (
