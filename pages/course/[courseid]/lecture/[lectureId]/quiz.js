@@ -195,7 +195,10 @@ const Quiz = (props) => {
           <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
             {quizzes[displayQuiz].title}
           </div>
-          <div class="subtitle-text mb-5" style={{ whiteSpace: 'pre' }}>
+          <div
+            class="subtitle-text mb-5"
+            style={{ whiteSpace: 'pre-wrap' }}
+          >
             {quizzes[displayQuiz].content}
           </div>
         </div>

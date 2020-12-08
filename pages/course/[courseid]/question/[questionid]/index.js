@@ -81,7 +81,7 @@ const QuestionDetail = (props) => {
           <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
             {question.title}
           </div>
-          <div class="body-text mb-2" style={{ whiteSpace: 'pre' }}>
+          <div class="body-text mb-2" style={{ whiteSpace: 'pre-wrap' }}>
             {question.content}
           </div>
           <hr />
