@@ -1,0 +1,51 @@
+{
+  "name": "learn-starter",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "export": "next export",
+    "start": "next start",
+    "test": "exit"
+  },
+  "dependencies": {
+    "@material-ui/core": "^4.11.0",
+    "@material-ui/icons": "^4.9.1",
+    "@svgr/webpack": "^5.4.0",
+    "@webdeb/next-styles": "^1.1.1",
+    "@zeit/next-sass": "^1.0.1",
+    "applause-button": "^3.3.2",
+    "axios": "^0.21.0",
+    "bootstrap": "^4.5.3",
+    "child_process": "^1.0.2",
+    "fs": "0.0.1-security",
+    "next": "^10.0.0",
+    "next-images": "^1.6.2",
+    "node-sass": "^4.14.1",
+    "pdf2pic": "^2.1.2",
+    "pdfjs-dist": "^2.5.207",
+    "react": "16.13.1",
+    "react-bootstrap": "^1.4.0",
+    "react-clap-button": "^1.2.12",
+    "react-dom": "16.13.1",
+    "react-file-reader": "^1.1.4",
+    "react-image-gallery": "^1.0.8",
+    "react-multiple-choice": "^2.0.2",
+    "react-pdf": "^5.0.0",
+    "react-router-dom": "^5.2.0",
+    "react-sizeme": "^2.6.12"
+  },
+  "devDependencies": {
+    "babel-eslint": "^10.1.0",
+    "eslint": "^7.13.0",
+    "eslint-config-airbnb": "^18.2.1",
+    "eslint-config-prettier": "^6.15.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.21.5",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "prettier": "2.2.0"
+  }
+}

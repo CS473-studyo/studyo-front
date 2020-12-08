@@ -1,0 +1,29 @@
+$headerHeight: 100px;
+
+.header-fill {
+  background-color: #234382;
+  height: $headerHeight;
+}
+
+.course-title {
+  color: white;
+  line-height: $headerHeight;
+}
+
+a.course-title {
+  color: white;
+}
+
+a.course-title:hover {
+  color: #c3d1ef !important;
+  text-decoration: none;
+}
+
+.course-detail {
+  color: white;
+  padding-top: $headerHeight/1.5;
+}
+
+.hello {
+  color: blue;
+}
