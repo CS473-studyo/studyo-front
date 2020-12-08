@@ -26,6 +26,11 @@ const AdminLoginPage = () => {
       setModal('Your passwords do not match.');
       return;
     }
+    if (password.length < 8) {
+      setShowModal(true);
+      setModal('Your password must be at least 8 characters long.');
+      return;
+    }
     loginAPI
       .register({ name, email, password })
       .then((res) => {
