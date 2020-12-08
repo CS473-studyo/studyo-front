@@ -135,13 +135,15 @@ const NoteList = ({
                   />
                 </div>
               ) : null}
-              <Clap
-                LectureId={LectureId}
-                UserId={user.id}
-                page={page}
-                loading={loading}
-                pdf={pdf}
-              />
+              <div className="align-self-end">
+                <Clap
+                  LectureId={LectureId}
+                  UserId={user.id}
+                  page={page}
+                  loading={loading}
+                  pdf={pdf}
+                />
+              </div>
             </div>
           ) : null}
         </div>

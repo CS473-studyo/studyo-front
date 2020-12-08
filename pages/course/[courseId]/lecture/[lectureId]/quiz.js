@@ -4,6 +4,7 @@ import Link from 'next/link';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import LectureHeader from 'components/lectureHeader';
+import { Row, Col } from 'react-bootstrap';
 
 import AnswerList from 'components/answerList.js';
 import * as questionAPI from 'api/question';
@@ -176,7 +177,7 @@ const Quiz = (props) => {
             </div>
             <div class="d-flex justify-content-center mt-5">
               <Link href={`/course/${courseId}`}>
-                <a type="submit" className="custom-btn mr-2 align-middle">
+                <a className="custom-btn mr-2 align-middle">
                   Back to home
                 </a>
               </Link>
@@ -231,8 +232,8 @@ const Quiz = (props) => {
           </div>
         </div>
         <div class="title-text mb-2">Quiz {displayQuiz + 1}.</div>
-        <div class="row w-100">
-          <div class="col">
+        <Row>
+          <div class="col-lg-6">
             <QuizContent />
             <form>
               <div class="form-group">
@@ -254,15 +255,15 @@ const Quiz = (props) => {
               <ButtonsGroup />
             </form>
           </div>
-          <div class="col">
-            <div class="subtitle-text mb-3">
+          <div class="col-lg-6">
+            <div class="subtitle-text mb-3 mt-3 mt-lg-0">
               Answers from course students
             </div>
             <div className="pl-3">
               <AnswerList answers={answers} admin={props.admin} />
             </div>
           </div>
-        </div>
+        </Row>
       </div>
       <Footer />
     </div>
