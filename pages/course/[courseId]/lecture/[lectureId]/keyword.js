@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Header from 'components/header';
 import Footer from 'components/footer';
 import LectureHeader from 'components/lectureHeader';
-import { Button, Modal, InputGroup, FormControl } from 'react-bootstrap';
+import { Row, Col, InputGroup, FormControl } from 'react-bootstrap';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import AddCircleOutlineIcon from '@material-ui/icons/AddCircleOutline';
@@ -120,9 +120,9 @@ const KeywordPage = (props) => {
       <Header name={props.name} badge={props.badge} />
       <LectureHeader courseId={courseId} lectureId={lectureId} />
       <div className="container mb-3 flex-grow-1">
-        <div className="title-text mb-2 mt-5">Keywords</div>
-        <div className="row">
-          <div className="col">
+        <div className="title-text mb-2 mt-3">Keywords</div>
+        <Row>
+          <Col lg="6">
             <div className="w-100">
               <div
                 className="subtitle-text mb-4"
@@ -136,7 +136,7 @@ const KeywordPage = (props) => {
               <div className="rounded border">
                 <div className="d-flex justify-content-between p-2">
                   <InputGroup
-                    className="body-text mr-5"
+                    className="body-text"
                     style={{ width: '65%' }}
                   >
                     <FormControl
@@ -156,19 +156,19 @@ const KeywordPage = (props) => {
                 </div>
               </div>
             </div>
-          </div>
-          <div className="col">
+          </Col>
+          <Col lg="6">
             <div className="w-100">
               <div
-                className="subtitle-text mb-4"
+                className="subtitle-text mb-4 mt-lg-0 mt-3"
                 style={{ color: '#234382' }}
               >
-                Vote from classmates
+                Votes from classmates
               </div>
               {sortedKeywordList.map((keyword) => {
                 let percent = (keyword.votes * 100) / studentNum;
                 return (
-                  <div className="w-100 d-flex py-1 pl-2">
+                  <div className="w-100 d-flex py-1">
                     <div className="w-25">{keyword.word}</div>
                     <div className="w-75 progress my-1">
                       <div
@@ -184,8 +184,8 @@ const KeywordPage = (props) => {
                 );
               })}
             </div>
-          </div>
-        </div>
+          </Col>
+        </Row>
       </div>
       <Footer />
     </div>

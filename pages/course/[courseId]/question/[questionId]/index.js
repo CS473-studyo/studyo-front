@@ -65,20 +65,26 @@ const QuestionDetail = (props) => {
     >
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseId={courseId} />
-      <div className="container mb-3 flex-grow-1">
-        <div className="title-text mt-5 mb-2" style={{ color: '#234382' }}>
+      <div className="container mb-3 flex-grow-1 d-flex flex-column">
+        <div
+          className="subtitle-text mt-3 mb-3"
+          style={{ color: '#234382' }}
+        >
           <Link href={`/course/${courseId}/question`}>
-            <a style={{ textDecoration: 'none', color: '#234382' }}>
+            <div
+              style={{ cursor: 'pointer', lineHeight: '100%' }}
+              className="d-flex align-items-center"
+            >
               <ArrowBackIcon
-                fontSize="large"
+                fontSize="small"
                 className="mr-1"
               ></ArrowBackIcon>
-              Question{question.num}
-            </a>
+              <div>My Questions</div>
+            </div>
           </Link>
         </div>
-        <div class="w-100 ml-2">
-          <div class="subtitle-text mb-2" style={{ color: '#234382' }}>
+        <div class="w-100">
+          <div class="title-text mb-2" style={{ color: '#234382' }}>
             {question.title}
           </div>
           <div class="body-text mb-2" style={{ whiteSpace: 'pre-wrap' }}>

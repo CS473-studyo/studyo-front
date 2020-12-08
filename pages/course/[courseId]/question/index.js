@@ -33,10 +33,13 @@ const Question = (props) => {
         <Link href={`/course/${courseId}/question/${props.id}`}>
           <a style={{ textDecoration: 'none', color: 'black' }}>
             <div className="row mt-3 body-text ml-2 mr-2">
-              <div className="col-2" style={{ fontWeight: '600' }}>
+              <div
+                className="col-lg-2 col-3"
+                style={{ fontWeight: '600' }}
+              >
                 Lecture {props.lecture}
               </div>
-              <div className="col-8 row align-items-center">
+              <div className="col-lg-8 col-7 row align-items-center">
                 {props.title}
               </div>
               <div className="col-2">{props.date}</div>
@@ -69,20 +72,26 @@ const Question = (props) => {
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseId={courseId} />
       <div className="container mb-2 flex-grow-1">
-        <div className="title-text mt-5" style={{ color: '#234382' }}>
+        <div className="subtitle-text mt-3" style={{ color: '#234382' }}>
           <Link href={`/course/${courseId}`}>
-            <div style={{ cursor: 'pointer' }}>
+            <div
+              style={{ cursor: 'pointer', lineHeight: '100%' }}
+              className="d-flex align-items-center"
+            >
               <ArrowBackIcon
-                fontSize="large"
+                fontSize="small"
                 className="mr-1"
               ></ArrowBackIcon>
-              My Questions
+              <div>Lectures</div>
             </div>
           </Link>
         </div>
+        <div className="title-text my-2">My Questions</div>
         <div className="row mt-4 subtitle-text ml-2 mr-2">
-          <div className="col-2">Lecture</div>
-          <div className="col-8 row align-items-center">Title</div>
+          <div className="col-lg-2 col-3">Lecture</div>
+          <div className="col-lg-8 col-7 row align-items-center">
+            Title
+          </div>
           <div className="col-2">Date</div>
         </div>
         <hr />

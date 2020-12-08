@@ -1,7 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import Header from 'components/header';
 import Footer from 'components/footer';
+import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 import CourseHeader from 'components/courseHeader';
 import * as courseAPI from 'api/course';
 import * as questionAPI from 'api/question';
@@ -73,12 +75,29 @@ const NewQuestion = (props) => {
   });
 
   return (
-    <>
+    <div className="d-flex flex-column" style={{ height: '100vh' }}>
       <Header name={props.name} badge={props.badge} />
       <CourseHeader courseId={courseId} />
-      <div className="container mb-3">
-        <div className="title-text mt-5 mb-3" style={{ color: '#234382' }}>
-          New Questions
+      <div className="container mb-3 flex-grow-1">
+        <div
+          className="subtitle-text mt-3 mb-3"
+          style={{ color: '#234382' }}
+        >
+          <Link href={`/course/${courseId}/question`}>
+            <div
+              style={{ cursor: 'pointer', lineHeight: '100%' }}
+              className="d-flex align-items-center"
+            >
+              <ArrowBackIcon
+                fontSize="small"
+                className="mr-1"
+              ></ArrowBackIcon>
+              <div>My Questions</div>
+            </div>
+          </Link>
+        </div>
+        <div className="title-text mt-3 mb-3" style={{ color: '#234382' }}>
+          New Question
         </div>
         <form>
           <div class="form-group">
@@ -129,7 +148,7 @@ const NewQuestion = (props) => {
         </div>
       </div>
       <Footer />
-    </>
+    </div>
   );
 };
 

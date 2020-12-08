@@ -81,9 +81,9 @@ const NoteList = ({
     const leftBarColor = isSelected ? '#234382' : '#DFDFDF';
 
     return (
-      <div className="row ml-1">
+      <div className="d-flex">
         <div style={{ backgroundColor: leftBarColor, width: '3px' }} />
-        <div className="col w-100 border border-light pr-0 pl-0">
+        <div className="flex-grow-1">
           <div
             className="d-flex align-items-center"
             style={{
@@ -105,33 +105,35 @@ const NoteList = ({
             </div>
           </div>
           {isSelected ? (
-            <div>
-              <div className="body-text" style={{ padding: '16px 24px' }}>
+            <div className="d-flex flex-column align-items-center">
+              <div className="body-text align-self-start mx-3 mt-3">
                 {comment}
               </div>
               {pdf ? (
-                <SizeMe
-                  monitorHeight
-                  refreshRate={128}
-                  refreshMode={'debounce'}
-                  render={({ size }) => (
-                    <>
-                      <Document
-                        file={pdf}
-                        onLoadSuccess={() => {
-                          console.log('loading');
-                          setLoading(false);
-                        }}
-                      >
-                        <Page
-                          pageNumber={page}
-                          width={size.width}
-                          renderAnnotationLayer={false}
-                        />
-                      </Document>
-                    </>
-                  )}
-                />
+                <div className="student-lecture-note">
+                  <SizeMe
+                    monitorHeight
+                    refreshRate={128}
+                    refreshMode={'debounce'}
+                    render={({ size }) => (
+                      <>
+                        <Document
+                          file={pdf}
+                          onLoadSuccess={() => {
+                            console.log('loading');
+                            setLoading(false);
+                          }}
+                        >
+                          <Page
+                            pageNumber={page}
+                            width={size.width}
+                            renderAnnotationLayer={false}
+                          />
+                        </Document>
+                      </>
+                    )}
+                  />
+                </div>
               ) : null}
               <Clap
                 LectureId={LectureId}

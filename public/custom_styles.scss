@@ -188,8 +188,19 @@ body {
   padding-bottom: 0.1rem;
 }
 
-.lecture_note {
-  width: 40% !important;
+.lecture-note {
+  width: 95vw !important;
+  @media (min-width: 992px) {
+    width: 48vw !important;
+    margin: 0 16px;
+  }
+}
+
+.student-lecture-note {
+  width: 90vw !important;
+  @media (min-width: 992px) {
+    width: 45vw !important;
+  }
 }
 
 .scrolling-wrapper {
@@ -261,14 +272,12 @@ body {
     padding: 30px 50px;
   }
 }
+
 .login-module {
   background-color: white;
   height: 100vh;
   padding: 15px;
-}
-
-@media (min-width: 768px) {
-  .login-module {
+  @media (min-width: 768px) {
     height: 100%;
     margin: 45px 15px;
   }
